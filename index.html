@@ -2,7 +2,11 @@
 <html lang="es" data-theme="light">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="17 laboratorios interactivos de Arquitectura de Computadoras. Aprende, experimenta y comprueba con Bit. Un único archivo, sin conexión.">
+<meta name="description" content="17 laboratorios interactivos y gamificados de Arquitectura de Computadoras: misiones, retos, insignias y registro opcional en Google Sheets. Un único archivo que también funciona sin conexión.">
+<meta name="theme-color" content="#4f46e5">
+<meta name="registro-sheets" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@500;700&family=Nunito:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap">
 <title>El Arquitecto de Bits · Arquitectura de Computadoras</title>
 <style>
 :root{color-scheme:light;--paper:#eee8dc;--paper2:#e5ddcc;--card:#fffcf5;--card2:#f5f0e5;--ink:#232d30;--muted:#626e6d;--line:#d7d1c2;--teal:#25675e;--teal-soft:#e3efe8;--gold:#865716;--gold-soft:#f5e9cb;--rust:#aa4936;--rust-soft:#fae8df;--shadow:0 12px 35px #353c3410;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,'Segoe UI',sans-serif;--mono:ui-monospace,'SFMono-Regular',Consolas,monospace}
@@ -164,8 +168,9 @@ body{background-image:radial-gradient(ellipse at 4% 4%,#b0d6ff33,transparent 34%
 
 
 /* Fourth edition: one typeface, clearer reading, one instruction per mission. */
-:root{--serif:'Times New Roman',Times,serif;--sans:'Times New Roman',Times,serif;--mono:'Times New Roman',Times,serif}
-*,*::before,*::after{font-family:'Times New Roman',Times,serif!important}
+:root{--serif:'Space Grotesk','Segoe UI',system-ui,sans-serif;--sans:'Nunito','Segoe UI',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;--diagram:'Barlow Semi Condensed','Arial Narrow','Segoe UI',sans-serif}
+html.classic-type{--serif:'Times New Roman',Times,serif;--sans:'Times New Roman',Times,serif;--mono:'Times New Roman',Times,serif;--diagram:'Times New Roman',Times,serif}
+html.classic-type *,html.classic-type *::before,html.classic-type *::after{font-family:'Times New Roman',Times,serif!important}
 body{font-size:17px;line-height:1.6}
 .mission-head{padding:24px}.mission-head h2{font-size:29px;margin:10px 0}.mission-head>p{font-size:16px;line-height:1.5}
 .mission-item p,.sim-note,.concept p,.objective,.analogy,.steps li{font-size:17px;line-height:1.6}
@@ -181,7 +186,7 @@ body{font-size:17px;line-height:1.6}
 .question-number{font-size:16px}.question-number>span,.question-fine,.question-actions>span{font-size:15px}.quiz-intro p,.feedback,.answer,.review-answers details,.teacher-question li,.teacher-question details{font-size:18px}
 .result-score,.rgb-preview b,.range-control output,.bit,.timeline button{font-variant-numeric:tabular-nums}
 .chat-log,.message{font-size:17px}.suggestions button,.chat-note{font-size:13px}.chat-form input{font-size:17px}
-.sim-board text{font-family:'Times New Roman',Times,serif!important}
+.sim-board text,.home-course-picture text,.access-art text{font-family:var(--diagram)!important}
 @media(max-width:600px){.mission-head{padding:20px}.mission-item p,.sim-note{font-size:17px}.phase-tab{font-size:14px}.brand-title{font-size:19px}.brand-sub{font-size:8px!important;letter-spacing:.5px}.top-actions .textbtn{font-size:12px}.top-inner{gap:5px}.mission-item h3{font-size:22px}.home-intro h1{font-size:41px}.journey-preview-meta{flex-wrap:wrap;gap:7px}.journey-legend{font-size:12px}.journey-stop-label{font-size:15px}.sim-header{padding:17px}.sim-header h2{font-size:24px}}
 
 /* Light states and finite actions are intentionally separate. */
@@ -193,7 +198,7 @@ body{font-size:17px;line-height:1.6}
 .viz-controls button:disabled{opacity:.48}.viz-controls .viz-read{color:var(--orange);border-color:var(--orange);background:var(--orange-soft)}.viz-controls label{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--muted);margin-left:auto}.viz-toolbar>small{display:block;margin-top:9px;font-size:12px;color:var(--muted)}
 .viz-controls button:hover:enabled{border-color:var(--blue);box-shadow:0 2px 6px #1232}.viz-controls button:focus-visible,.viz-controls select:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
 #sim-content .pulse,#sim-content .v2-flow,#sim-content .signal,#sim-content .v2-water,#sim-content .v2-rotor,#sim-content .v2-glow,#sim-content .v2-blink,#sim-content .v2-breathe{animation:none!important}
-#sim-content [data-viz-route]{animation:none!important;transition:stroke-width .15s,opacity .15s}.viz-route-active{stroke-opacity:1!important;stroke-width:3.5!important;opacity:1!important;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--orange) 45%,transparent))}.viz-packet-layer{pointer-events:none}.viz-packet-layer text{font-family:'Times New Roman',Times,serif!important}.viz-node-active{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--blue) 40%,transparent))}
+#sim-content [data-viz-route]{animation:none!important;transition:stroke-width .15s,opacity .15s}.viz-route-active{stroke-opacity:1!important;stroke-width:3.5!important;opacity:1!important;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--orange) 45%,transparent))}.viz-packet-layer{pointer-events:none}.viz-packet-layer text{font-family:var(--diagram)!important}.viz-node-active{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--blue) 40%,transparent))}
 .bulb-bank{display:grid!important;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px!important;padding:18px 14px 14px!important;background:radial-gradient(ellipse at 50% 0,var(--blue-soft),var(--card2));border-radius:14px!important;border:1px solid var(--line)}
 .bulb-bank .bulb-switch{position:relative;min-width:0;min-height:155px;padding:8px 4px 10px!important;display:flex;flex-direction:column;align-items:center;background:var(--card)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:12px!important;box-shadow:0 4px 0 var(--line)!important;transition:transform .15s,border-color .18s,background .18s}
 .bulb-bank .bulb-switch:hover{transform:translateY(-3px);filter:none}.bulb-bank .bulb-switch:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)!important}.bulb-bank .bulb-switch.on{border-color:var(--yellow)!important;background:linear-gradient(180deg,var(--yellow-soft),var(--card))!important}
@@ -209,6 +214,262 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
 @media(max-width:760px){.viz-toolbar{margin:14px 14px 0;padding:12px}.viz-controls label{margin-left:0}.viz-status p{font-size:16px}.bulb-bank{grid-template-columns:repeat(4,minmax(0,1fr));padding:17px 10px 13px!important;gap:12px 8px!important}.bulb-bank .bulb-switch{min-height:150px}.bit-bulb{height:78px}.viz-controls button{flex:1;font-size:14px;min-height:38px}.viz-controls label{width:100%;justify-content:space-between}.viz-controls select{min-width:90px}.viz-toolbar>small{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.bulb-bank .bulb-switch,.rgb-pixel{transition:none}.bulb-bank .bulb-switch:hover{transform:none}.mission-item.viz-achieved .mission-check,#sim-content .bulb-switch.just-changed{animation:none!important}}
 @media print{.viz-toolbar,.viz-packet-layer{display:none!important}}
+
+/* Sexta edición: más color, juego y registro en vivo. Se apoya en las capas anteriores sin reemplazarlas. */
+:root{--v6-grad:linear-gradient(135deg,#4f7dff 0%,#8b5cf6 52%,#ec4899 100%);--v6-grad-warm:linear-gradient(135deg,#f59e0b,#f97316 45%,#ec4899);--v6-grad-cool:linear-gradient(135deg,#06b6d4,#3b82f6 55%,#8b5cf6);--v6-grad-green:linear-gradient(135deg,#10b981,#06b6d4);--v6-shadow:0 10px 30px -14px rgba(49,46,129,.32);--v6-shadow-lg:0 26px 60px -22px rgba(49,46,129,.45);--v6-ring:0 0 0 4px color-mix(in srgb,var(--purple) 18%,transparent)}
+html[data-theme=dark]{--v6-shadow:0 10px 30px -14px rgba(0,0,0,.65);--v6-shadow-lg:0 26px 60px -20px rgba(0,0,0,.75)}
+body{font-family:var(--sans);font-size:16px;line-height:1.65}
+html.classic-type body{font-size:17px}
+h1,h2,h3,h4{font-family:var(--serif);letter-spacing:-.02em}
+.metric strong,.result-score,.journey-node-number,.timeline button,.bit-digit,.range-control output,.rgb-preview b{font-family:var(--mono)}
+code,pre,kbd{font-family:var(--mono);font-size:.92em}
+body::after{content:'';position:fixed;inset:-15%;z-index:-1;pointer-events:none;background:radial-gradient(38% 32% at 12% 18%,rgba(99,132,255,.26),transparent 70%),radial-gradient(34% 30% at 88% 12%,rgba(255,170,90,.22),transparent 70%),radial-gradient(36% 34% at 78% 88%,rgba(190,120,255,.2),transparent 70%),radial-gradient(30% 28% at 8% 86%,rgba(60,220,190,.18),transparent 70%);animation:v6-aurora 28s ease-in-out infinite alternate}
+html[data-theme=dark] body::after{opacity:.55}
+@keyframes v6-aurora{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(2%,-2%,0) scale(1.05) rotate(2deg)}100%{transform:translate3d(-2%,1%,0) scale(1.02) rotate(-2deg)}}
+
+/* Barra superior */
+.topbar{background:color-mix(in srgb,var(--card) 84%,transparent);box-shadow:0 8px 26px -22px rgba(49,46,129,.7)}
+.brand-mark{background:var(--v6-grad);box-shadow:0 8px 18px -8px #6d5cf6;border-radius:11px}
+.brand-title{background:var(--v6-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+html.classic-type .brand-title{color:transparent}
+.mode-label{font-weight:700}
+html[data-mode=student] #xp{display:none}
+.v6-level{display:flex;align-items:center;gap:8px;border:1px solid color-mix(in srgb,var(--purple) 32%,var(--line));background:var(--card);border-radius:40px;padding:3px 13px 3px 3px;box-shadow:var(--v6-shadow);color:var(--ink);transition:transform .2s}
+.v6-level:hover{transform:translateY(-1px)}
+.v6-level-ring{--p:0;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--purple) calc(var(--p) * 1%),var(--line) 0);flex-shrink:0}
+.v6-level-ring b{width:28px;height:28px;border-radius:50%;background:var(--v6-grad);color:#fff;display:grid;place-items:center;font:800 13px var(--mono)}
+.v6-level-text{display:flex;flex-direction:column;line-height:1.15;text-align:left;min-width:0}
+.v6-level-text small{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.3px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#v6-level-xp{font:800 12px var(--mono);color:var(--purple)}
+.v6-streak{font:800 13px var(--mono);color:var(--orange);background:var(--orange-soft);border:1px solid color-mix(in srgb,var(--orange) 35%,transparent);border-radius:20px;padding:5px 10px;white-space:nowrap}
+.v6-streak.hot{animation:v6-flame 1.2s ease-in-out infinite}
+@keyframes v6-flame{50%{transform:scale(1.08);box-shadow:0 0 0 4px color-mix(in srgb,var(--orange) 15%,transparent)}}
+.top-actions .v6-arcade-btn{background:var(--v6-grad);color:#fff;border-radius:30px;font-weight:800;padding:7px 14px;box-shadow:0 8px 18px -10px #8b5cf6;white-space:nowrap}
+.top-actions .v6-arcade-btn:hover{filter:brightness(1.08)}
+html[data-mode=access] .v6-arcade-btn{display:none}
+.v6-cloud{display:inline-flex;align-items:center;gap:6px;font:800 11px var(--mono);border-radius:20px;padding:5px 10px;background:var(--green-soft);color:var(--green);border:1px solid color-mix(in srgb,var(--green) 35%,transparent);white-space:nowrap;cursor:default}
+.v6-cloud:before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px color-mix(in srgb,currentColor 22%,transparent)}
+.v6-cloud[data-status=ok]:before{animation:v6-live 1.8s ease-in-out infinite}
+.v6-cloud[data-status=sending]{background:var(--blue-soft);color:var(--blue);border-color:color-mix(in srgb,var(--blue) 35%,transparent)}
+.v6-cloud[data-status=pending],.v6-cloud[data-status=offline]{background:var(--orange-soft);color:var(--orange);border-color:color-mix(in srgb,var(--orange) 35%,transparent)}
+.v6-cloud[data-status=error],.v6-cloud[data-status=denied]{background:var(--red-soft);color:var(--red);border-color:color-mix(in srgb,var(--red) 35%,transparent)}
+html[data-mode=teacher] .v6-cloud{cursor:pointer}
+@keyframes v6-live{50%{opacity:.35}}
+#v6-type[aria-pressed=true],#v6-sound[aria-pressed=false]{background:var(--purple-soft);border-color:var(--purple)}
+
+/* Botones, paneles y pestañas */
+.btn:not(.secondary):not(.semantic-action):not(.journey-open){background:var(--v6-grad);border-color:transparent;color:#fff;box-shadow:0 10px 22px -12px #6d5cf6}
+.btn{border-radius:12px;transition:transform .15s,box-shadow .2s,filter .2s,background .2s}
+.btn:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.05)}
+.btn:not(:disabled):active{transform:translateY(1px)}
+.btn:disabled{background:var(--line)!important;color:var(--muted)!important;box-shadow:none!important;border-color:var(--line)!important}
+.btn.secondary{background:var(--card);border-color:var(--line)}
+.btn.secondary:not(:disabled):hover{border-color:var(--purple);color:var(--purple)}
+.panel{border-radius:20px;box-shadow:var(--v6-shadow)}
+.sim-board{border-radius:16px}
+.phase-tabs{gap:6px;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 78%,transparent);padding:6px;border-radius:18px;width:max-content;max-width:100%;box-shadow:var(--v6-shadow)}
+.phase-tab{border-radius:13px;border-bottom:0!important;transition:background .2s,box-shadow .2s,color .2s}
+.phase-tab:hover:not(.active){background:var(--card2)}
+.phase-tab.active{background:var(--phase-soft);box-shadow:inset 0 0 0 2px var(--phase-color)}
+.heading-art{border-radius:18px;box-shadow:var(--v6-shadow);animation:v6-float 6s ease-in-out infinite}
+@keyframes v6-float{50%{transform:translateY(-4px) rotate(-2deg)}}
+.lab-heading h1{background:linear-gradient(100deg,var(--ink) 30%,var(--scene) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.timeline button{transition:transform .2s}
+.timeline button:not(.locked):hover{transform:translateY(-3px)}
+.timeline button.current{box-shadow:0 0 0 4px color-mix(in srgb,var(--journey-color,var(--blue)) 20%,transparent)}
+.mission-head{background:linear-gradient(140deg,var(--scene-soft),var(--card) 80%)}
+.mission-item{transition:background .3s}
+.mission-item.achieved{background:linear-gradient(90deg,var(--green-soft),transparent 85%);border-radius:12px;padding-left:10px;padding-right:6px}
+.mission-item.achieved .mission-check{box-shadow:0 0 0 4px var(--green-soft)}
+.mission-meter{height:8px}
+.mission-meter i{background:var(--v6-grad);box-shadow:0 0 12px #8b5cf688}
+.analogy{border-radius:0 14px 14px 0}
+.concept{transition:transform .2s}
+.concept:hover{transform:translateX(4px)}
+.concept h4:before{content:'◆ ';color:var(--scene)}
+.semantic-metric{border-radius:14px}
+.metric strong.v6-pop{animation:v6-pop .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes v6-pop{0%{transform:scale(1)}35%{transform:scale(1.18);text-shadow:0 0 14px color-mix(in srgb,var(--metric-color,var(--purple)) 55%,transparent)}100%{transform:scale(1)}}
+.metric strong{display:inline-block;transform-origin:left center}
+.focus-enter:not(.lab-top)>*{animation:v6-enter .45s ease-out both}
+.focus-enter:not(.lab-top)>*:nth-child(2){animation-delay:.05s}.focus-enter:not(.lab-top)>*:nth-child(3){animation-delay:.1s}.focus-enter:not(.lab-top)>*:nth-child(4){animation-delay:.15s}.focus-enter:not(.lab-top)>*:nth-child(5){animation-delay:.2s}.focus-enter:not(.lab-top)>*:nth-child(6){animation-delay:.25s}
+@keyframes v6-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Cuestionario */
+.quiz-card{border-radius:20px;overflow:hidden}
+.answer{border-radius:14px;transition:transform .15s,border-color .2s,background .2s,box-shadow .2s}
+.answer:not(:disabled):hover{transform:translateX(5px);box-shadow:var(--v6-shadow)}
+.answer .letter{border-radius:8px;font-weight:800;min-width:28px;text-align:center}
+.answers .answer:nth-child(1) .letter{background:var(--blue-soft);color:var(--blue);border-color:var(--blue)}
+.answers .answer:nth-child(2) .letter{background:var(--orange-soft);color:var(--orange);border-color:var(--orange)}
+.answers .answer:nth-child(3) .letter{background:var(--purple-soft);color:var(--purple);border-color:var(--purple)}
+.answers .answer:nth-child(4) .letter{background:var(--green-soft);color:var(--green);border-color:var(--green)}
+.answer.correct{animation:v6-correct .7s ease-out;box-shadow:0 0 0 3px var(--green-soft)}
+@keyframes v6-correct{30%{transform:scale(1.02)}}
+.v6-shake{animation:v6-shake .45s}
+@keyframes v6-shake{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
+.feedback{border-radius:14px}
+.quiz-result{border-radius:22px}
+.result-medal{animation:v6-medal 1.2s cubic-bezier(.3,1.6,.5,1)}
+@keyframes v6-medal{0%{transform:scale(.2) rotate(-40deg);opacity:0}100%{transform:none;opacity:1}}
+
+/* Ilustraciones vivas */
+.home-course-picture svg path[fill="none"],.access-art svg path[fill="none"]{stroke-dasharray:9 7;animation:v2-flow 2.4s linear infinite}
+.home-course-picture svg>rect:nth-of-type(1),.access-art svg>rect:nth-of-type(1){animation:v6-cpu 4s ease-in-out infinite;transform-origin:261px 122px;transform-box:view-box}
+@keyframes v6-cpu{50%{filter:drop-shadow(0 0 12px #4f7dff88)}}
+.v6-bits{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit}
+.v6-bits i{position:absolute;bottom:-24px;font:800 15px var(--mono);font-style:normal;color:var(--purple);opacity:0;animation:v6-rise 9s linear infinite}
+.v6-bits i:nth-child(3n){color:var(--blue)}.v6-bits i:nth-child(3n+1){color:var(--pink)}.v6-bits i:nth-child(4n){color:var(--orange)}
+@keyframes v6-rise{0%{transform:translateY(0) rotate(0);opacity:0}12%{opacity:.55}85%{opacity:.35}100%{transform:translateY(-330px) rotate(25deg);opacity:0}}
+.access-features span:nth-child(4){color:var(--pink)}
+.journey-stop.is-selected .journey-node:before{animation:v6-ring 2.6s ease-in-out infinite}
+@keyframes v6-ring{50%{box-shadow:0 0 0 9px color-mix(in srgb,var(--journey-color) 12%,transparent),0 5px 12px color-mix(in srgb,var(--journey-color) 20%,transparent)}}
+.journey-node-emoji{animation:v6-bob 3.4s ease-in-out infinite}
+.journey-stop:nth-child(odd) .journey-node-emoji{animation-delay:-1.7s}
+@keyframes v6-bob{50%{transform:translateY(-3px) rotate(8deg)}}
+.journey-open:not(:disabled){background:linear-gradient(135deg,var(--journey-color),color-mix(in srgb,var(--journey-color) 55%,#ec4899))}
+.chat-launch{background:linear-gradient(135deg,var(--card),var(--purple-soft));border-color:color-mix(in srgb,var(--purple) 30%,var(--line))}
+.chat-launch .pet{display:inline-block}
+.chat-launch .pet.v6-jump{animation:v6-jump .9s cubic-bezier(.3,1.7,.5,1)}
+@keyframes v6-jump{0%{transform:none}30%{transform:translateY(-14px) rotate(-8deg)}60%{transform:translateY(0) rotate(6deg)}100%{transform:none}}
+
+/* Burbuja de Bit, insignias, XP flotante, confeti y ventana de nivel */
+.v6-bit-bubble{position:fixed;right:24px;bottom:96px;z-index:60;max-width:min(320px,calc(100vw - 40px));background:var(--card);color:var(--ink);border:2px solid var(--purple);border-radius:18px 18px 4px 18px;padding:12px 16px;font-weight:700;font-size:15px;line-height:1.45;box-shadow:var(--v6-shadow-lg);animation:v6-bubble .35s cubic-bezier(.3,1.5,.5,1)}
+.v6-bit-bubble[data-mood=think]{border-color:var(--orange)}
+.v6-bit-bubble[data-mood=party]{border-color:var(--green);background:linear-gradient(135deg,var(--card),var(--green-soft))}
+@keyframes v6-bubble{from{opacity:0;transform:translateY(12px) scale(.9)}to{opacity:1;transform:none}}
+.v6-pop-stack{position:fixed;top:96px;right:18px;z-index:80;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.v6-badge-pop{pointer-events:auto;display:flex;align-items:center;gap:12px;width:min(340px,calc(100vw - 36px));background:var(--card);border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:16px;padding:12px 14px;box-shadow:var(--v6-shadow-lg);animation:v6-slide .45s cubic-bezier(.3,1.4,.5,1)}
+.v6-badge-pop>span{font-size:34px;line-height:1;filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
+.v6-badge-pop small{display:block;font:800 10px var(--mono);letter-spacing:1px;color:var(--purple);text-transform:uppercase}
+.v6-badge-pop b{display:block;font:700 16px var(--serif)}
+.v6-badge-pop p{font-size:12px;color:var(--muted);line-height:1.4}
+.v6-badge-pop.out{animation:v6-slide-out .35s ease-in forwards}
+@keyframes v6-slide{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes v6-slide-out{to{opacity:0;transform:translateX(40px)}}
+.v6-float-xp{position:fixed;z-index:85;pointer-events:none;font:800 18px var(--mono);color:#fff;background:var(--v6-grad);padding:4px 12px;border-radius:20px;box-shadow:0 8px 18px -8px #8b5cf6;animation:v6-xp 1.4s ease-out forwards;transform:translate(-50%,-50%)}
+@keyframes v6-xp{0%{opacity:0;transform:translate(-50%,-30%) scale(.7)}20%{opacity:1;transform:translate(-50%,-80%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-260%) scale(1)}}
+.v6-confetti{position:fixed;inset:0;z-index:95;pointer-events:none}
+.v6-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:rgba(17,24,48,.45);backdrop-filter:blur(6px);animation:v6-fade .25s}
+.v6-modal-card{width:min(520px,100%);max-height:calc(100dvh - 40px);overflow:auto;background:var(--card);border-radius:26px;padding:30px;box-shadow:var(--v6-shadow-lg);border:1px solid var(--line);text-align:center;animation:v6-bubble .4s cubic-bezier(.3,1.5,.5,1)}
+.v6-modal-card.left{text-align:left}
+.v6-modal-card h2{font-size:30px;margin:10px 0 6px}
+.v6-modal-card p{color:var(--muted);font-size:15px}
+.v6-big-emoji{font-size:72px;line-height:1;display:inline-block;animation:v6-medal 1s cubic-bezier(.3,1.6,.5,1),v6-float 4s 1s ease-in-out infinite}
+.v6-modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+@keyframes v6-fade{from{opacity:0}}
+
+/* Panel del jugador en el inicio */
+.v6-player{display:grid;grid-template-columns:minmax(260px,1.1fr) 2fr;gap:18px;margin:22px 0 8px}
+.v6-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--v6-shadow);position:relative;overflow:hidden}
+.v6-level-card{background:linear-gradient(140deg,#4f46e5,#8b5cf6 55%,#ec4899);color:#fff;border:0}
+.v6-level-card:after{content:'';position:absolute;width:220px;height:220px;right:-70px;top:-90px;border-radius:50%;background:rgba(255,255,255,.12)}
+.v6-level-card .mini-label{color:#fff;opacity:.85}
+.v6-level-card h3{font-size:26px;margin:4px 0 2px;color:#fff}
+.v6-level-card p{font-size:13px;opacity:.9}
+.v6-level-head{display:flex;align-items:center;gap:16px}
+.v6-level-emoji{font-size:44px;width:70px;height:70px;border-radius:22px;background:rgba(255,255,255,.18);display:grid;place-items:center;flex-shrink:0;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25);animation:v6-float 5s ease-in-out infinite}
+.v6-xpbar{height:12px;background:rgba(255,255,255,.25);border-radius:20px;overflow:hidden;margin:16px 0 8px}
+.v6-xpbar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#fde68a,#fff);box-shadow:0 0 14px #fff8;transition:width .8s cubic-bezier(.3,1.2,.5,1)}
+.v6-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.v6-stat{border-radius:16px;padding:14px;background:linear-gradient(150deg,var(--stat-soft),var(--card));border:1px solid color-mix(in srgb,var(--stat) 28%,var(--line))}
+.v6-stat span{font-size:22px}
+.v6-stat b{display:block;font:800 22px var(--mono);color:var(--stat);margin-top:4px}
+.v6-stat small{font-size:12px;color:var(--muted);font-weight:700}
+.v6-badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.v6-badge-row .v6-mini-badge{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:var(--card2);border:1px solid var(--line)}
+.v6-badge-row small{color:var(--muted);font-size:12px}
+.v6-next{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--blue-soft);color:var(--blue);font-weight:700;font-size:14px}
+.v6-next span{flex:1}
+
+/* Zona de retos */
+.v6-arcade-teaser{margin:34px 0 10px}
+.v6-arcade-teaser .section-head h2,.v6-arena-head h1{background:var(--v6-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.v6-games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.v6-game{--g:var(--blue);--gs:var(--blue-soft);position:relative;overflow:hidden;text-align:left;background:linear-gradient(150deg,var(--gs),var(--card) 75%);border:1px solid color-mix(in srgb,var(--g) 30%,var(--line));border-radius:22px;padding:20px;box-shadow:var(--v6-shadow);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
+.v6-game:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:var(--v6-shadow-lg)}
+.v6-game .v6-game-emoji{font-size:38px;line-height:1;width:62px;height:62px;border-radius:18px;display:grid;place-items:center;background:var(--card);box-shadow:var(--v6-shadow);margin-bottom:6px}
+.v6-game h3{font-size:21px;color:var(--g)}
+.v6-game p{font-size:13px;color:var(--muted);line-height:1.5}
+.v6-game .v6-game-unit{font:800 10px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--g)}
+.v6-game .v6-game-best{font:700 12px var(--mono);color:var(--muted);margin-top:auto;padding-top:8px}
+.v6-game-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.v6-game-actions button{border-radius:12px;padding:9px 13px;font-weight:800;font-size:13px;border:1px solid var(--g);background:var(--card);color:var(--g);transition:background .2s,color .2s,transform .15s}
+.v6-game-actions button:first-child{background:var(--g);color:#fff}
+.v6-game-actions button:hover{transform:translateY(-2px)}
+.v6-game:after{content:'';position:absolute;width:140px;height:140px;border-radius:50%;right:-50px;top:-50px;background:var(--g);opacity:.08}
+.v6-arena-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:30px 0 18px}
+.v6-arena-head h1{font-size:clamp(34px,4vw,52px);letter-spacing:-1.5px;line-height:1.05;margin-top:8px}
+.v6-arena-head p{color:var(--muted);max-width:620px;margin-top:8px}
+.v6-arena{max-width:860px;margin:10px auto 0}
+.v6-hud{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.v6-hud>div{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 14px;box-shadow:var(--v6-shadow);font-weight:800}
+.v6-hud b{font:800 20px var(--mono)}
+.v6-hud .v6-timer{--t:100;position:relative;overflow:hidden}
+.v6-hud .v6-timer:after{content:'';position:absolute;left:0;bottom:0;height:4px;width:calc(var(--t) * 1%);background:var(--v6-grad);transition:width .25s linear}
+.v6-hud .v6-timer.low b{color:var(--red);animation:v6-live .6s infinite}
+.v6-hud .v6-hud-game{margin-right:auto;color:var(--g)}
+.v6-qcard{background:var(--card);border-radius:24px;border:1px solid var(--line);border-top:6px solid var(--g);padding:26px 28px;box-shadow:var(--v6-shadow-lg);animation:v6-enter .35s ease-out}
+.v6-qcard .mini-label{color:var(--g)}
+.v6-qcard h2{font-size:24px;margin:10px 0 14px;line-height:1.35}
+.v6-qcode{font:800 clamp(22px,3.6vw,34px) var(--mono);letter-spacing:1px;text-align:center;padding:18px 14px;margin:6px 0 18px;border-radius:16px;background:linear-gradient(135deg,var(--gs),var(--card2));color:var(--ink);overflow-wrap:anywhere}
+.v6-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.v6-opt{display:flex;align-items:center;gap:12px;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:14px 16px;font:700 17px var(--mono);color:var(--ink);transition:transform .15s,border-color .2s,background .2s;min-height:62px}
+.v6-opt i{font:800 13px var(--mono);font-style:normal;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;background:var(--card2);color:var(--muted)}
+.v6-opt:nth-child(1) i{background:var(--blue-soft);color:var(--blue)}.v6-opt:nth-child(2) i{background:var(--orange-soft);color:var(--orange)}.v6-opt:nth-child(3) i{background:var(--purple-soft);color:var(--purple)}.v6-opt:nth-child(4) i{background:var(--green-soft);color:var(--green)}
+.v6-opt:not(:disabled):hover{transform:translateY(-3px);border-color:var(--g)}
+.v6-opt:disabled{opacity:1}
+.v6-opt.ok{border-color:var(--green);background:var(--green-soft);animation:v6-correct .6s}
+.v6-opt.ko{border-color:var(--red);background:var(--red-soft);animation:v6-shake .45s}
+.v6-opt.dim{opacity:.45}
+.v6-explain{margin-top:16px;padding:14px 16px;border-radius:14px;background:var(--blue-soft);color:var(--ink);font-size:15px;line-height:1.6}
+.v6-explain.ko{background:var(--red-soft)}
+.v6-explain b{color:var(--blue)}
+.v6-explain.ko b{color:var(--red)}
+.v6-arena-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.v6-end{text-align:center;padding:34px 26px}
+.v6-end .result-score{margin:10px 0}
+.v6-end-stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0}
+.v6-end-stats span{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:8px 14px;font-weight:800}
+.v6-mode-switch{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:5px;gap:4px;box-shadow:var(--v6-shadow)}
+.v6-mode-switch button{border-radius:12px;padding:9px 14px;font-weight:800;font-size:13px;background:none;color:var(--muted)}
+.v6-mode-switch button[aria-pressed=true]{background:var(--v6-grad);color:#fff}
+
+/* Bitácora: insignias y retos */
+.v6-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0 26px}
+.v6-badge{border-radius:18px;padding:16px 14px;background:linear-gradient(150deg,var(--purple-soft),var(--card));border:1px solid color-mix(in srgb,var(--purple) 30%,var(--line));text-align:center}
+.v6-badge span{font-size:36px;display:block;line-height:1.1}
+.v6-badge b{display:block;font:700 15px var(--serif);margin-top:8px}
+.v6-badge small{display:block;font-size:12px;color:var(--muted);line-height:1.4;margin-top:4px}
+.v6-badge.locked{background:var(--card2);border-style:dashed;border-color:var(--line)}
+.v6-badge.locked span{filter:grayscale(1);opacity:.35}
+.v6-section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:30px}
+.v6-section-title h2{font-size:26px}
+
+/* Panel del profesor para Google Sheets */
+.v6-teacher{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:20px 0 6px}
+.v6-teacher .v6-card{flex:1;min-width:260px;display:flex;gap:14px;align-items:center}
+.v6-teacher .v6-card>span{font-size:34px}
+.v6-teacher .v6-card p{font-size:13px;color:var(--muted)}
+.v6-form{display:grid;gap:12px;margin-top:16px;text-align:left}
+.v6-form label{font-weight:800;font-size:13px;display:grid;gap:6px}
+.v6-form input{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:var(--card2);font:600 14px var(--mono);color:var(--ink);width:100%}
+.v6-form small{font-weight:600;color:var(--muted)}
+.v6-result{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--card2);font-size:14px}
+.v6-result.ok{background:var(--green-soft);color:var(--green)}.v6-result.ko{background:var(--red-soft);color:var(--red)}
+.v6-steps{margin:14px 0 0;padding-left:20px;font-size:14px;color:var(--muted);line-height:1.7}
+.registration-note.v6-live-note{background:var(--green-soft);color:var(--green);border-radius:10px;padding:9px 11px;font-weight:700}
+
+@media(max-width:1500px){html[data-mode=student] .top-progress{display:none}html[data-mode=student] .top-actions{margin-left:auto}}
+.brand-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand>span:last-child{min-width:0}.top-actions .textbtn{white-space:nowrap}.mode-label{max-width:200px}
+.access-art .art-label{top:14px;bottom:auto}
+@media(max-width:1120px){.v6-level-text small{max-width:90px}}
+@media(max-width:900px){.v6-player{grid-template-columns:1fr}.v6-games{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.v6-level-text,.v6-streak{display:none}.v6-level{padding:2px;border-radius:50%}.top-actions .v6-arcade-btn span{display:none}.top-actions .v6-arcade-btn{padding:6px 10px}.v6-cloud{font-size:0;padding:6px}.v6-cloud:before{margin:0}.v6-bit-bubble{right:12px;bottom:78px}.phase-tabs{width:100%}.v6-opts{grid-template-columns:1fr}.v6-qcard{padding:20px}}
+@media(max-width:600px){html[data-mode=student] .top-actions .bitacora-btn{display:none}.top-actions{gap:3px!important}.v6-level-ring{width:31px;height:31px}.v6-level-ring b{width:24px;height:24px;font-size:12px}.top-actions .v6-arcade-btn{padding:5px 8px}.v6-games{grid-template-columns:minmax(0,1fr)}.v6-pop-stack{top:auto;bottom:86px;right:12px}.v6-modal-card{padding:24px 20px}.v6-hud>div{padding:7px 11px}.v6-hud b{font-size:17px}.v6-arena-head{padding-top:22px}}
+@media(prefers-reduced-motion:reduce){body::after,.heading-art,.journey-node-emoji,.journey-stop.is-selected .journey-node:before,.v6-bits i,.home-course-picture svg path,.access-art svg path,.v6-level-emoji,.v6-big-emoji,.v6-streak.hot,.focus-enter:not(.lab-top)>*{animation:none!important}.v6-bits{display:none}}
+@media print{.v6-transient,.v6-arcade-btn,.v6-level,.v6-streak,.v6-cloud,#v6-sound,#v6-type,.v6-arcade-teaser,.v6-game-actions,body::after{display:none!important}.v6-card,.v6-badge{box-shadow:none;break-inside:avoid}.v6-level-card{background:#fff!important;color:#111!important;border:1px solid #999!important}.v6-level-card *{color:#111!important}}
+
 </style>
 </head>
 <body>
@@ -216,12 +477,12 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
 <header class="topbar"><div class="top-inner">
 <button class="brand" onclick="goHome()" aria-label="El Arquitecto de Bits, volver al inicio"><span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="16" height="16" rx="3"/><path d="M12 3v5m8-5v5M12 24v5m8-5v5M3 12h5m-5 8h5m16-8h5m-5 8h5M12 13h8v7h-8z"/></svg></span><span><span class="brand-title">El Arquitecto de Bits</span><span class="brand-sub">Arquitectura de Computadoras</span></span></button>
 <button class="mode-label" id="mode-label" onclick="showModePicker()" title="Cambiar modo">Elegir modo</button><div class="top-progress"><span id="progress-label">0 / 17 completados</span><div class="tiny-progress" role="progressbar" aria-label="Progreso del recorrido" aria-valuemin="0" aria-valuemax="17" aria-valuenow="0"><i id="progress-fill" style="width:0%"></i></div></div>
-<div class="top-actions"><span class="xp" id="xp">✦ 0 XP</span><button class="textbtn bitacora-btn" onclick="showProgress()">Mi bitácora</button><button class="iconbtn" onclick="toggleTheme()" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema">◐</button><button class="iconbtn hide-mobile" id="projection-btn" onclick="toggleProjection()" aria-label="Activar modo proyección" aria-pressed="false" title="Modo proyección">⛶</button><button class="iconbtn hide-mobile" onclick="downloadHTML()" aria-label="Descargar aplicación HTML" title="Descargar HTML">↓</button></div>
+<div class="top-actions"><span class="xp" id="xp">✦ 0 XP</span><span class="v6-cloud" id="v6-cloud" role="status" hidden></span><span class="v6-streak" id="v6-streak" title="Racha de respuestas correctas" hidden>🔥 <b>0</b></span><button class="v6-level" id="v6-level" onclick="showProgress()" aria-label="Tu nivel y experiencia" hidden><span class="v6-level-ring" id="v6-level-ring" aria-hidden="true"><b id="v6-level-n">1</b></span><span class="v6-level-text"><small id="v6-level-name">Chispa curiosa</small><span id="v6-level-xp">0 XP</span></span></button><button class="textbtn v6-arcade-btn" id="v6-arcade-btn" onclick="showArcade()" title="Zona de retos">🎮 <span>Retos</span></button><button class="textbtn bitacora-btn" onclick="showProgress()">Mi bitácora</button><button class="iconbtn" onclick="toggleTheme()" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema">◐</button><button class="iconbtn" id="v6-sound" onclick="V6.toggleSound()" aria-pressed="true" aria-label="Activar o silenciar los sonidos" title="Sonido">🔊</button><button class="iconbtn hide-mobile" id="v6-type" onclick="V6.toggleType()" aria-pressed="false" aria-label="Usar la tipografía clásica" title="Tipografía clásica">Aa</button><button class="iconbtn hide-mobile" id="projection-btn" onclick="toggleProjection()" aria-label="Activar modo proyección" aria-pressed="false" title="Modo proyección">⛶</button><button class="iconbtn hide-mobile" onclick="downloadHTML()" aria-label="Descargar aplicación HTML" title="Descargar HTML">↓</button></div>
 </div></header>
 <main id="main" tabindex="-1"></main>
-<footer class="footer"><div>Adaptación didáctica de <b>El Detective de Datos</b> · Diseño de referencia: <b>Aslin Gonzalo Botello Plata</b>.<br>El Arquitecto de Bits · Arquitectura de Computadoras · Obra derivada.</div><span>17 laboratorios · 85 preguntas · Hecho para aprender haciendo</span></footer>
+<footer class="footer"><div>Adaptación didáctica de <b>El Detective de Datos</b> · Diseño de referencia: <b>Aslin Gonzalo Botello Plata</b>.<br>El Arquitecto de Bits · Arquitectura de Computadoras · Obra derivada.</div><span>Sexta edición · 17 laboratorios · 85 preguntas · 6 retos · Hecho para aprender jugando</span></footer>
 <button class="chat-launch" id="chat-launch" onclick="toggleChat(true)" aria-label="Abrir chat con Bit, tu guía local" aria-expanded="false" aria-controls="chat-panel"><span class="pet" data-pet></span><span><b>¿Lo vemos juntos?</b><small>Bit · Tu guía de laboratorio</small></span></button>
-<aside class="chat-panel" id="chat-panel" aria-label="Conversación con Bit" hidden><header class="chat-head"><span class="pet" data-pet></span><div><b>Bit</b><small>● Guía local · Sin conexión</small></div><button onclick="toggleChat(false)" aria-label="Cerrar conversación">×</button></header><div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div><div class="suggestions" id="suggestions"></div><form class="chat-form" onsubmit="event.preventDefault();sendChat()"><input id="chat-input" aria-label="Escribe una pregunta para Bit" placeholder="¿Qué es la memoria caché?" maxlength="300" autocomplete="off"><button aria-label="Enviar pregunta" type="submit">↑</button></form><p class="chat-note">Respuestas de una base didáctica predeterminada. No usa IA ni envía tus preguntas a servidores.</p></aside>
+<aside class="chat-panel" id="chat-panel" aria-label="Conversación con Bit" hidden><header class="chat-head"><span class="pet" data-pet></span><div><b>Bit</b><small>● Guía local · Sin conexión</small></div><button onclick="toggleChat(false)" aria-label="Cerrar conversación">×</button></header><div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div><div class="suggestions" id="suggestions"></div><form class="chat-form" onsubmit="event.preventDefault();sendChat()"><input id="chat-input" aria-label="Escribe una pregunta para Bit" placeholder="¿Qué es la memoria caché?" maxlength="300" autocomplete="off"><button aria-label="Enviar pregunta" type="submit">↑</button></form><p class="chat-note" id="chat-note">Respuestas de una base didáctica predeterminada. No usa IA ni envía tus preguntas a servidores.</p></aside>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script type="application/json" id="module-data">[
   {
@@ -444,19 +705,19 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
     "unit": 1,
     "eyebrow": "De la miniaturización a la reconfiguración",
     "objective": "Comprender una tendencia histórica del número de transistores y configurar una función lógica mediante una tabla LUT.",
-    "analogy": "Una LUT es una pequeña hoja de respuestas: para cada combinación de entradas guarda la salida deseada. Ejemplo: XOR guarda 0, 1, 1 y 0 para 00, 01, 10 y 11. En el gráfico, 1 millón de transistores pasa a 2 y luego a 4 millones tras dos y cuatro años del modelo.",
+    "analogy": "Una LUT es una pequeña hoja de respuestas: para cada combinación de entradas guarda la salida deseada. Ejemplo: XOR guarda 0, 1, 1 y 0 para 00, 01, 10 y 11. En el gráfico, 1 millón de transistores pasa a 2 millones y luego a 4 millones tras dos y cuatro años del modelo.",
     "concepts": [
       {
         "term": "Ley de Moore",
-        "text": "Es una observación histórica sobre el crecimiento del número de transistores, a menudo resumida como una duplicación aproximada cada dos años. No garantiza que todos los chips ni su velocidad sigan esa pauta."
+        "text": "Es una observación histórica sobre el crecimiento del número de transistores integrados en un chip. Gordon Moore la propuso en 1965 con una duplicación anual y en 1975 la ajustó a una duplicación aproximada cada dos años. No garantiza que todos los chips ni su velocidad sigan esa pauta."
       },
       {
         "term": "Crecimiento exponencial",
-        "text": "Si una cantidad se duplica cada dos años, 1 000 transistores pasan a 2 000 y luego a 4 000 en cuatro años. El simulador ilustra esa regla; no predice un producto real."
+        "text": "Si una cantidad se duplica cada dos años, tras n años se multiplica por 2^(n/2): 1 millón de transistores pasa a 2 millones en dos años y a 4 millones en cuatro. En escala lineal los primeros años casi no se ven; en escala logarítmica cada duplicación sube el mismo escalón y la tendencia se convierte en una recta. El simulador ilustra esa regla; no predice un producto real."
       },
       {
         "term": "FPGA y LUT",
-        "text": "Un FPGA contiene bloques lógicos, registros y conexiones configurables; algunos incluyen procesadores y otros bloques dedicados. Una LUT de dos entradas guarda cuatro salidas, una para cada combinación."
+        "text": "Una FPGA contiene bloques lógicos, registros y conexiones configurables; algunos incluyen procesadores y otros bloques dedicados. Una LUT de dos entradas guarda cuatro salidas, una para cada combinación."
       },
       {
         "term": "Límites físicos y del modelo",
@@ -464,7 +725,7 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
       }
     ],
     "steps": [
-      "Ajusta Años transcurridos a 0, 2 y 4 y observa los factores 1×, 2× y 4×.",
+      "Ajusta Años transcurridos a 0, 2 y 4 y observa los factores 1×, 2× y 4×. Cambia entre escala lineal y logarítmica y compara la forma de la curva.",
       "Configura las cuatro filas de la LUT para obtener una función XOR; comprueba después con el botón de ejemplo.",
       "Prueba las cuatro combinaciones de A y B y explica qué fila se consulta en cada caso."
     ],
@@ -505,7 +766,7 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
         "explanation": "Hay cuatro combinaciones posibles: 00, 01, 10 y 11."
       },
       {
-        "q": "¿Qué caracteriza a un FPGA?",
+        "q": "¿Qué caracteriza a una FPGA?",
         "options": [
           "Solo puede sumar",
           "No contiene circuitos físicos",
@@ -533,12 +794,16 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
         "a": "No. Resume una tendencia histórica de la industria. El ritmo depende de dificultades técnicas y económicas, y no debe extenderse como una garantía indefinida."
       },
       {
-        "q": "¿Un FPGA está vacío por dentro?",
+        "q": "¿Una FPGA está vacío por dentro?",
         "a": "No. Se fabrica con recursos físicos, como LUT, registros y rutas configurables. Programarlo configura esos recursos; no crea materia nueva."
       },
       {
         "q": "¿Una LUT ejecuta instrucciones como una CPU?",
         "a": "Una LUT combinacional relaciona entradas y salida según una tabla. Una CPU ejecuta un repertorio de instrucciones; son mecanismos distintos, aunque pueden integrarse en un mismo sistema."
+      },
+      {
+        "q": "¿Por qué usar una escala logarítmica?",
+        "a": "Porque en ella cada multiplicación por el mismo factor ocupa la misma distancia vertical. Una duplicación cada dos años se ve como una recta, y eso permite comparar cinco décadas de chips, desde los 2 300 transistores del Intel 4004 hasta los más de cien mil millones de un chip actual."
       }
     ]
   },
@@ -686,7 +951,7 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
       {
         "q": "En este modelo configurable, ¿qué controla el código de operación?",
         "options": [
-          "La energía del FPGA",
+          "La energía de la FPGA",
           "La ruta del MUX que se muestra en la salida",
           "El tamaño de la RAM",
           "La cantidad de entradas"
@@ -731,7 +996,7 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
         "q": "¿Qué realiza realmente el botón de síntesis de este laboratorio?",
         "options": [
           "Fabrica transistores nuevos",
-          "Programa cualquier FPGA conectado",
+          "Programa cualquier FPGA conectada",
           "Genera un bitstream comercial",
           "Prepara una representación conceptual del diseño"
         ],
@@ -868,7 +1133,7 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
     "unit": 3,
     "eyebrow": "Hablar con el mundo exterior",
     "objective": "Comparar E/S aislada y mapeada, seleccionar un destino y ejecutar una lectura o escritura válida mediante su controlador.",
-    "analogy": "El controlador es la recepción de un edificio: prepara o recibe un mensaje y aplica reglas de acceso. Ejemplo: el teclado del modelo entrega el número 65 cuando se selecciona una lectura; un intento de escribirlo se rechaza.",
+    "analogy": "El controlador es la recepción de un edificio: prepara o recibe un mensaje y aplica reglas de acceso. Ejemplo: el teclado del modelo entrega el número 65, el código ASCII de la letra «A», cuando se selecciona una lectura; un intento de escribirlo se rechaza.",
     "concepts": [
       {
         "term": "Controlador de periférico",
@@ -1625,6 +1890,10 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
         "text": "La aceleración ideal es 1 / [(1 − p) + p/N]. p es la fracción paralelizable, entre 0 y 1, y N es el factor de aceleración de esa parte. Con 80 % y cuatro núcleos: 1 / [0,2 + 0,8/4] = 2,5. Un trabajo de 1 s pasa idealmente a 0,4 s."
       },
       {
+        "term": "Potencia y energía",
+        "text": "La potencia dinámica de un chip CMOS se aproxima con P ≈ α · C · V² · f. Bajar solo la frecuencia reduce la potencia y el calor, pero alarga el tiempo: si V no cambia, la energía de la tarea (E = P × t) queda casi igual. Reducir también el voltaje (DVFS) sí ahorra energía, porque V aparece al cuadrado."
+      },
+      {
         "term": "Límites y tendencias",
         "text": "La parte secuencial no se acelera; con p = 0,8, el límite ideal es 1/0,2 = 5×. Se omiten comunicación, sincronización y otras esperas. NPU y núcleos de eficiencia son tendencias explicadas, sin controles de hardware reales en esta simulación."
       }
@@ -1705,6 +1974,10 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
       {
         "q": "¿Por qué añadir núcleos mejora cada vez menos?",
         "a": "La parte secuencial permanece. Con 80 % paralelizable, cuatro núcleos reducen el tiempo a 0,4 del original y ocho a 0,3; ni siquiera infinitos núcleos pueden superar 5× bajo esos supuestos."
+      },
+      {
+        "q": "¿Bajar la frecuencia ahorra energía?",
+        "a": "Reduce la potencia instantánea, pero la tarea tarda más. Con el mismo voltaje, la energía total casi no cambia: E = P × t y P es proporcional a f. El ahorro aparece cuando también se reduce el voltaje, porque la potencia depende de V²."
       }
     ]
   },
@@ -2059,7 +2332,7 @@ if(mode==='reg'){out=diagram(box(45,80,160,90,'D = '+(Number(s.d)&1),'Próximo d
 if(mode==='encoder'){out=diagram([0,1,2,3].map((v,i)=>box(30,12+i*57,150,45,'D'+v+' = '+(v===l?1:0),'',v===l?'gold':'ink')+line(180,35+i*57,320,123,v===l?'gold':'muted',v===l)).join('')+box(320,75,180,95,'Encoder 4→2','Una entrada activa')+line(500,123,620,123,'gold',true)+box(620,88,145,70,bin(l,2),'Código de salida','gold'),'Codificador una línea activa a código binario');extra=`<div class="sim-controls">${select('line','Única entrada activa',l,[0,1,2,3].map(v=>({value:v,label:'D'+v})))}</div><p class="sim-note">D${l} activa se codifica como ${bin(l,2)}. Este modelo admite una sola entrada activa; varias entradas exigirían un codificador de prioridad.</p>`}
 if(mode==='demux'){out=diagram(box(35,85,150,75,'Dato D = '+a)+line(185,123,300,123)+box(300,75,180,95,'DEMUX 1→4','Selector '+bin(c,2))+[0,1,2,3].map((v,i)=>line(480,123,600,35+i*57,v===c?'gold':'muted',v===c)+box(600,12+i*57,140,45,'Y'+v+' = '+(v===c?a:0),'',v===c?'gold':'ink')).join(''),'Demultiplexor dirige un dato a una salida');extra=`<div class="sim-controls">${select('a','Dato de entrada D',a,opts([0,'0'],[1,'1']))}${select('code','Selector',c,[0,1,2,3].map(v=>({value:v,label:bin(v,2)+' → Y'+v})))}</div><p class="sim-note">El DEMUX dirige el dato D a Y${c}. Las demás salidas quedan en 0. Si D = 0, la salida elegida también vale 0.</p>`}
 return `<div class="sim-controls">${select('mode','Componente digital',mode,opts(['mux','Multiplexor (MUX)'],['deco','Decodificador'],['encoder','Codificador'],['demux','Demultiplexor'],['reg','Registro D']))}</div>${out}${extra}`},action(s,a){if(a==='clock')s.reg=Number(s.d)&1}};
-SIMS.u13={initial:()=>({years:4,a:0,b:1,lut:[0,0,0,1]}),render:s=>{
+SIMS.u13={initial:()=>({years:4,a:0,b:1,lut:[0,0,0,1],scale:'lin'}),render:s=>{
 let years=bounded(s.years,0,12),a=Number(s.a)&1,b=Number(s.b)&1,idx=a*2+b,lut=s.lut;
 return `<p class="mini-label">Modelo histórico simplificado · duplicación cada 2 años</p><div class="sim-controls" style="margin-top:16px">${slider('years','Años transcurridos',years,0,12,2)}</div>${diagram([0,2,4,6,8,10,12].map((yr,i)=>{let h=15+2**(yr/2)*1.8;return `<rect x="${45+i*105}" y="${190-h}" width="58" height="${h}" rx="4" fill="var(--${yr===years?'gold':'teal'})" opacity="${yr===years?1:.4}"/>${text(74+i*105,216,yr+' años',12,'muted')}${text(74+i*105,180-h,2**(yr/2)+'×',13,yr===years?'gold':'teal')}`}).join(''),'Crecimiento teórico del número de transistores',240)}<div class="metrics">${metric('Factor teórico',2**(years/2)+'×','N = N₀ × 2^(años/2)')}${metric('Punto de partida','1 millón','Ejemplo hipotético de transistores')}${metric('Resultado',2**(years/2)+' millones','No predice un chip real')}</div><p class="sim-note">La ley de Moore describe una tendencia histórica de integración. No garantiza duplicar velocidad, reducir consumo ni continuar indefinidamente.</p><div style="border-top:1px solid var(--line);margin-top:20px;padding-top:18px"><p class="mini-label">FPGA · configura una LUT de 2 entradas</p><div class="sim-controls" style="margin-top:15px">${select('a','Entrada A',a,opts([0,'0'],[1,'1']))}${select('b','Entrada B',b,opts([0,'0'],[1,'1']))}${button('preset','Cargar AND','and')}${button('preset','Cargar XOR','xor')}</div><div class="chip-row">${lut.map((v,i)=>`<button class="bit ${v?'on':''}" onclick="simAction('lut','${i}')" aria-label="Salida LUT para ${bin(i,2)}, valor ${v}">${v}<small>A B = ${bin(i,2)}</small></button>`).join('')}</div><div class="trace">A B = ${a}${b} → se consulta la fila ${idx} → salida Y = ${lut[idx]}.</div><p class="sim-note">Una LUT almacena la tabla de verdad. Al cambiar sus cuatro valores reconfiguras una función lógica física; no fabricas de nuevo el chip.</p></div>`},action(s,a,v){if(a==='lut')s.lut[Number(v)]^=1;if(a==='preset')s.lut=v==='xor'?[0,1,1,0]:[0,0,0,1]}};
 function aluResult(a,b,op,bits=8){const m=2**bits,sign=m/2;let raw=0;if(op==='add')raw=a+b;else if(op==='sub')raw=a-b;else if(op==='and')raw=a&b;else if(op==='or')raw=a|b;else if(op==='xor')raw=a^b;else raw=~a;let r=((raw%m)+m)%m;let sa=a>=sign?a-m:a,sb=b>=sign?b-m:b,sr=r>=sign?r-m:r;return {r,raw,c:op==='add'&&raw>=m?1:0,borrow:op==='sub'&&a<b?1:0,z:r===0?1:0,n:r>=sign?1:0,v:op==='add'?+(sa+sb<-sign||sa+sb>=sign):op==='sub'?+(sa-sb<-sign||sa-sb>=sign):0,sa,sb,sr}}
@@ -2193,7 +2466,7 @@ S.u52={
  svg+=text(140,95,'CPU actual',14,'ink','end')+`<rect x="165" y="78" width="${w(t)}" height="26" rx="6" fill="var(--teal)"/>`+text(165+w(t)+9,97,f(t,4)+' s',13,'ink','start');
  svg+=text(140,150,`${N} núcleos ideales`,14,'ink','end')+`<rect x="165" y="133" width="${w(tp)}" height="26" rx="6" fill="var(--gold)"/>`+text(165+w(tp)+9,152,f(tp,4)+' s',13,'ink','start');
  return `<div class="sim-controls">${slider('instructions','Instrucciones (millones)',s.instructions,100,5000,100)}${slider('cpi','Ciclos por instrucción (CPI)',s.cpi,.5,5,.1)}${slider('frequency','Frecuencia nominal (GHz)',s.frequency,.5,6,.1)}${slider('effective','Frecuencia efectiva (% nominal)',s.effective,10,100,5)}</div>`+
- `<div class="metrics">${metric('Frecuencia efectiva',f(hz)+' GHz',`${f(freq)} × ${eff}/100`)}${metric('Tiempo de CPU',f(t,4)+' s','I × CPI / frecuencia efectiva')}${metric('Frente a referencia',f(1/t)+'×','Referencia: 1000 M, CPI 2, 2 GHz = 1 s')}</div>`+
+ `<div class="metrics">${metric('Frecuencia efectiva',f(hz)+' GHz',`${f(freq)} × ${eff}/100`)}${metric('Tiempo de CPU',f(t,4)+' s','I × CPI / frecuencia efectiva')}${metric('Frente a referencia',f(1/t)+'×','Referencia: 1000 M, CPI 2, 2 GHz = 1 s')}${metric('Potencia dinámica relativa',eff+' %','P ∝ V²·f con V fijo; la energía de la tarea casi no cambia')}</div>`+
  `<div class="sim-controls">${slider('parallel','Trabajo paralelizable (%)',s.parallel,0,100,5)}${select('cores','Núcleos / factor ideal de esa parte',s.cores,[1,2,4,8,16,32,64].map(x=>({value:x,label:String(x)})))}${button('thermal','Simular reducción térmica al 70 %')}${button('nominal','Restaurar frecuencia nominal')}</div>`+
  diagram(svg,'Menos tiempo significa mejor rendimiento para esta misma tarea',180)+
  `<div class="metrics">${metric('Aceleración de Amdahl',f(speed)+'×',`1 / (${f(1-p)} + ${f(p)} / ${N})`)}${metric('Tiempo con paralelismo ideal',f(tp,4)+' s',`${100-Math.round(p*100)} % del trabajo permanece secuencial`)}${metric('Límite con núcleos infinitos',p===1?'Sin límite en el modelo':f(1/(1-p))+'×','Depende de la fracción secuencial')}</div>`+
@@ -2244,7 +2517,7 @@ S.u62={
  svg+=line(610,115,610,185,active?'gold':'ink',!s.connected)+box(445,185,330,80,'Actuador + controlador',active?'Bomba ON · regando':'Bomba OFF',active?'gold':'ink')+line(445,225,200,225,active?'gold':'ink',!active)+box(20,185,180,80,'Suelo',active?'Recibe agua':'Sin riego','gold');
  if(s.connected&&s.sequence>0)svg+=pulse(175,72,235,72,'teal')+pulse(390,72,450,72,'teal','.85s')+pulse(610,115,610,185,active?'gold':'teal','1.7s');
  svg+=text(400,145,'Telemetría ↑ · decisión y comando ↓',13);
- return `<div class="sim-controls">${slider('humidity','Humedad física del suelo (%)',s.humidity,0,100,1)}${slider('threshold','Umbral de riego (%)',s.threshold,5,95,1)}${button('connect',s.connected?'Desconectar red simulada':'Enlazar red simulada')}${button('publish','Muestrear y publicar')}${button('sun','Sequía: −15 %')}${button('rain','Lluvia: +15 %')}${button('advance','Avanzar un paso del entorno')}</div>`+
+ return `<div class="sim-controls">${slider('humidity','Humedad física del suelo (%)',s.humidity,0,100,1)}${slider('threshold','Umbral de riego (%)',s.threshold,5,95,1)}${button('connect',s.connected?'Desconectar red simulada':'Enlazar red simulada')}${button('publish','Muestrear y publicar')}${button('sun','Sequía: −15 puntos')}${button('rain','Lluvia: +15 puntos')}${button('advance','Avanzar un paso del entorno')}</div>`+
  diagram(svg,'Lazo cerrado: medir → comunicar → decidir → actuar',290)+
  `<div class="metrics">${metric('Enlace',s.connected?'CONECTADO':'DESCONECTADO','Entorno local: sin tráfico de red real')}${metric('Última muestra publicada',s.lastHumidity===null?'—':s.lastHumidity+' %',`Mensajes publicados: ${s.sequence}`)}${metric('Bomba',active?'ENCENDIDA':'APAGADA','Controlada por la última decisión recibida')}</div>`+
 
@@ -2812,7 +3085,7 @@ function button(action,label,arg=''){const role=v3ActionRole(action);return `<bu
 function rangePreview(input,key){const label=input.closest('.range-control');if(label){label.querySelector('output').value=input.value;const pct=(Number(input.value)-Number(input.min))/(Number(input.max)-Number(input.min))*100;label.style.setProperty('--range-progress',Math.max(0,Math.min(100,pct))+'%')}simSet(key,input.value,input)}
 function decorateContext(){const scene=document.querySelector('.lab-top');if(scene){const role=CONTEXT_COLORS[current().id]||'blue';scene.dataset.topic=current().id;scene.dataset.sceneColor=role;scene.style.setProperty('--scene',`var(--${role})`);scene.style.setProperty('--scene-soft',`var(--${role}-soft)`);scene.style.setProperty('--scene-bright',`var(--${role}-bright)`)}if(current().id==='u11'&&state.view==='module'){const s=simState(),hex=[s.r,s.g,s.b].map(x=>hx(bounded(x,0,255)));const node=document.querySelector('.rgb-preview b');if(node)node.innerHTML='#'+hex.map((h,i)=>`<span class="hex-channel ${['red','green','blue'][i]}" title="${['Rojo','Verde','Azul'][i]}">${h}</span>`).join('')}}
 
-/* Fixed contracts: 17 simulators, 59 inputs, 1,435 rendered select variants.
+/* Fixed contracts: 17 simulators, 60 inputs, 1,437 rendered select variants.
    Select values retain their number/string types. Outputs and action-only state are excluded. */
 window.SIM_INPUT_SCHEMA = {
   "u11": {
@@ -2900,6 +3173,13 @@ window.SIM_INPUT_SCHEMA = {
     }
   },
   "u13": {
+    "scale": {
+      "type": "select",
+      "values": [
+        "lin",
+        "log"
+      ]
+    },
     "years": {
       "type": "number",
       "min": 0,
@@ -3324,10 +3604,31 @@ SIMS.u12.render=s=>{
  }
  return svg?replace(html,svg,'Circuito digital interactivo con bombillos para cada estado lógico',365):html;
 };
+/* Cifras públicas aproximadas de transistores por chip (Intel y Apple). */
+const mooreChips=[['Intel 4004',1971,2300,2],['Intel 8086',1978,29000,0],['Intel 80386',1985,275000,0],['Pentium',1993,3.1e6,0],['Pentium 4',2000,4.2e7,0],['Core 2 Duo',2006,2.91e8,0],['Apple M1',2020,1.6e10,3],['Apple M2 Ultra',2023,1.34e11,1]];
+const supDigits=n=>String(n).replace(/\d/g,d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
+const mooreHistory=()=>{
+ const X=y=>92+(y-1970)/(2024-1970)*628,Y=v=>262-(Math.log10(v)-3)/9*190,names={3:'mil',6:'1 millón',9:'mil millones',12:'1 billón'};
+ let g=surface('Chips reales frente a la regla de duplicación','Escala logarítmica: cada línea vale diez veces más. La línea punteada duplica cada dos años desde el Intel 4004.',305);
+ for(let e=3;e<=12;e++){const y=Y(10**e);g+=`<path d="M92 ${y}H722" stroke="var(--line)" ${e%3?'stroke-dasharray="2 6"':''}/>`+tx(86,y+4,'10'+supDigits(e),10,'muted','end')+(names[e]?tx(728,y+4,names[e],10,'muted','start'):'');}
+ for(let y=1970;y<=2020;y+=10)g+=tx(X(y),284,String(y),11,'muted');
+ const model=[];for(let y=1971;y<=2023;y+=2)model.push(X(y).toFixed(1)+','+Y(2300*2**((y-1971)/2)).toFixed(1));
+ g+=`<polyline points="${model.join(' ')}" fill="none" stroke="var(--purple)" stroke-width="2.2" stroke-dasharray="7 5"/>`;
+ g+=mooreChips.map(([name,year,count,left])=>{const x=X(year),y=Y(count),label=count.toLocaleString('es-CO')+' transistores';return `<g><title>${esc(name+' · '+year+' · '+label)}</title><circle cx="${x}" cy="${y}" r="9" fill="var(--orange)" opacity=".18"/><circle cx="${x}" cy="${y}" r="5" fill="var(--orange)" stroke="var(--card)" stroke-width="1.5"/>${left===1?tx(x-10,y-6,name,11,'ink','end'):left===2?tx(x+12,y-8,name,11,'ink','start'):left===3?tx(x,y+22,name,11,'ink','middle'):tx(x,y-13,name,11,'ink','middle')}</g>`}).join('');
+ g+=tx(25,300,'Puntos naranjas: chips reales (cifras aproximadas). Línea violeta: regla de duplicación cada dos años.',10,'muted','start');
+ return diagram(g,'Transistores por chip desde 1971 en escala logarítmica comparados con una duplicación cada dos años',305)+'<p class="sim-note">Cinco décadas después, la regla sigue cerca de los datos: 2 300 × 2²⁶ ≈ 154 000 millones, y un chip de 2023 integra unos 134 000 millones. Cada punto se aleja algo de la recta porque la ley de Moore describe una tendencia, no una obligación.</p>';
+};
 SIMS.u13.render=s=>{
- let html=original.u13(s),idx=(Number(s.a)&1)*2+(Number(s.b)&1),years=bounded(s.years,0,12),chart=surface('Una duplicación hipotética cada dos años','Cada altura expresa un factor de integración. El año elegido se destaca en naranja.',265);
- chart+=`<path d="M38 209H777" stroke="var(--line)"/>`+[0,2,4,6,8,10,12].map((yr,i)=>{let h=15+2**(yr/2)*1.8,on=yr===years,col=on?'orange':'blue';return node('moore-'+yr,click(`<rect x="${45+i*105}" y="${209-h}" width="58" height="${h}" rx="5" fill="var(--${col})" opacity="${on?1:.5}"/>${tx(74+i*105,234,yr+' años',12,'muted')}${tx(74+i*105,199-h,2**(yr/2)+'×',14,col)}`,`simSet('years',${yr})`,'Elegir '+yr+' años, factor '+2**(yr/2),on))}).join('');
- html=replace(html,chart,'Crecimiento teórico, no una garantía de velocidad del procesador',265);
+ let html=original.u13(s),idx=(Number(s.a)&1)*2+(Number(s.b)&1),years=bounded(s.years,0,12),log=s.scale==='log',H=130,base=254;
+ /* Las alturas son proporcionales (lineal) o proporcionales al logaritmo (log): nunca una mezcla de ambas. */
+ const hOf=f=>log?(Math.log2(f)+1)/7*H:Math.max(2,f/64*H),pts=[];
+ let chart=surface(log?'Escala logarítmica: cada duplicación sube el mismo escalón':'Escala lineal: la altura es proporcional al factor',log?'Cada línea vale el doble que la anterior. Una duplicación constante se ve como una recta.':'Los primeros años casi no se notan y luego la curva se dispara: así crece una duplicación constante.',300);
+ chart+=(log?[1,2,4,8,16,32,64]:[0,16,32,48,64]).map(f=>{const y=base-(f?hOf(f):0);return `<path d="M88 ${y}H772" stroke="var(--line)" ${f?'stroke-dasharray="3 5"':''}/>`+tx(80,y+4,f+'×',11,'muted','end')}).join('');
+ chart+=[0,2,4,6,8,10,12].map((yr,i)=>{const f=2**(yr/2),h=hOf(f),on=yr===years,col=on?'orange':'blue',x=106+i*96;pts.push((x+28)+','+(base-h));return node('moore-'+yr,click(`<rect x="${x}" y="${base-h}" width="56" height="${h}" rx="5" fill="var(--${col})" opacity="${on?1:.55}"/>${tx(x+28,base+20,yr+' años',12,'muted')}${tx(x+28,base-h-8,f+'×',14,col)}`,`simSet('years',${yr})`,'Elegir '+yr+' años, factor '+f,on))}).join('');
+ chart+=`<polyline points="${pts.join(' ')}" fill="none" stroke="var(--purple)" stroke-width="2" stroke-dasharray="6 5" opacity=".75" pointer-events="none"/>`;
+ chart+=node('scale',click(tag(552,64,104,'Escala lineal',log?'blue':'orange'),"simSet('scale','lin')",'Ver la gráfica en escala lineal',!log)+click(tag(664,64,114,'Logarítmica',log?'orange':'blue'),"simSet('scale','log')",'Ver la gráfica en escala logarítmica',log));
+ html=replace(html,chart,'Crecimiento teórico en escala '+(log?'logarítmica':'lineal')+'; no es una garantía de velocidad del procesador',300);
+ html=html.replace('<div style="border-top:1px solid var(--line);margin-top:20px;padding-top:18px"><p class="mini-label">FPGA',()=>mooreHistory()+'<div style="border-top:1px solid var(--line);margin-top:20px;padding-top:18px"><p class="mini-label">FPGA');
  let lut=surface('La LUT guarda cuatro posibles respuestas','Toca A o B para elegir una fila. Después cambia sus valores en la tabla inferior.',330);
  const input=(id,y,val,col)=>lampChip(id,30,y,130,88,'ENTRADA '+id.toUpperCase(),val,col,`simSet('${id}',${1-val})`);
  lut+=input('a',82,Number(s.a)&1,'blue')+input('b',195,Number(s.b)&1,'purple')+wire(160,126,386,167,'blue',{id:'lut-a',from:'a',to:'lut',on:'set:a set:b action:lut action:preset',value:Number(s.a)&1})+wire(160,239,386,211,'purple',{id:'lut-b',from:'b',to:'lut',on:'set:a set:b action:lut action:preset',value:Number(s.b)&1})+node('lut',chip(386,147,180,104,'LUT · FILA '+bin(idx,2),'Y = '+s.lut[idx],'purple'))+wire(566,199,657,199,'green',{id:'lut-output',from:'lut',to:'output',on:'set:a set:b action:lut action:preset',value:s.lut[idx]})+lampChip('output',657,155,118,88,'SALIDA Y',s.lut[idx],'green')+legend(317);
@@ -3582,7 +3883,7 @@ function isTeacher(){return state.mode==='teacher'}
 function isStudent(){return state.mode==='student'&&!!state.profileKey&&validName(state.name)}
 function validName(v){const n=String(v).trim().replace(/\s+/g,' ');return n.length>=5&&n.length<=80&&/^[\p{L}\p{M} .’'\-]+$/u.test(n)&&n.split(' ').filter(t=>(t.match(/\p{L}/gu)||[]).length>=2).length>=2}
 function record(m){let r=state.records[m.id];if(!r||typeof r!=='object'||Array.isArray(r))r=state.records[m.id]={answers:{},best:0,explored:0,missions:{},history:[],witnesses:{},cursor:0,passed:false};if(!r.answers||typeof r.answers!=='object')r.answers={};if(!r.missions||typeof r.missions!=='object')r.missions={};if(!Array.isArray(r.history))r.history=[];if(!r.witnesses||typeof r.witnesses!=='object')r.witnesses={};r.best=bounded(r.best,0,5);r.explored=bounded(r.explored,0,100000);r.cursor=bounded(r.cursor,0,5);return r}
-function captureProfile(){if(isStudent())profiles[state.profileKey]={name:state.name,records:state.records,simStates:state.simStates,current:state.current,modelRevision:4}}
+function captureProfile(){if(isStudent())profiles[state.profileKey]={name:state.name,records:state.records,simStates:state.simStates,current:state.current,modelRevision:4,game:state.game&&typeof state.game==='object'?state.game:{}}}
 function save(){captureProfile();try{localStorage.setItem(STORE,JSON.stringify({version:2,theme:state.theme,lastStudent,profiles}))}catch(e){if(storageOK){storageOK=false;setTimeout(()=>toast('No se pudo guardar en este navegador. Descarga tu bitácora al terminar.'),0)}}}
 function score(m){const r=record(m);return m.questions.reduce((a,q,i)=>a+(r.answers[i]===q.answer?1:0),0)}
 function answered(m){return m.questions.filter((q,i)=>Number.isInteger(record(m).answers[i])&&record(m).answers[i]>=0&&record(m).answers[i]<q.options.length).length}
@@ -3602,10 +3903,10 @@ const unitNames=['Fundamentos digitales','La unidad aritmético-lógica','Entrad
 const unitAt=i=>i<3?0:i<6?1:i<9?2:i<12?3:i<14?4:i<16?5:6;
 function lockIcon(){return '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg>'}
 function sceneIcon(id){const number=modules.findIndex(m=>m.id===id),group=unitAt(Math.max(number,0));let inner='';if(group===0)inner='<rect x="9" y="18" width="12" height="28" rx="4"/><rect x="26" y="18" width="12" height="28" rx="4"/><rect x="43" y="18" width="12" height="28" rx="4"/><path d="M15 25v14m17-14v14m17-14v14"/>';else if(group===1||group===6)inner='<rect x="17" y="17" width="30" height="30" rx="7"/><rect x="25" y="25" width="14" height="14" rx="2"/><path d="M23 8v9m9-9v9m9-9v9M23 47v9m9-9v9m9-9v9M8 23h9m-9 9h9m-9 9h9m30-18h9m-9 9h9m-9 9h9"/>';else if(group===2)inner='<circle cx="13" cy="32" r="8"/><circle cx="50" cy="14" r="8"/><circle cx="50" cy="50" r="8"/><path d="m20 28 22-11m-22 19 22 11m-13-15h15m-3-4 4 4-4 4"/>';else if(group===3)inner='<path d="m32 8 25 13-25 13L7 21zM7 31l25 13 25-13M7 41l25 13 25-13"/>';else if(group===4)inner='<path d="M10 51h46M15 44V31h8v13m6 0V22h8v22m6 0V12h8v32M11 22l17-10 9 4 15-9"/>';else inner='<path d="M32 55V30m0 6c-17 0-21-13-21-13 17-2 21 8 21 8m0 13c17 0 21-14 21-14-17-1-21 9-21 9"/><path d="M18 16q14-11 28 0M24 21q8-6 16 0"/><circle cx="32" cy="25" r="2"/>';return `<svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`}
-function showModePicker(showStudent=false){save();if(isTeacher())teacherWorkspace=state.simStates;state.mode=null;state.view='access';state.showStudent=showStudent;mainHTML(`<section class="access-view focus-enter"><div class="access-story"><span class="eyebrow"><i class="status-dot"></i> Arquitectura de Computadoras · Laboratorio vivo</span><h1>Aprender por dentro.<br><em>Descubrir haciendo.</em></h1><p>Una ruta de 17 escenas para construir, conectar y comprender una computadora. Cada decisión deja una evidencia de aprendizaje.</p><div class="access-art">${heroDiagram()}<span class="access-pet pet" data-pet></span><span class="art-label">CONEXIONES QUE SE CONVIERTEN EN CONOCIMIENTO</span></div><div class="access-features"><span>◉ 51 misiones prácticas</span><span>✦ 85 preguntas</span><span>↗ Todo sin conexión</span></div></div><div class="access-card panel"><span class="mini-label">Elige tu experiencia</span><h2>Tu laboratorio,<br>tu manera de explorarlo.</h2><button class="role-choice ${showStudent?'selected':''}" onclick="showModePicker(true)"><span class="role-symbol">✧</span><span><b>Soy estudiante</b><small>Misiones, cinco preguntas en orden y avance paso a paso.</small></span><span>→</span></button>${showStudent?`<form class="registration" id="registration" onsubmit="event.preventDefault();registerStudent()" novalidate><label for="full-name">Nombre completo del estudiante</label><input id="full-name" name="fullName" autocomplete="name" maxlength="80" placeholder="Nombres y apellidos" value="${esc(lastStudent)}" aria-describedby="name-help name-error"><p id="name-help">Usa el mismo nombre para continuar tu progreso en este navegador.</p><p class="form-error" id="name-error" role="alert" hidden></p><button class="btn" type="submit">Entrar a mi recorrido <span>→</span></button><p class="registration-note">Registro local con tu nombre. No se verifica tu identidad ni se envían datos a servidores.</p></form>`:''}<div class="role-divider"><span>o presenta en el aula</span></div><button class="role-choice teacher-choice" onclick="enterTeacher()"><span class="role-symbol">◈</span><span><b>Soy profesor</b><small>Acceso libre a todas las escenas, sin requisitos ni evaluación obligatoria.</small></span><span>→</span></button><div class="mode-tip"><span class="pet" data-pet></span><p>La curiosidad abre el laboratorio. La experimentación conecta las ideas.</p></div></div></section>`);focusMain();if(showStudent)document.getElementById('full-name').focus();chatSuggestions()}
+function showModePicker(showStudent=false){save();if(isTeacher())teacherWorkspace=state.simStates;state.mode=null;state.view='access';state.showStudent=showStudent;mainHTML(`<section class="access-view focus-enter"><div class="access-story"><span class="eyebrow"><i class="status-dot"></i> Arquitectura de Computadoras · Laboratorio vivo</span><h1>Aprender por dentro.<br><em>Descubrir haciendo.</em></h1><p>Una ruta de 17 escenas para construir, conectar y comprender una computadora. Cada decisión deja una evidencia de aprendizaje.</p><div class="access-art">${heroDiagram()}<span class="access-pet pet" data-pet></span><span class="art-label">CONEXIONES QUE SE CONVIERTEN EN CONOCIMIENTO</span></div><div class="access-features"><span>◉ 51 misiones prácticas</span><span>✦ 85 preguntas</span><span>↗ Funciona sin conexión</span></div></div><div class="access-card panel"><span class="mini-label">Elige tu experiencia</span><h2>Tu laboratorio,<br>tu manera de explorarlo.</h2><button class="role-choice ${showStudent?'selected':''}" onclick="showModePicker(true)"><span class="role-symbol">✧</span><span><b>Soy estudiante</b><small>Misiones, cinco preguntas en orden y avance paso a paso.</small></span><span>→</span></button>${showStudent?`<form class="registration" id="registration" onsubmit="event.preventDefault();registerStudent()" novalidate><label for="full-name">Nombre completo del estudiante</label><input id="full-name" name="fullName" autocomplete="name" maxlength="80" placeholder="Nombres y apellidos" value="${esc(lastStudent)}" aria-describedby="name-help name-error"><p id="name-help">Usa el mismo nombre para continuar tu progreso en este navegador.</p><p class="form-error" id="name-error" role="alert" hidden></p><button class="btn" type="submit">Entrar a mi recorrido <span>→</span></button><p class="registration-note" id="registration-note">${typeof registrationNote==='function'?registrationNote():'Registro local con tu nombre. No se verifica tu identidad ni se envían datos a servidores.'}</p></form>`:''}<div class="role-divider"><span>o presenta en el aula</span></div><button class="role-choice teacher-choice" onclick="enterTeacher()"><span class="role-symbol">◈</span><span><b>Soy profesor</b><small>Acceso libre a todas las escenas, sin requisitos ni evaluación obligatoria.</small></span><span>→</span></button><div class="mode-tip"><span class="pet" data-pet></span><p>La curiosidad abre el laboratorio. La experimentación conecta las ideas.</p></div></div></section>`);focusMain();if(showStudent)document.getElementById('full-name').focus();chatSuggestions()}
 function prepareStudentModels(profile){if(profile.modelRevision!==4){for(const m of modules){const r=state.records[m.id];if(!r||!r.passed){delete state.simStates[m.id];if(r){r.history=[];r.witnesses={}}}}profile.modelRevision=4}for(const m of modules){const data=state.simStates[m.id];if(!data||typeof data!=='object'||Array.isArray(data))continue;for(const [key,rule]of Object.entries(window.SIM_INPUT_SCHEMA?.[m.id]||{})){if(!Object.hasOwn(data,key))continue;const normalized=normalizeSimInput(rule,data[key]);data[key]=normalized===undefined?SIMS[m.id].initial()[key]:normalized}}}
-function registerStudent(){let e=document.getElementById('full-name');let name=e.value.trim().replace(/\s+/g,' ');if(!validName(name)){let error=document.getElementById('name-error');error.hidden=false;error.textContent='Escribe al menos un nombre y un apellido completos, usando letras.';e.setAttribute('aria-invalid','true');e.focus();return false}save();lastStudent=name;let key=name.toLocaleLowerCase('es');let p=profiles[key];if(!p||typeof p!=='object')p={name,records:{},simStates:{},current:0};profiles[key]=p;state.mode='student';state.profileKey=key;state.name=name;state.records=p.records&&typeof p.records==='object'?p.records:{};state.simStates=p.simStates&&typeof p.simStates==='object'?p.simStates:{};prepareStudentModels(p);state.current=bounded(p.current,0,16);if(!canEnterModule(state.current))state.current=Math.max(0,modules.findIndex(m=>!completed(m)));state.phase=0;clearChat();save();goHome();toast('¡Bienvenido, '+name.split(' ')[0]+'! Tu recorrido está listo.');return true}
-function enterTeacher(){save();state.mode='teacher';state.name='';state.profileKey=null;state.records={};state.simStates=teacherWorkspace;state.current=0;state.phase=1;clearChat();applyMode();goHome()}
+function registerStudent(){let e=document.getElementById('full-name');let name=e.value.trim().replace(/\s+/g,' ');if(!validName(name)){let error=document.getElementById('name-error');error.hidden=false;error.textContent='Escribe al menos un nombre y un apellido completos, usando letras.';e.setAttribute('aria-invalid','true');e.focus();return false}save();lastStudent=name;let key=name.toLocaleLowerCase('es');let p=profiles[key];if(!p||typeof p!=='object')p={name,records:{},simStates:{},current:0};profiles[key]=p;state.mode='student';state.profileKey=key;state.name=name;state.records=p.records&&typeof p.records==='object'?p.records:{};state.simStates=p.simStates&&typeof p.simStates==='object'?p.simStates:{};state.game=p.game&&typeof p.game==='object'&&!Array.isArray(p.game)?p.game:{};prepareStudentModels(p);state.current=bounded(p.current,0,16);if(!canEnterModule(state.current))state.current=Math.max(0,modules.findIndex(m=>!completed(m)));state.phase=0;clearChat();save();goHome();toast('¡Bienvenido, '+name.split(' ')[0]+'! Tu recorrido está listo.');return true}
+function enterTeacher(){save();state.mode='teacher';state.name='';state.profileKey=null;state.records={};state.game={};state.simStates=teacherWorkspace;state.current=0;state.phase=1;clearChat();applyMode();goHome()}
 function clearChat(){document.getElementById('chat-log').innerHTML='';document.getElementById('chat-panel').hidden=true;document.getElementById('chat-launch').hidden=false;document.getElementById('chat-launch').setAttribute('aria-expanded','false');chatOpen=false}
 function firstPending(){const n=modules.findIndex(m=>!completed(m));return n<0?0:n}
 function v3CoursePicture(){return `<svg viewBox="0 0 520 235" role="img" aria-label="Ilustración de teclado cian, CPU azul, ALU naranja, memoria violeta y salida rosa conectadas"><circle cx="266" cy="117" r="102" fill="var(--blue-soft)" opacity=".55"/><circle cx="436" cy="60" r="42" fill="var(--purple-soft)"/><circle cx="75" cy="145" r="53" fill="var(--cyan-soft)"/><path d="M117 140h55v-27h35m107-17h37V60h41m-78 80h45v38h35" fill="none" stroke="var(--blue)" stroke-width="2.5"/><path d="M392 76h-27v37h-51" fill="none" stroke="var(--orange)" stroke-width="2"/><rect x="202" y="61" width="119" height="122" rx="17" fill="var(--blue)"/><path d="M214 54v7m19-7v7m19-7v7m19-7v7m19-7v7m19-7v7m-95 122v7m19-7v7m19-7v7m19-7v7m19-7v7m19-7v7M195 79h7m-7 19h7m-7 19h7m-7 19h7m-7 19h7m119-76h7m-7 19h7m-7 19h7m-7 19h7m-7 19h7" stroke="var(--blue)" stroke-width="4" stroke-linecap="round"/><text x="261" y="102" fill="var(--card)" text-anchor="middle" font-family="Times New Roman,Times,serif" font-size="30">CPU</text><rect x="216" y="122" width="40" height="31" rx="5" fill="var(--orange-soft)"/><rect x="266" y="122" width="40" height="31" rx="5" fill="var(--purple-soft)"/><text x="236" y="142" fill="var(--orange)" text-anchor="middle" font-family="Times New Roman,Times,serif" font-size="12" font-weight="700">ALU</text><text x="286" y="142" fill="var(--purple)" text-anchor="middle" font-family="Times New Roman,Times,serif" font-size="12" font-weight="700">UC</text><rect x="37" y="115" width="81" height="48" rx="8" fill="var(--card)" stroke="var(--cyan)" stroke-width="2"/>${Array.from({length:12},(_,i)=>`<rect x="${47+i%4*16}" y="${127+Math.floor(i/4)*8}" width="11" height="5" rx="1" fill="var(--cyan)" opacity=".7"/>`).join('')}<text x="76" y="184" fill="var(--cyan)" text-anchor="middle" font-family="Times New Roman,Times,serif" font-size="11" font-weight="700">ENTRADA</text><rect x="390" y="35" width="97" height="58" rx="9" fill="var(--purple-soft)" stroke="var(--purple)" stroke-width="2"/>${Array.from({length:4},(_,i)=>`<rect x="${404+i*18}" y="49" width="12" height="23" rx="2" fill="var(--purple)" opacity=".65"/>`).join('')}<text x="438" y="112" fill="var(--purple)" text-anchor="middle" font-family="Times New Roman,Times,serif" font-size="11" font-weight="700">MEMORIA</text><rect x="395" y="147" width="89" height="52" rx="7" fill="var(--pink-soft)" stroke="var(--pink)" stroke-width="2"/><path d="M438 199v10m-17 0h35" stroke="var(--pink)" stroke-width="3" stroke-linecap="round"/><path d="m411 175 13 9 19-22 24 13" fill="none" stroke="var(--pink)" stroke-width="3" stroke-linecap="round"/><text x="438" y="228" fill="var(--pink)" text-anchor="middle" font-family="Times New Roman,Times,serif" font-size="11" font-weight="700">SALIDA</text><circle cx="170" cy="113" r="5" fill="var(--orange)"/><circle cx="360" cy="178" r="5" fill="var(--pink)"/><circle cx="352" cy="60" r="5" fill="var(--purple)"/><text x="261" y="219" text-anchor="middle" fill="var(--muted)" font-family="Times New Roman,Times,serif" font-size="9" letter-spacing="1.3">CADA PIEZA TIENE SU FUNCIÓN</text></svg>`}
@@ -3621,7 +3922,7 @@ function phaseKeys(e,i){if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.k
 function learnHTML(m){return `<div class="learn-grid"><article class="panel panel-pad"><span class="mini-label">La idea que te llevarás</span><h2 style="margin-top:12px">${esc(m.shortTitle)}</h2><p class="objective">${esc(m.objective)}</p><div class="analogy"><b>Imagina algo cotidiano</b>${esc(m.analogy)}</div><div class="aside-bit"><span class="pet" data-pet></span><span>Antes de mover un control, imagina lo que sucederá. Después busca la evidencia.</span></div></article><article class="panel panel-pad"><span class="mini-label">Conecta los conceptos</span>${m.concepts.map(c=>`<div class="concept"><h4>${esc(c.term)}</h4><p>${esc(c.text)}</p></div>`).join('')}</article></div>`}
 function experimentHTML(m){return `<div class="experiment-grid"><aside class="panel sidebar-panel mission-sidebar"><div class="mission-head"><span class="mini-label">${isTeacher()?'Retos para conversar':'Tu tablero de misiones'}</span><h2>Explora y descubre.</h2><p>${isTeacher()?'Puedes presentar los retos en cualquier orden.':'Completa las tres misiones para abrir las cinco preguntas.'}</p><div class="mission-meter"><i id="mission-meter-fill"></i></div><span class="mission-total" id="mission-total"></span></div><ol class="mission-list" id="mission-list"></ol></aside><article class="panel simulation-panel"><header class="sim-header"><h2>Laboratorio interactivo</h2></header>${v5ToolbarHTML(m)}<div id="sim-content" class="sim-content"></div><div class="sim-footer"><button class="textbtn" onclick="resetSim()" title="Restaura los valores y las observaciones pendientes; conserva las misiones logradas.">↺ Reiniciar experimento</button></div></article></div>`}
 function updateMissionPanel(){const m=current(),r=record(m),tasks=MISSIONS[m.id]||[],list=document.getElementById('mission-list');if(!list)return;const count=missionCount(m);list.innerHTML=tasks.map((t,i)=>`<li data-mission-id="${esc(t.id)}" class="mission-item ${r.missions[t.id]?'achieved':''}"><span class="mission-check" aria-hidden="true">${r.missions[t.id]?'✓':i+1}</span><div><h3>${esc(t.title)}</h3><p>${esc(t.help)}</p><span class="mission-state">${r.missions[t.id]?'Evidencia conseguida':isTeacher()?'Opcional':'Pendiente'}</span></div></li>`).join('');document.getElementById('mission-total').textContent=isTeacher()?'Sin evaluación obligatoria':count+' de 3 evidencias conseguidas';document.getElementById('mission-meter-fill').style.width=(isTeacher()?0:count/3*100)+'%';const quizTab=document.getElementById('phase-2');if(quizTab){quizTab.setAttribute('aria-disabled',!canEnterQuiz(m));quizTab.classList.toggle('locked',!canEnterQuiz(m));quizTab.querySelector('i').innerHTML=canEnterQuiz(m)?'03':lockIcon()}const next=document.getElementById('phase-next');if(next)next.disabled=!canEnterQuiz(m)}
-function simState(){let m=current();if(!state.simStates[m.id]||typeof state.simStates[m.id]!=='object')state.simStates[m.id]=SIMS[m.id].initial();return state.simStates[m.id]}
+function simState(){let m=current();if(!state.simStates[m.id]||typeof state.simStates[m.id]!=='object')state.simStates[m.id]=SIMS[m.id].initial();const s=state.simStates[m.id];for(const [k,v] of Object.entries(SIMS[m.id].initial()))if(!Object.hasOwn(s,k))s[k]=v;return s}
 function patchDOM(oldNode,newNode){if(oldNode.nodeType!==newNode.nodeType||(oldNode.nodeType===1&&oldNode.tagName!==newNode.tagName)){oldNode.replaceWith(newNode.cloneNode(true));return}if(oldNode.nodeType===3){if(oldNode.nodeValue!==newNode.nodeValue)oldNode.nodeValue=newNode.nodeValue;return}if(oldNode.nodeType!==1)return;for(const a of [...oldNode.attributes])if(!newNode.hasAttribute(a.name))oldNode.removeAttribute(a.name);for(const a of [...newNode.attributes])if(oldNode.getAttribute(a.name)!==a.value)oldNode.setAttribute(a.name,a.value);const oldChildren=[...oldNode.childNodes],newChildren=[...newNode.childNodes];for(let i=0;i<Math.max(oldChildren.length,newChildren.length);i++){if(!newChildren[i])oldChildren[i].remove();else if(!oldChildren[i])oldNode.appendChild(newChildren[i].cloneNode(true));else patchDOM(oldChildren[i],newChildren[i])}if(['INPUT','SELECT','TEXTAREA'].includes(oldNode.tagName)&&oldNode.value!==newNode.value)oldNode.value=newNode.value}
 function renderSim(){const el=document.getElementById('sim-content');if(el){const clone=el.cloneNode(false);clone.innerHTML=SIMS[current().id].render(simState());clone.querySelectorAll('animate,animateMotion,animateTransform').forEach(a=>a.remove());patchDOM(el,clone);paintPets();decorateContext()}}
 function simTouched(event){finishInteraction(trackMissionEvent(event))}
@@ -3639,10 +3940,10 @@ function renderQuizSummary(){const m=current(),r=record(m),s=score(m);const e=do
 function retryQuiz(){if(!isStudent()||!canEnterQuiz(current()))return;record(current()).answers={};record(current()).cursor=0;save();renderModule();focusMain();toast('Cinco nuevas oportunidades. Tus misiones y tu mejor resultado se conservan.')}
 function teacherQuestions(m){return `<div class="teacher-question-list"><div class="quiz-intro"><span class="quiz-emblem">◈</span><div><span class="mini-label">Recurso opcional de presentación</span><h2>Cinco preguntas para conversar.</h2><p>No se registran respuestas ni se exige evaluación. Abre la explicación cuando quieras mostrarla al grupo.</p></div></div>${m.questions.map((q,i)=>`<article class="panel teacher-question"><span class="question-number">PREGUNTA ${i+1} / 5</span><h3>${esc(q.q)}</h3><ol type="A">${q.options.map(o=>`<li>${esc(o)}</li>`).join('')}</ol><details><summary>Mostrar explicación y respuesta</summary><p><b>${esc(q.options[q.answer])}</b><br>${esc(q.explanation)}</p></details></article>`).join('')}</div>`}
 function showProgress(){if(!isStudent()){if(isTeacher()){goHome();toast('Las demostraciones del profesor no generan resultados de estudiante.')}else showModePicker(true);return}state.view='progress';const n=modules.filter(completed).length,points=modules.reduce((a,m)=>a+record(m).best,0),mc=modules.reduce((a,m)=>a+missionCount(m),0);mainHTML(`<section class="progress-view focus-enter"><span class="eyebrow">Mi bitácora</span><h1 style="margin-top:15px">Tu curiosidad deja evidencia.</h1><p class="objective">${n===17?'Has conectado las 17 piezas: desde el primer bit hasta un sistema completo.':'Completa tres misiones y al menos cuatro aciertos de cinco por escena. Tu nombre y tu avance permanecen asociados a este navegador.'}</p><div class="metrics">${metric('Escenas completadas',n+' / 17','Tres misiones y evaluación superada')}${metric('Evidencias prácticas',mc+' / 51','Cada una verifica un resultado concreto')}${metric('Mejores evaluaciones',points+' / 85',storageOK?'Guardado en este navegador':'Solo disponible durante esta sesión')}</div><div class="student-identity"><span>◉</span><div><small>Estudiante registrado</small><b>${esc(state.name)}</b></div><button class="textbtn" onclick="showModePicker(true)">Cambiar estudiante ↗</button></div><div class="result-actions no-print"><button class="btn" onclick="goModule(${firstPending()},0)">Continuar mi recorrido →</button><button class="btn secondary" onclick="exportProgress()">Descargar bitácora</button><button class="btn secondary" onclick="window.print()">Imprimir / PDF</button><button class="btn secondary" onclick="downloadHTML()">Descargar aplicación</button></div><div class="table-scroll"><table class="report-table"><thead><tr><th scope="col">Escena</th><th scope="col">Misiones</th><th scope="col">Mejor resultado</th><th scope="col">Estado</th></tr></thead><tbody>${modules.map((m,i)=>`<tr><td>${i+1}. ${esc(m.shortTitle)}</td><td>${missionCount(m)}/3</td><td>${record(m).best}/5</td><td>${completed(m)?'✓ Completada':canEnterModule(i)?'En aprendizaje':'Bloqueada'}</td></tr>`).join('')}</tbody></table></div>${n===17?`<article class="certificate"><p class="mini-label">Constancia de recorrido didáctico</p><h2>El Arquitecto de Bits</h2><p><b>${esc(state.name)}</b> completó 51 misiones y 17 evaluaciones de Arquitectura de Computadoras.<br>Mejor resultado acumulado: ${points}/85.</p><p style="margin-top:14px">${new Date().toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'})}</p><p class="fine" style="margin-top:20px">Actividad de autoaprendizaje con identificación local. No constituye una certificación académica oficial.</p></article>`:''}<p class="hint no-print">Copiar el HTML no transfiere tu progreso. La bitácora descargada conserva un resumen; los resultados interactivos quedan en este navegador.</p><button class="textbtn no-print" style="color:var(--rust);margin-top:20px" onclick="resetProgress()">Restablecer el progreso de este estudiante</button></section>`);focusMain();chatSuggestions()}
-function exportProgress(){if(!isStudent())return;download('bitacora-arquitectura.json',JSON.stringify({title:'El Arquitecto de Bits · Bitácora',student:state.name,identification:'Registro local sin verificación de identidad',date:new Date().toISOString(),completed:modules.filter(completed).length,total:17,missions:modules.reduce((a,m)=>a+missionCount(m),0),modules:modules.map(m=>({code:m.code,title:m.title,missions:(MISSIONS[m.id]||[]).map(t=>({title:t.title,achieved:!!record(m).missions[t.id]})),best:record(m).best,questions:5,completed:completed(m)}))},null,2),'application/json');toast('Tu bitácora está descargada.')}
+function exportProgress(){if(!isStudent())return;download('bitacora-arquitectura.json',JSON.stringify({title:'El Arquitecto de Bits · Bitácora',student:state.name,identification:'Registro local sin verificación de identidad',date:new Date().toISOString(),completed:modules.filter(completed).length,total:17,juego:typeof V6==='object'?V6.exportSummary():null,missions:modules.reduce((a,m)=>a+missionCount(m),0),modules:modules.map(m=>({code:m.code,title:m.title,missions:(MISSIONS[m.id]||[]).map(t=>({title:t.title,achieved:!!record(m).missions[t.id]})),best:record(m).best,questions:5,completed:completed(m)}))},null,2),'application/json');toast('Tu bitácora está descargada.')}
 function download(name,data,type){let url=URL.createObjectURL(new Blob([data],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000)}
-function downloadHTML(){let c=document.documentElement.cloneNode(true);c.querySelector('#main').innerHTML='';c.querySelector('#chat-log').innerHTML='';c.querySelector('#chat-panel').hidden=true;c.querySelector('#chat-launch').hidden=false;c.querySelector('#toast').hidden=true;c.querySelector('#toast').textContent='';c.querySelector('#chat-launch').setAttribute('aria-expanded','false');c.querySelector('#suggestions').innerHTML='';c.querySelector('#chat-input').value='';c.classList.remove('projection');c.removeAttribute('data-mode');c.querySelector('#mode-label').textContent='Elegir modo';c.querySelector('#mode-label').title='Cambiar modo';c.querySelector('#projection-btn').setAttribute('aria-pressed','false');download('el-arquitecto-de-bits.html','<!doctype html>\n'+c.outerHTML,'text/html;charset=utf-8');toast('Aplicación descargada. No incluye los datos personales del navegador.')}
-function resetProgress(){if(!isStudent()||!confirm('¿Borrar las misiones y resultados de '+state.name+' en este navegador? Los demás estudiantes se conservan.'))return;state.records={};state.simStates={};state.current=0;save();goHome();toast('Nuevo recorrido para '+state.name+'.')}
+function downloadHTML(){let c=document.documentElement.cloneNode(true);c.querySelector('#main').innerHTML='';c.querySelector('#chat-log').innerHTML='';c.querySelector('#chat-panel').hidden=true;c.querySelector('#chat-launch').hidden=false;c.querySelector('#toast').hidden=true;c.querySelector('#toast').textContent='';c.querySelector('#chat-launch').setAttribute('aria-expanded','false');c.querySelector('#suggestions').innerHTML='';c.querySelector('#chat-input').value='';c.classList.remove('projection');c.removeAttribute('data-mode');c.querySelector('#mode-label').textContent='Elegir modo';c.querySelector('#mode-label').title='Cambiar modo';c.querySelector('#projection-btn').setAttribute('aria-pressed','false');c.querySelectorAll('.v6-transient').forEach(e=>e.remove());download('el-arquitecto-de-bits.html','<!doctype html>\n'+c.outerHTML,'text/html;charset=utf-8');toast('Aplicación descargada. No incluye los datos personales del navegador.')}
+function resetProgress(){if(!isStudent()||!confirm('¿Borrar las misiones y resultados de '+state.name+' en este navegador? Los demás estudiantes se conservan.'))return;state.records={};state.simStates={};state.game={};state.current=0;save();goHome();toast('Nuevo recorrido para '+state.name+'.')}
 function toggleTheme(){state.theme=state.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=state.theme;save()}
 function toggleProjection(){if(!isTeacher()){toast('El modo de presentación se encuentra en el acceso de profesor.');return}let on=document.documentElement.classList.toggle('projection');document.getElementById('projection-btn').setAttribute('aria-pressed',on);if(state.view==='module')renderModule();toast(on?'Escena ampliada para presentar':'Vista de presentación habitual')}
 
@@ -3702,7 +4003,7 @@ const glossary=[
 function numericReply(raw){const q=norm(raw),negative=/-\s*\d/.test(raw);if(!/(?:en|a) (?:binario|hexadecimal|decimal)/.test(q))return null;if(negative)return 'Para representar negativos en binario necesitamos fijar el ancho y el convenio, por ejemplo complemento a dos de 8 bits. Prueba primero una conversión sin signo: “10 en binario”.';let match=q.match(/\b([0-9a-f]{1,6})\b/g)?.filter(x=>/\d/.test(x));if(!match||match.length!==1)return null;let v=match[0],n;if(/(?:en|a) binario/.test(q)||/(?:en|a) hexadecimal/.test(q)){if(!/^\d+$/.test(v))return null;n=Number(v);if(n>65535)return 'Puedo convertir enteros sin signo de 0 a 65535. Para otros formatos necesito una regla de representación concreta.';return `Tomando ${n} como número decimal: ${n}₁₀ = ${n.toString(2).padStart(n<=255?8:16,'0')}₂ = 0x${n.toString(16).toUpperCase()}. En binario cada posición pesa una potencia de 2.`}if(/(?:en|a) decimal/.test(q)&&/binario|binaria/.test(q)&&/^[01]+$/.test(v))return `${v}₂ = ${parseInt(v,2)}₁₀. Se suman los pesos de las posiciones que tienen un 1, de derecha a izquierda: 1, 2, 4, 8, 16…`;return null}
 
 const KB=knowledge();
-function answerLocal(query){let q=norm(query),m=current();if(!q)return 'Escribe una pregunta o elige una sugerencia.';if(/^(hola|buenas|buenos dias|hey|gracias|muchas gracias)$/.test(q))return '¡Hola! Soy Bit. Te acompaño a explorar cómo funciona una computadora. Puedo explicar conceptos, darte una pista o repasar una pregunta. Mis respuestas están preparadas dentro de este archivo.';if(/^(ayuda|como empiezo|que hago|instrucciones|como funciona la app|como usar)$/.test(q))return isTeacher()?'En modo profesor todas las escenas están abiertas. Elige Simulación, manipula los controles y usa Ampliar para presentar. Las preguntas son opcionales y ninguna demostración cambia el progreso de los estudiantes.':'Sigue tres pasos: Aprende, Experimenta y Comprueba. Consigue las tres misiones de la escena; después responde cinco preguntas una por una. Con al menos cuatro aciertos se abre la siguiente escena. Tus misiones y tu mejor resultado se conservan al repetir.';if(/^(pista|dame una pista|reto|ayudame con el reto|mi siguiente mision)$/.test(q)){const task=(MISSIONS[m.id]||[]).find(t=>!record(m).missions[t.id]);return isTeacher()?'Puedes proponer al grupo: '+(MISSIONS[m.id]?.[0]?.help||m.hint):task?'Tu siguiente misión: '+task.title+'\n\n'+task.help:'Ya lograste las tres misiones. Abre Comprueba y responde las cinco preguntas en orden.';}if(/^(explicame este tema|resumen|tema actual|que estoy aprendiendo)$/.test(q))return m.objective+'\n\n'+m.analogy;if(/\bprogreso\b|\bbitacora\b|guardar (?:mi |el )?avance/.test(q))return 'Tu avance se guarda en este navegador cuando el guardado local está disponible. En Mi bitácora puedes consultar resultados, descargar un resumen o imprimirlo. El HTML funciona sin conexión; copiarlo a otro dispositivo no copia el progreso de este navegador.';if(/\bapi\b|inteligencia artificial|eres ia/.test(q))return 'Soy un tutor local con respuestas predeterminadas. No estoy conectado a inteligencia artificial ni hago llamadas a una API. El archivo incluye un punto de extensión para conectar un proveedor más adelante.';
+function answerLocal(query){let q=norm(query),m=current();if(!q)return 'Escribe una pregunta o elige una sugerencia.';if(/^(hola|buenas|buenos dias|hey|gracias|muchas gracias)$/.test(q))return '¡Hola! Soy Bit. Te acompaño a explorar cómo funciona una computadora. Puedo explicar conceptos, darte una pista o repasar una pregunta. Mis respuestas están preparadas dentro de este archivo.';if(/^(ayuda|como empiezo|que hago|instrucciones|como funciona la app|como usar)$/.test(q))return isTeacher()?'En modo profesor todas las escenas están abiertas. Elige Simulación, manipula los controles y usa Ampliar para presentar. Las preguntas son opcionales y ninguna demostración cambia el progreso de los estudiantes.':'Sigue tres pasos: Aprende, Experimenta y Comprueba. Consigue las tres misiones de la escena; después responde cinco preguntas una por una. Con al menos cuatro aciertos se abre la siguiente escena. Tus misiones y tu mejor resultado se conservan al repetir.';if(/^(pista|dame una pista|reto|ayudame con el reto|mi siguiente mision)$/.test(q)){const task=(MISSIONS[m.id]||[]).find(t=>!record(m).missions[t.id]);return isTeacher()?'Puedes proponer al grupo: '+(MISSIONS[m.id]?.[0]?.help||m.hint):task?'Tu siguiente misión: '+task.title+'\n\n'+task.help:'Ya lograste las tres misiones. Abre Comprueba y responde las cinco preguntas en orden.';}if(/^(explicame este tema|resumen|tema actual|que estoy aprendiendo)$/.test(q))return m.objective+'\n\n'+m.analogy;if(/\bprogreso\b|\bbitacora\b|guardar (?:mi |el )?avance/.test(q))return 'Tu avance se guarda en este navegador cuando el guardado local está disponible. En Mi bitácora puedes consultar resultados, insignias y retos, descargar un resumen o imprimirlo. El HTML funciona sin conexión; copiarlo a otro dispositivo no copia el progreso de este navegador.'+(typeof registroActivo==='function'&&registroActivo()?' Además, tu profesor activó el registro del curso: tus interacciones se envían a su hoja de Google.':'');if(/\bapi\b|inteligencia artificial|eres ia/.test(q))return 'Soy un tutor local con respuestas predeterminadas. No estoy conectado a inteligencia artificial ni hago llamadas a una API. El archivo incluye un punto de extensión para conectar un proveedor más adelante.';
 let numeric=numericReply(query);if(numeric)return numeric;
 let exact=KB.find(k=>norm(k.q)===q);if(exact)return exact.a;
 let matches=glossary.filter(g=>g.aliases.some(a=>(' '+q+' ').includes(' '+a+' ')));
@@ -3813,5 +4114,516 @@ bits=function(n,b,act){return `<div class="chip-row binary-bits bulb-bank" aria-
  window.advanceTime=ms=>{tick(ms)};
  window.render_game_to_text=()=>JSON.stringify({coordinates:'Cada diagrama SVG tiene origen en la esquina superior izquierda; x crece a la derecha, y hacia abajo.',view:state.view,mode:state.mode,scene:current().id,phase:state.phase,model:state.view==='module'?structuredClone(simState()):null,missions:state.mode==='student'?missionCount(current()):null,visual:BitMotion.getState()});
 })();
+</script>
+<script id="v6-layer">
+/* Sexta edición: niveles, insignias, Zona de retos y registro en vivo con Google Sheets.
+   Esta capa envuelve el motor anterior: los modelos, las misiones y las reglas de acceso no cambian.
+
+   REGISTRO EN GOOGLE SHEETS (opcional). Pega aquí la URL /exec de tu aplicación web de Apps Script,
+   o configúrala desde el modo profesor (botón ☁ Registro en vivo). Ver README.md. */
+window.REGISTRO_CONFIG = {endpoint: '', clave: '', curso: ''};
+
+(()=>{
+'use strict';
+const VERSION='6.0';
+const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const P=a=>a[Math.floor(Math.random()*a.length)];
+const nf=(v,d=2)=>Number(v).toLocaleString('es-CO',{maximumFractionDigits:d});
+const minus=v=>String(v).replace('-','−');
+const uid=()=>(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2,10));
+const $=id=>document.getElementById(id);
+
+/* ------------------------------------------------------------------ preferencias */
+const PREF='arquitecto-de-bits-preferencias';
+const prefs={sound:true,classic:false};
+try{Object.assign(prefs,JSON.parse(localStorage.getItem(PREF))||{})}catch(e){}
+function savePrefs(){try{localStorage.setItem(PREF,JSON.stringify(prefs))}catch(e){}}
+function applyPrefs(){
+  document.documentElement.classList.toggle('classic-type',!!prefs.classic);
+  const s=$('v6-sound'),t=$('v6-type');
+  if(s){s.textContent=prefs.sound?'🔊':'🔇';s.setAttribute('aria-pressed',String(!!prefs.sound));s.title=prefs.sound?'Silenciar sonidos':'Activar sonidos'}
+  if(t){t.setAttribute('aria-pressed',String(!!prefs.classic));t.title=prefs.classic?'Volver a la tipografía moderna':'Usar la tipografía clásica (Times New Roman)'}
+}
+
+/* ------------------------------------------------------------------ sonido sintetizado (sin archivos) */
+const Sound=(()=>{
+  let ctx=null;
+  const ac=()=>{if(!ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;ctx=new C()}if(ctx.state==='suspended')ctx.resume();return ctx};
+  const tone=(c,f,start,dur,type='sine',gain=.06)=>{const t=c.currentTime+start,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(gain,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g).connect(c.destination);o.start(t);o.stop(t+dur+.05)};
+  const songs={tick:[[880,0,.05,'triangle',.025]],good:[[523,0,.12],[659,.08,.12],[784,.16,.22]],bad:[[247,0,.16,'triangle',.05],[196,.12,.26,'triangle',.045]],mission:[[523,0,.1],[659,.08,.1],[784,.16,.1],[1047,.24,.32]],badge:[[988,0,.1],[1319,.1,.3]],level:[[392,0,.12],[523,.12,.12],[659,.24,.12],[784,.36,.14],[1047,.52,.5]],start:[[440,0,.08],[660,.09,.12]],end:[[784,0,.12],[659,.12,.12],[523,.24,.3]]};
+  return {play(name){if(!prefs.sound)return;try{const c=ac();if(!c)return;(songs[name]||[]).forEach(n=>tone(c,n[0],n[1],n[2],n[3],n[4]))}catch(e){}}};
+})();
+
+/* ------------------------------------------------------------------ confeti */
+const Confetti=(()=>{
+  let canvas=null,ctx=null,parts=[],raf=0;
+  const colors=['#4f7dff','#8b5cf6','#ec4899','#f59e0b','#10b981','#06b6d4','#facc15'];
+  function ensure(){if(canvas&&document.body.contains(canvas))return;canvas=document.createElement('canvas');canvas.className='v6-confetti v6-transient';canvas.setAttribute('aria-hidden','true');document.body.appendChild(canvas);ctx=canvas.getContext('2d');resize()}
+  function resize(){if(!canvas)return;const d=Math.min(2,devicePixelRatio||1);canvas.width=innerWidth*d;canvas.height=innerHeight*d;ctx.setTransform(d,0,0,d,0,0)}
+  addEventListener('resize',resize);
+  function frame(){ctx.clearRect(0,0,innerWidth,innerHeight);parts=parts.filter(p=>p.life>0&&p.y<innerHeight+40);for(const p of parts){p.vy+=.22;p.vx*=.992;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.life--;ctx.save();ctx.globalAlpha=Math.min(1,p.life/40);ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;if(p.shape)ctx.fillRect(-p.s/2,-p.s/3,p.s,p.s/1.6);else{ctx.beginPath();ctx.arc(0,0,p.s/2.4,0,7);ctx.fill()}ctx.restore()}if(parts.length)raf=requestAnimationFrame(frame);else{cancelAnimationFrame(raf);raf=0;canvas.remove();canvas=null}}
+  function burst({x=innerWidth/2,y=innerHeight/3,count=90,spread=1}={}){if(reduced())return;ensure();for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,v=(3+Math.random()*7)*spread;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-5,r:Math.random()*6,vr:(Math.random()-.5)*.3,s:6+Math.random()*7,c:P(colors),shape:Math.random()<.65,life:110+R(0,60)})}if(!raf)raf=requestAnimationFrame(frame)}
+  function fromElement(el,count=70){if(!el){burst({count});return}const b=el.getBoundingClientRect();burst({x:b.left+b.width/2,y:b.top+Math.min(b.height/2,120),count})}
+  return {burst,fromElement};
+})();
+
+function floatXP(text,el){if(reduced())return;const b=el?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const f=document.createElement('div');f.className='v6-float-xp v6-transient';f.textContent=text;f.style.left=(b.left+b.width/2)+'px';f.style.top=(b.top+Math.min(b.height/2,60))+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),1500)}
+
+let bubbleTimer=0;
+function bitSays(text,mood='happy'){
+  let b=$('v6-bit-bubble');
+  if(!b){b=document.createElement('div');b.id='v6-bit-bubble';b.className='v6-bit-bubble v6-transient';b.setAttribute('role','status');b.setAttribute('aria-live','polite');document.body.appendChild(b)}
+  if(chatOpen)return;
+  b.dataset.mood=mood;b.textContent=text;b.hidden=false;b.style.animation='none';void b.offsetWidth;b.style.animation='';
+  const pet=document.querySelector('#chat-launch .pet');if(pet&&!reduced()){pet.classList.remove('v6-jump');void pet.offsetWidth;pet.classList.add('v6-jump')}
+  clearTimeout(bubbleTimer);bubbleTimer=setTimeout(()=>{b.hidden=true},4200);
+}
+
+function popStack(){let s=document.querySelector('.v6-pop-stack');if(!s){s=document.createElement('div');s.className='v6-pop-stack v6-transient';s.setAttribute('aria-live','polite');document.body.appendChild(s)}return s}
+function showBadgePop(emoji,label,title,text,color='var(--purple)'){
+  const card=document.createElement('div');card.className='v6-badge-pop';card.style.borderLeftColor=color;card.setAttribute('role','status');
+  card.innerHTML=`<span aria-hidden="true">${esc(emoji)}</span><div><small>${esc(label)}</small><b>${esc(title)}</b><p>${esc(text)}</p></div>`;
+  popStack().appendChild(card);setTimeout(()=>{card.classList.add('out');setTimeout(()=>card.remove(),380)},4600);
+}
+
+function modal(html,{onClose,left=false}={}){
+  closeModal();const m=document.createElement('div');m.className='v6-modal v6-transient';m.id='v6-modal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
+  m.innerHTML=`<div class="v6-modal-card ${left?'left':''}" tabindex="-1">${html}</div>`;
+  m.addEventListener('click',e=>{if(e.target===m)closeModal()});m._onClose=onClose;document.body.appendChild(m);
+  const first=m.querySelector('[data-autofocus]')||m.querySelector('button,input')||m.querySelector('.v6-modal-card');setTimeout(()=>first?.focus(),30);return m;
+}
+function closeModal(){const m=$('v6-modal');if(m){const f=m._onClose;m.remove();if(typeof f==='function')f()}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('v6-modal'))closeModal()});
+
+/* ------------------------------------------------------------------ niveles, XP e insignias */
+const LEVELS=[[0,'Chispa curiosa','✨'],[100,'Explorador de bits','💡'],[250,'Domador de compuertas','🔀'],[450,'Constructor de ALU','🧮'],[700,'Piloto de buses','🚌'],[1000,'Guardián de la memoria','💾'],[1400,'Estratega de la caché','⚡'],[1900,'Ingeniero de sistemas','🛠️'],[2500,'Diseñador de arquitecturas','🏗️'],[3200,'Arquitecto de Bits','👑']];
+function levelInfo(xp){let i=0;while(i+1<LEVELS.length&&xp>=LEVELS[i+1][0])i++;const [min,name,emoji]=LEVELS[i],next=i+1<LEVELS.length?LEVELS[i+1]:null;return {n:i+1,name,emoji,min,next:next?next[0]:null,nextName:next?next[1]:null,pct:next?Math.max(0,Math.min(1,(xp-min)/(next[0]-min))):1}}
+function game(){if(!state.game||typeof state.game!=='object'||Array.isArray(state.game))state.game={};const g=state.game;for(const k of ['badges','arcade','failed'])if(!g[k]||typeof g[k]!=='object')g[k]={};for(const k of ['streak','bestStreak','chat'])g[k]=Math.max(0,Number(g[k])||0);return g}
+const completedCount=()=>modules.filter(completed).length;
+const totalMissions=()=>modules.reduce((a,m)=>a+missionCount(m),0);
+const bestSum=()=>modules.reduce((a,m)=>a+record(m).best,0);
+const baseXP=()=>modules.reduce((a,m)=>a+record(m).best*20+missionCount(m)*25,0);
+const arcadeXP=()=>Object.values(game().arcade).reduce((a,x)=>a+Math.min(150,Math.floor((Number(x&&x.best)||0)/2)),0);
+const badgeXP=()=>Object.keys(game().badges).length*15;
+function totalXP(){return isStudent()?baseXP()+arcadeXP()+badgeXP():0}
+window.totalXP=totalXP;
+
+const BADGES=[
+  {id:'primer-bit',emoji:'💡',title:'Primer bit encendido',desc:'Consigue tu primera misión.',test:()=>totalMissions()>=1},
+  {id:'primera-escena',emoji:'🧩',title:'Primera escena conectada',desc:'Completa una escena: tres misiones y al menos 4 de 5.',test:()=>completedCount()>=1},
+  {id:'perfecto',emoji:'🎯',title:'Cinco de cinco',desc:'Obtén 5/5 en una evaluación.',test:()=>modules.some(m=>record(m).best===5)},
+  {id:'racha-5',emoji:'🔥',title:'Racha de fuego',desc:'Encadena 5 respuestas correctas.',test:()=>game().bestStreak>=5},
+  {id:'racha-12',emoji:'☄️',title:'Imparable',desc:'Encadena 12 respuestas correctas.',test:()=>game().bestStreak>=12},
+  {id:'perseverancia',emoji:'💪',title:'Perseverancia',desc:'Supera una evaluación después de un intento sin aprobar.',test:()=>!!game().comeback},
+  {id:'explorador',emoji:'🔭',title:'Explorador incansable',desc:'Realiza 150 interacciones en los laboratorios.',test:()=>modules.reduce((a,m)=>a+record(m).explored,0)>=150},
+  {id:'curioso',emoji:'💬',title:'Mente curiosa',desc:'Hazle 5 preguntas a Bit.',test:()=>game().chat>=5},
+  {id:'jugador',emoji:'🎮',title:'Jugador de bits',desc:'Termina tu primera ronda en la Zona de retos.',test:()=>Object.keys(game().arcade).length>=1},
+  {id:'campeon',emoji:'🏆',title:'Campeón contrarreloj',desc:'Consigue 150 puntos en una ronda de 60 segundos.',test:()=>Object.values(game().arcade).some(x=>(Number(x&&x.bestTimed)||0)>=150)},
+  {id:'coleccionista',emoji:'🕹️',title:'Coleccionista de retos',desc:'Juega los seis retos.',test:()=>Object.keys(game().arcade).length>=6},
+  ...window.TIMELINE_THEMES.map((t,u)=>({id:'unidad-'+(u+1),emoji:t.emoji,color:t.color,title:'Unidad '+(u+1)+' · '+t.label,desc:'Completa todas las escenas de la unidad '+(u+1)+'.',test:()=>modules.every((m,i)=>unitAt(i)!==u||completed(m))})),
+  {id:'arquitecto',emoji:'👑',title:'Arquitecto de Bits',desc:'Completa las 17 escenas del recorrido.',test:()=>completedCount()===17}
+];
+
+function paintLevel(){
+  const box=$('v6-level'),streak=$('v6-streak');if(!box)return;
+  const student=isStudent();box.hidden=!student;
+  if(streak){const s=student?game().streak:0;streak.hidden=!s;streak.querySelector('b').textContent=s;streak.classList.toggle('hot',s>=5);streak.title='Racha actual: '+s+' respuestas correctas seguidas'}
+  if(!student)return;
+  const xp=totalXP(),lv=levelInfo(xp);
+  $('v6-level-n').textContent=lv.n;$('v6-level-name').textContent=lv.emoji+' '+lv.name;$('v6-level-xp').textContent=nf(xp,0)+' XP';
+  $('v6-level-ring').style.setProperty('--p',Math.round(lv.pct*100));
+  box.title='Nivel '+lv.n+' · '+lv.name+' · '+xp+' XP'+(lv.next?' · faltan '+(lv.next-xp)+' XP para «'+lv.nextName+'»':' · nivel máximo');
+  const x=$('xp');if(x)x.textContent='✦ '+xp+' XP';
+}
+
+let celebrateQueue=Promise.resolve();
+function checkProgress(silent=false){
+  if(!isStudent())return;
+  const g=game(),earned=[];
+  for(const b of BADGES){let ok=false;try{ok=b.test()}catch(e){}if(!g.badges[b.id]&&ok){g.badges[b.id]=new Date().toISOString();earned.push(b)}}
+  const lv=levelInfo(totalXP());let up=false;
+  if(!Number.isInteger(g.level))g.level=lv.n;else if(lv.n>g.level){g.level=lv.n;up=true}
+  if(earned.length||up)save();
+  paintLevel();
+  for(const b of earned)track('insignia',{accion:b.id,valor:b.title});
+  if(up)track('nivel',{accion:'nivel '+lv.n,valor:lv.name});
+  if(silent)return;
+  const who=state.profileKey,still=()=>isStudent()&&state.profileKey===who;
+  if(earned.length>3){showBadgePop('🏅','Insignias desbloqueadas',earned.length+' insignias nuevas','Revisa tu colección en Mi bitácora.');Sound.play('badge')}
+  else earned.forEach((b,i)=>setTimeout(()=>{if(!still())return;showBadgePop(b.emoji,'Nueva insignia',b.title,b.desc,b.color||'var(--purple)');Sound.play('badge')},350+i*700));
+  if(up)setTimeout(()=>{if(still())levelUp(lv)},earned.length?Math.min(3,earned.length)*700+600:250);
+}
+function levelUp(lv){
+  Sound.play('level');Confetti.burst({count:160,y:innerHeight*.35});
+  modal(`<span class="v6-big-emoji" aria-hidden="true">${lv.emoji}</span><span class="mini-label" style="display:block;margin-top:12px">¡Subiste de nivel!</span><h2 id="v6-level-title">Nivel ${lv.n} · ${esc(lv.name)}</h2><p>${lv.next?'Te faltan '+(lv.next-totalXP())+' XP para llegar a «'+esc(lv.nextName)+'».':'Alcanzaste el nivel máximo. ¡Eres un verdadero Arquitecto de Bits!'}</p><div class="v6-modal-actions"><button class="btn" data-autofocus onclick="V6.closeModal()">¡A seguir explorando! →</button></div>`);
+  $('v6-modal')?.setAttribute('aria-labelledby','v6-level-title');
+}
+
+/* ------------------------------------------------------------------ envolturas del motor */
+const baseFinish=finishInteraction;
+finishInteraction=function(won=[]){
+  baseFinish(won);
+  if(!won.length||!isStudent())return;
+  const target=document.querySelector('[data-mission-id="'+won[won.length-1].id+'"]')||document.querySelector('.simulation-panel');
+  Sound.play('mission');Confetti.fromElement(target,80);floatXP('+'+25*won.length+' XP',target);
+  for(const t of won)track('mision_lograda',{accion:t.id,valor:t.title});
+  bitSays(missionsDone(current())?'¡Tres de tres! 🎉 Ya puedes abrir tus cinco preguntas.':P(['¡Misión lograda! ✨ Esa evidencia vale oro.','¡Eso es! 💡 Observa qué cambió en el diagrama.','¡Gran experimento! 🔬 Vamos por la siguiente misión.']),'party');
+  checkProgress();
+};
+
+const pendingSets=new Map();
+const baseSet=simSet;
+simSet=function(key,value,source){
+  const id=state.view==='module'?current().id:null,r=baseSet(key,value,source);
+  if(r&&id&&isStudent()){const s=simState();track('simulacion_ajuste',{accion:key,valor:Array.isArray(s[key])?s[key].join(','):s[key],coalesce:true})}
+  return r;
+};
+const baseAction=simAction;
+simAction=function(action,arg=''){
+  const r=baseAction(action,arg);
+  if(r){Sound.play('tick');if(isStudent()){const s=simState();track('simulacion_accion',{accion:action,valor:arg,detalle:typeof s.msg==='string'?{mensaje:s.msg.slice(0,240)}:(typeof s.last==='string'?{mensaje:s.last.slice(0,240)}:null)})}}
+  return r;
+};
+
+const baseRender=renderSim;
+renderSim=function(){
+  const el=document.getElementById('sim-content'),before=el?[...el.querySelectorAll('.metric strong')].map(e=>e.textContent):[];
+  baseRender();
+  if(!el||reduced())return;
+  const after=[...el.querySelectorAll('.metric strong')];
+  if(before.length===after.length)after.forEach((e,i)=>{if(before[i]!==e.textContent){e.classList.remove('v6-pop');void e.offsetWidth;e.classList.add('v6-pop')}});
+};
+
+let pendingQuiz=null;
+const baseAnswer=answerQuestion;
+answerQuestion=function(i,j){
+  const m=current(),r=record(m),prevBest=r.best;
+  const ok=baseAnswer(i,j);if(!ok)return ok;
+  const q=m.questions[i],correct=j===q.answer,g=game();
+  if(correct){g.streak++;g.bestStreak=Math.max(g.bestStreak,g.streak);Sound.play('good');Confetti.fromElement(document.querySelector('.answer.correct'),28)}
+  else{g.streak=0;Sound.play('bad');document.querySelector('.quiz-card')?.classList.add('v6-shake');bitSays('Casi… 💭 Lee la explicación: también es parte del aprendizaje.','think')}
+  track('respuesta',{accion:'Pregunta '+(i+1),valor:q.options[j],correcto:correct,detalle:{pregunta:q.q,elegida:q.options[j],correcta:q.options[q.answer]}});
+  if(answered(m)===5){
+    const sc=score(m),passed=sc>=4;
+    if(passed){if(g.failed[m.id])g.comeback=true}else g.failed[m.id]=true;
+    pendingQuiz={id:m.id,score:sc,passed,gained:(r.best-prevBest)*20};
+    track('cuestionario_completado',{accion:passed?'aprobado':'por repetir',valor:sc+'/5',puntaje:sc,correcto:passed});
+  }
+  save();paintLevel();if(answered(m)<5)checkProgress();return ok;
+};
+const baseSummary=renderQuizSummary;
+renderQuizSummary=function(){
+  baseSummary();
+  const p=pendingQuiz;if(!p||p.id!==current().id)return;pendingQuiz=null;
+  const medal=document.querySelector('.result-medal');
+  if(p.passed){Sound.play('mission');Confetti.burst({count:150,y:innerHeight*.3});if(p.gained>0)floatXP('+'+p.gained+' XP',medal);bitSays(p.score===5?'¡Cinco de cinco! 🎯 Dominaste esta escena.':'¡Escena superada! 🚀 La siguiente ya está abierta.','party')}
+  else bitSays('Vas por buen camino 💪 Repasa el experimento y vuelve a intentarlo.','think');
+  checkProgress();
+};
+const baseRetry=retryQuiz;retryQuiz=function(){const r=baseRetry();if(isStudent())track('cuestionario_reintento',{});return r};
+const baseReset=resetSim;resetSim=function(){const r=baseReset();if(isStudent())track('reinicio_simulacion',{});return r};
+const baseResetProgress=resetProgress;resetProgress=function(){const before=state.game;const r=baseResetProgress();if(isStudent()&&state.game!==before){track('reinicio_progreso',{});paintLevel()}return r};
+const baseAsk=askBit;
+askBit=async function(q){if(isStudent()){game().chat++;save();track('chat_pregunta',{valor:String(q).slice(0,300)})}const r=await baseAsk(q);checkProgress();return r};
+const baseRegister=registerStudent;
+registerStudent=function(){const ok=baseRegister();if(ok){game();track('ingreso_estudiante',{valor:state.name});checkProgress(true);flush(true)}return ok};
+const basePaint=paintTop;paintTop=function(){basePaint();paintLevel()};
+
+let lastView='';
+const baseMain=mainHTML;
+mainHTML=function(...args){
+  if(state.view!=='arcade')stopArena();
+  const out=baseMain(...args);
+  const key=state.view+(state.view==='module'?':'+current().id+':'+state.phase:'');
+  if(key!==lastView){lastView=key;if(isStudent())track('vista',{accion:state.view,valor:state.view==='module'?['Aprende','Experimenta','Comprueba'][state.phase]:''})}
+  updateNotes();return out;
+};
+
+/* ------------------------------------------------------------------ inicio, acceso y bitácora */
+function bitsRain(n=14){return `<div class="v6-bits" aria-hidden="true">${Array.from({length:n},(_,i)=>`<i style="left:${4+i*92/n}%;animation-delay:${-(i*.71%9).toFixed(2)}s;animation-duration:${7+(i*1.3%5).toFixed(1)}s">${i%3?'1':'0'}</i>`).join('')}</div>`}
+const baseModePicker=showModePicker;
+showModePicker=function(showStudent=false){
+  const r=baseModePicker(showStudent);
+  const art=document.querySelector('.access-art');if(art&&!art.querySelector('.v6-bits'))art.insertAdjacentHTML('afterbegin',bitsRain());
+  const feats=document.querySelector('.access-features');if(feats&&feats.children.length===3)feats.insertAdjacentHTML('beforeend','<span>🎮 6 retos · '+BADGES.length+' insignias</span>');
+  updateNotes();return r;
+};
+
+function nextGoal(){
+  const i=modules.findIndex(m=>!completed(m));if(i<0)return {text:'¡Completaste las 17 escenas! Supera tus récords en la Zona de retos.',action:'showArcade()',label:'Ir a los retos'};
+  const m=modules[i],task=(MISSIONS[m.id]||[]).find(t=>!record(m).missions[t.id]);
+  return task?{text:'Escena '+(i+1)+' · '+m.shortTitle+': «'+task.title+'».',action:`goModule(${i},1)`,label:'Ir a la misión'}:{text:'Escena '+(i+1)+' · '+m.shortTitle+': responde tus cinco preguntas.',action:`goModule(${i},2)`,label:'Responder'};
+}
+function statHTML(emoji,value,label,color){return `<div class="v6-stat" style="--stat:var(--${color});--stat-soft:var(--${color}-soft)"><span aria-hidden="true">${emoji}</span><b>${value}</b><small>${label}</small></div>`}
+function levelCardHTML(){const xp=totalXP(),lv=levelInfo(xp);return `<div class="v6-card v6-level-card"><div class="v6-level-head"><span class="v6-level-emoji" aria-hidden="true">${lv.emoji}</span><div><span class="mini-label">Nivel ${lv.n} de ${LEVELS.length}</span><h3>${esc(lv.name)}</h3><p>${nf(xp,0)} XP acumulados</p></div></div><div class="v6-xpbar" role="progressbar" aria-label="Progreso hacia el siguiente nivel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(lv.pct*100)}"><i style="width:${Math.round(lv.pct*100)}%"></i></div><p>${lv.next?'Faltan <b>'+(lv.next-xp)+' XP</b> para «'+esc(lv.nextName)+'».':'¡Nivel máximo alcanzado!'} Ganas XP con misiones (25), aciertos en tu mejor evaluación (20), insignias (15) y retos.</p></div>`}
+function playerPanelHTML(){
+  const g=game(),earned=BADGES.filter(b=>g.badges[b.id]),goal=nextGoal();
+  return `<section class="v6-player" aria-label="Tu panel de jugador">${levelCardHTML()}<div class="v6-card"><span class="mini-label">Tu progreso en el juego</span><div class="v6-stats" style="margin-top:12px">${statHTML('🧩',completedCount()+'/17','escenas','blue')}${statHTML('✅',totalMissions()+'/51','misiones','green')}${statHTML('🎯',bestSum()+'/85','aciertos','purple')}${statHTML('🔥',g.bestStreak,'mejor racha','orange')}${statHTML('🏅',earned.length+'/'+BADGES.length,'insignias','pink')}</div><div class="v6-badge-row">${earned.slice(-8).map(b=>`<span class="v6-mini-badge" title="${esc(b.title)}">${b.emoji}</span>`).join('')||'<small>Tu primera insignia llegará con tu primera misión.</small>'}<button class="textbtn" onclick="showProgress()" style="margin-left:auto;color:var(--purple)">Ver colección →</button></div><div class="v6-next"><span>🎯 <b>Próximo objetivo:</b> ${esc(goal.text)}</span><button class="btn small" onclick="${goal.action}">${goal.label} →</button></div></div></section>`;
+}
+function teacherPanelHTML(){
+  const on=registroActivo();
+  return `<section class="v6-teacher" aria-label="Herramientas del aula"><div class="v6-card"><span aria-hidden="true">☁️</span><div style="flex:1"><b>Registro en vivo con Google Sheets</b><p>${on?'Activo'+(regCfg.curso?' · Curso '+esc(regCfg.curso):'')+'. Cada interacción de tus estudiantes llega a la hoja en segundos.':'Desactivado. Conecta tu hoja para seguir en tiempo real misiones, respuestas y retos.'}</p></div><button class="btn small" onclick="V6.openRegistro()">${on?'Revisar conexión':'Conectar hoja'}</button></div><div class="v6-card"><span aria-hidden="true">🎮</span><div style="flex:1"><b>Zona de retos para la clase</b><p>Proyecta una ronda contrarreloj y compitan por equipos.</p></div><button class="btn small" onclick="showArcade()">Abrir retos</button></div></section>`;
+}
+function arcadeTeaserHTML(){
+  return `<section class="v6-arcade-teaser"><div class="section-head"><div><span class="eyebrow">Practica jugando</span><h2>Zona de retos ⚡</h2><p>Seis juegos con ejercicios nuevos en cada ronda. Contrarreloj de 60 segundos o práctica sin prisa.</p></div><button class="btn" onclick="showArcade()">Entrar a la Zona de retos →</button></div><div class="v6-games">${ARCADE.map(a=>gameCardHTML(a,false)).join('')}</div></section>`;
+}
+const baseHome=goHome;
+goHome=function(){
+  const r=baseHome();
+  if(state.view!=='home')return r;
+  if(isStudent())checkProgress(true);
+  const intro=document.querySelector('.home-intro');
+  if(intro){intro.insertAdjacentHTML('afterend',isStudent()?playerPanelHTML():isTeacher()?teacherPanelHTML():'');const pic=document.querySelector('.home-course-picture');if(pic&&!pic.querySelector('.v6-bits')){pic.style.position='relative';pic.insertAdjacentHTML('afterbegin',bitsRain(10))}}
+  const journey=document.querySelector('.learning-journey');if(journey)journey.insertAdjacentHTML('afterend',arcadeTeaserHTML());
+  return r;
+};
+const baseProgress=showProgress;
+showProgress=function(){
+  const r=baseProgress();
+  if(state.view!=='progress')return r;
+  const g=game(),id=document.querySelector('.student-identity');
+  const badges=`<div class="v6-section-title"><h2>🏅 Insignias</h2><span class="pill">${BADGES.filter(b=>g.badges[b.id]).length} / ${BADGES.length}</span></div><div class="v6-badges">${BADGES.map(b=>{const at=g.badges[b.id];return `<div class="v6-badge ${at?'':'locked'}"><span aria-hidden="true">${b.emoji}</span><b>${esc(b.title)}</b><small>${esc(b.desc)}</small>${at?`<small style="color:var(--green);font-weight:800">✓ ${new Date(at).toLocaleDateString('es-CO')}</small>`:''}</div>`}).join('')}</div>`;
+  const arcade=`<div class="v6-section-title"><h2>🎮 Récords de la Zona de retos</h2><button class="btn small secondary no-print" onclick="showArcade()">Jugar →</button></div><div class="table-scroll"><table class="report-table"><thead><tr><th scope="col">Reto</th><th scope="col">Rondas</th><th scope="col">Récord contrarreloj</th><th scope="col">Récord práctica</th><th scope="col">Precisión</th></tr></thead><tbody>${ARCADE.map(a=>{const x=g.arcade[a.id]||{};return `<tr><td>${a.emoji} ${esc(a.title)}</td><td>${x.plays||0}</td><td>${x.bestTimed||0}</td><td>${x.bestPractice||0}</td><td>${x.total?Math.round(100*x.correct/x.total)+' %':'—'}</td></tr>`}).join('')}</tbody></table></div>`;
+  const anchor=document.querySelector('.progress-view .result-actions')||id;
+  if(anchor)anchor.insertAdjacentHTML('afterend',`<div class="v6-player" style="grid-template-columns:1fr">${levelCardHTML()}</div>`+badges+arcade);
+  return r;
+};
+
+/* ------------------------------------------------------------------ Zona de retos: ejercicios generados y verificados */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function options(correct,distractors,fallback){
+  const set=[String(correct)];
+  for(const d of distractors){const t=String(d);if(d!==null&&d!==undefined&&!set.includes(t)&&set.length<4)set.push(t)}
+  for(let guard=0;set.length<4&&guard<80;guard++){const t=String(fallback());if(!set.includes(t))set.push(t)}
+  const opts=shuffle(set);return {options:opts,answer:opts.indexOf(String(correct))};
+}
+const weights=n=>[...bin(n)].map((c,i)=>c==='1'?2**(7-i):0).filter(Boolean);
+function genBinario(){
+  const t=P(['b2d','b2d','d2h','h2d','d2b','bus']);
+  if(t==='b2d'){const n=R(1,255),w=weights(n);return {...options(n,[n^(1<<R(0,7)),parseInt([...bin(n)].reverse().join(''),2),n^(1<<R(0,7)),n+1,n-1].filter(x=>x>=0&&x<=255&&x!==n),()=>R(0,255)),topic:'Binario → decimal',prompt:'¿Cuánto vale este byte en decimal?',code:bin(n)+'₂',explain:`Suma los pesos de los bits en 1: ${w.join(' + ')} = ${n}.`}}
+  if(t==='d2h'){const n=R(16,255),hi=n>>4,lo=n&15,c='0x'+hx(n);return {...options(c,['0x'+hx(lo*16+hi),n<100?'0x'+String(n).padStart(2,'0'):null,'0x'+hx((n+16)&255),'0x'+hx(n^1)],()=>'0x'+hx(R(16,255))),topic:'Decimal → hexadecimal',prompt:'¿Cómo se escribe este número decimal en hexadecimal?',code:String(n),explain:`${n} = ${hi} × 16 + ${lo}. ${hi} se escribe ${hi.toString(16).toUpperCase()} y ${lo} se escribe ${lo.toString(16).toUpperCase()}: ${c}.`}}
+  if(t==='h2d'){const n=R(16,255),hi=n>>4,lo=n&15;return {...options(n,[lo*16+hi,hi<10&&lo<10?hi*10+lo:null,n+16<=255?n+16:n-16,n-1],()=>R(16,255)),topic:'Hexadecimal → decimal',prompt:'¿Qué valor decimal tiene este número hexadecimal?',code:'0x'+hx(n),explain:`0x${hx(n)} = ${hi} × 16 + ${lo} = ${hi*16} + ${lo} = ${n}.`}}
+  if(t==='d2b'){const n=R(1,255),w=weights(n),ks=shuffle([0,1,2,3,4,5,6,7]);return {...options(bin(n),ks.slice(0,3).map(k=>bin(n^(1<<k))),()=>bin(R(0,255))),topic:'Decimal → binario',prompt:'¿Qué byte representa este número decimal?',code:String(n),explain:`${n} = ${w.join(' + ')}. Esos pesos se encienden: ${bin(n)}.`}}
+  const L=P([4,8,10,12,16,20]),c=2**L;return {...options(nf(c,0),[nf(2*L,0),nf(L*L,0),nf(2**(L-1),0),nf(2**(L+1),0)],()=>nf(2**R(3,22),0)),topic:'Bus de direcciones',prompt:`Un bus de direcciones tiene ${L} líneas. ¿Cuántas posiciones distintas puede seleccionar?`,code:L+' líneas → ?',explain:`Cada línea duplica las combinaciones: 2^${L} = ${nf(c,0)} direcciones, numeradas de 0 a ${nf(c-1,0)}.`};
+}
+const GATES={AND:[(a,b)=>a&b,'vale 1 solo si ambos bits son 1'],OR:[(a,b)=>a|b,'vale 1 si al menos un bit es 1'],XOR:[(a,b)=>a^b,'vale 1 si los bits son diferentes'],NAND:[(a,b)=>~(a&b)&15,'es la negación de AND: vale 0 solo si ambos bits son 1'],NOR:[(a,b)=>~(a|b)&15,'es la negación de OR: vale 1 solo si ambos bits son 0']};
+function genPuertas(){
+  const a=R(0,15),b=R(0,15),op=P(Object.keys(GATES)),res=GATES[op][0](a,b);
+  const others=Object.keys(GATES).filter(k=>k!==op).map(k=>bin(GATES[k][0](a,b),4));
+  return {...options(bin(res,4),shuffle(others).concat([bin(res^(1<<R(0,3)),4)]),()=>bin(R(0,15),4)),topic:'Operación '+op,prompt:`Calcula la operación bit a bit con 4 bits. ${op} ${GATES[op][1]}.`,code:`${bin(a,4)} ${op} ${bin(b,4)}`,explain:`Columna por columna: ${[3,2,1,0].map(k=>`${a>>k&1}·${b>>k&1}→${res>>k&1}`).join(', ')}. Resultado: ${bin(res,4)} (${res} en decimal).`};
+}
+function genALU(){
+  const op=P(['add','add','add','sub','sub']);let a,b;
+  if(op==='add'){const c=P(['carry','overflow','zero','normal','neg']);
+    if(c==='carry'){a=R(129,255);b=R(256-a,255)}else if(c==='overflow'){a=R(64,127);b=R(128-a,127)}else if(c==='zero'){a=R(1,255);b=256-a}else if(c==='normal'){a=R(0,90);b=R(0,37)}else{a=R(128,191);b=R(128,383-a)}}
+  else{const c=P(['borrow','overflow','zero','normal']);
+    if(c==='borrow'){a=R(0,120);b=R(a+1,127)}else if(c==='overflow'){a=R(1,127);b=R(128,Math.min(255,a+128))}else if(c==='zero'){a=b=R(1,255)}else{a=R(60,127);b=R(0,a-1)}}
+  const r=aluResult(a,b,op),first=op==='add'?['C',r.c]:['B',r.borrow],flags=[first,['Z',r.z],['N',r.n],['V',r.v]];
+  const fmt=f=>f.map(([k,v])=>k+'='+v).join(' · ');
+  const flips=shuffle([0,1,2,3]).slice(0,3).map(k=>fmt(flags.map(([n,v],i)=>[n,i===k?1-v:v])));
+  const sym=op==='add'?'+':'−',signed=op==='add'?r.sa+r.sb:r.sa-r.sb;
+  const why=op==='add'?`${a} + ${b} = ${a+b}${a+b>=256?' ≥ 256: sobra un noveno bit, C = 1':' < 256: cabe en 8 bits, C = 0'}`:`${a} ${a<b?'<':'≥'} ${b}: ${a<b?'la resta sin signo necesita préstamo, B = 1':'no hace falta préstamo, B = 0'}`;
+  return {...options(fmt(flags),flips,()=>fmt(flags.map(([n])=>[n,R(0,1)]))),topic:op==='add'?'Suma de 8 bits':'Resta de 8 bits',prompt:`ALU de 8 bits: ¿qué banderas produce ${a} ${sym} ${b}? (${op==='add'?'C = acarreo':'B = préstamo'}, Z = cero, N = signo, V = desbordamiento con signo)`,code:`${bin(a)} ${sym} ${bin(b)}`,explain:`Se guarda ${bin(r.r)} = ${r.r}. ${why}. Z = ${r.z} porque el resultado ${r.r===0?'es':'no es'} cero. N = ${r.n}: copia el bit 7. Con signo: ${minus(r.sa)} ${sym} ${minus(r.sb)} = ${minus(signed)}, ${r.v?'fuera':'dentro'} del rango −128…127, así que V = ${r.v}.`};
+}
+function cacheRun(seq){const lines=[null,null,null,null];return seq.map(a=>{const i=a%4,t=Math.floor(a/4),old=lines[i],hit=!!old&&old.tag===t;if(!hit)lines[i]={tag:t,address:a};return {a,i,t,hit,old}})}
+function genCache(){
+  if(Math.random()<.65){
+    const seq=Array.from({length:3},()=>R(0,15)),base=P(seq),target=Math.random()<.5?base:(base+4*R(1,3))%16;
+    const run=cacheRun([...seq,target]),last=run[3],other=(last.i+R(1,3))%4,ok=(last.hit?'HIT':'MISS')+' · línea '+last.i;
+    const why=!last.old?`La línea ${last.i} estaba vacía: MISS obligatorio y se carga desde RAM.`:last.hit?`La línea ${last.i} ya guarda la etiqueta ${last.t} (dirección ${last.old.address}): HIT.`:`La línea ${last.i} guarda la etiqueta ${last.old.tag} (dirección ${last.old.address}), no la ${last.t}: MISS por conflicto.`;
+    return {...options(ok,['HIT · línea '+last.i,'MISS · línea '+last.i,'HIT · línea '+other,'MISS · línea '+other],()=>P(['HIT','MISS'])+' · línea '+R(0,3)),topic:'Mapeo directo',prompt:`Caché de mapeo directo con 4 líneas, inicialmente vacía. Se leyeron, en orden, ${seq.join(', ')}. ¿Qué ocurre al leer ${target}?`,code:`${seq.join(' → ')} → ${target} ?`,explain:`${target} mod 4 = ${last.i} (línea) y ⌊${target} / 4⌋ = ${last.t} (etiqueta). ${why}`};
+  }
+  const pool=shuffle([0,1,2,3,4,5,6,7,8]).slice(0,3),seq=Array.from({length:4},()=>P(pool)),run=cacheRun(seq),hits=run.filter(x=>x.hit).length,cost=hits+(4-hits)*21;
+  return {...options(cost+' ciclos',[(cost+20)+' ciclos',cost>24?(cost-20)+' ciclos':null,'84 ciclos','4 ciclos',(4*21-hits)+' ciclos'],()=>(4+20*R(0,4))+' ciclos'),topic:'Costo de accesos',prompt:`Desde una caché vacía de 4 líneas (mapeo directo), ¿cuántos ciclos cuesta leer ${seq.join(', ')}? Un HIT cuesta 1 ciclo; un MISS, 21.`,code:seq.join(' → '),explain:run.map(x=>`${x.a}: ${x.hit?'HIT (1)':'MISS (21)'}`).join(' · ')+`. Total: ${cost} ciclos; tasa de aciertos ${hits}/4 = ${hits*25} %.`};
+}
+function genRend(){
+  const t=P(['amdahl','amdahl','time','freq']);
+  if(t==='amdahl'){const p=P([50,60,75,80,90,95]),N=P([2,4,8,16]),f=p/100,den=(1-f)+f/N,S=1/den;return {...options(nf(S)+'×',[N+'×',nf(1/(1-f))+'×',nf(1/((1-f)/N+f))+'×',nf(f*N)+'×'],()=>nf(S+R(1,9)/10)+'×'),topic:'Ley de Amdahl',prompt:`Una tarea es ${p} % paralelizable y esa parte se reparte entre ${N} núcleos ideales. ¿Cuál es la aceleración total?`,code:`p = ${nf(f)} · N = ${N}`,explain:`S = 1 / [(1 − ${nf(f)}) + ${nf(f)}/${N}] = 1 / ${nf(den,4)} ≈ ${nf(S)}×. El ${100-p} % secuencial limita la mejora: ni con infinitos núcleos se superaría ${nf(1/(1-f))}×.`}}
+  if(t==='time'){const I=P([500,1000,1500,2000,3000]),c=P([1,1.5,2,2.5,3]),f=P([1,2,2.5,3,4]),T=I*c/(f*1000);return {...options(nf(T,3)+' s',[nf(I*c*f/1000,3)+' s',nf(I/(f*1000),3)+' s',nf(I*c/f,3)+' s',nf(T*2,3)+' s'],()=>nf(T*P([.25,.5,1.5,3]),3)+' s'),topic:'Tiempo de CPU',prompt:`Un programa ejecuta ${nf(I,0)} millones de instrucciones con CPI ${nf(c,1)} a ${nf(f,1)} GHz efectivos. ¿Cuánto tarda?`,code:'t = I × CPI ÷ f',explain:`t = ${nf(I,0)} × 10⁶ × ${nf(c,1)} ÷ (${nf(f,1)} × 10⁹) = ${nf(T,3)} s. GHz son miles de millones de ciclos por segundo.`}}
+  const fn=P([2,2.4,3,3.2,3.6,4]),pct=P([50,60,70,75,80,90]),fe=fn*pct/100;return {...options(nf(fe)+' GHz',[nf(fn*(1-pct/100))+' GHz',nf(fn/(pct/100))+' GHz',nf(fn-pct/100)+' GHz',nf(fn)+' GHz'],()=>nf(fe+R(1,9)/10)+' GHz'),topic:'Frecuencia efectiva',prompt:`Por temperatura, un procesador de ${nf(fn,1)} GHz nominales trabaja al ${pct} %. ¿Cuál es su frecuencia efectiva?`,code:`${nf(fn,1)} GHz × ${pct} %`,explain:`f efectiva = ${nf(fn,1)} × ${pct}/100 = ${nf(fe)} GHz. La misma tarea tarda ${nf(100/pct)} veces más que a frecuencia nominal.`};
+}
+function genMCU(){
+  if(Math.random()<.6){const tenths=R(1,49),V=tenths/10,code=Math.floor(tenths*1024/50),exact=tenths*1024/50;return {...options(code,[Math.floor(tenths*1023/50),Math.round(exact),Math.floor(tenths*255/50),code+1,code-1].filter(x=>x>=0),()=>code+R(-6,6)),topic:'ADC de 10 bits',prompt:`ADC ideal de 10 bits con referencia de 5 V (código = mín(1023, ⌊V / 5 × 1024⌋)). ¿Qué código produce ${nf(V,1)} V?`,code:nf(V,1)+' V → ?',explain:`⌊${nf(V,1)} / 5 × 1024⌋ = ⌊${nf(exact,2)}⌋ = ${code}. Cada código equivale a 5/1024 ≈ 4,88 mV.`}}
+  const s=R(0,255),k=P([10,32,50,64,100,128,200,256,300]),sum=s+k,fin=sum%256,ov=Math.floor(sum/256),lab=(v,o)=>`Valor ${v} · ${o} desbordamiento${o===1?'':'s'}`;
+  return {...options(lab(fin,ov),[sum>255?lab(sum,0):null,lab(fin,ov+1),lab((fin+1)%256,ov),ov?lab(fin,ov-1):lab((fin+255)%256,1)],()=>lab(R(0,255),R(0,2))),topic:'Temporizador de 8 bits',prompt:`Un temporizador de 8 bits vale ${s} y recibe ${k} pulsos. ¿En qué valor queda y cuántos desbordamientos ocurren?`,code:`${s} + ${k} pulsos`,explain:`${s} + ${k} = ${sum} = ${ov} × 256 + ${fin}. El contador solo guarda 0…255: queda en ${fin} con ${ov} desbordamiento${ov===1?'':'s'}.`};
+}
+const ARCADE=[
+  {id:'binario',emoji:'🔢',title:'Binario relámpago',unit:0,desc:'Convierte entre binario, decimal y hexadecimal, y cuenta direcciones.',gen:genBinario},
+  {id:'puertas',emoji:'🔀',title:'Puertas en acción',unit:0,desc:'Calcula AND, OR, XOR, NAND y NOR bit a bit.',gen:genPuertas},
+  {id:'alu',emoji:'🧮',title:'Banderas de la ALU',unit:1,desc:'Predice acarreo, préstamo, cero, signo y desbordamiento.',gen:genALU},
+  {id:'cache',emoji:'⚡',title:'¿HIT o MISS?',unit:3,desc:'Sigue una caché de mapeo directo y calcula su costo.',gen:genCache},
+  {id:'rendimiento',emoji:'🚀',title:'Velocidad y Amdahl',unit:4,desc:'Tiempo de CPU, frecuencia efectiva y aceleración paralela.',gen:genRend},
+  {id:'mcu',emoji:'🌱',title:'Microcontrolador en acción',unit:5,desc:'Convierte voltajes con el ADC y cuenta con el temporizador.',gen:genMCU}
+];
+window.V6_GENERATORS=Object.fromEntries(ARCADE.map(a=>[a.id,a.gen]));
+const themeOf=a=>window.TIMELINE_THEMES[a.unit];
+const gameStyle=a=>{const t=themeOf(a);return `--g:${t.color};--gs:${t.soft}`};
+function gameCardHTML(a,full=true){
+  const x=isStudent()?game().arcade[a.id]:null,t=themeOf(a);
+  return `<article class="v6-game" style="${gameStyle(a)}"><span class="v6-game-emoji" aria-hidden="true">${a.emoji}</span><span class="v6-game-unit">Unidad ${a.unit+1} · ${esc(t.label)}</span><h3>${esc(a.title)}</h3><p>${esc(a.desc)}</p><span class="v6-game-best">${x?'Récord: '+(x.bestTimed||0)+' pts contrarreloj · '+(x.plays||0)+' rondas':'Aún sin jugar'}</span><div class="v6-game-actions"><button type="button" onclick="arcadeStart('${a.id}','timed')">⏱ Contrarreloj</button><button type="button" onclick="arcadeStart('${a.id}','practice')">🧘 Práctica</button></div></article>`;
+}
+let arena=null,arenaTimer=0;
+function stopArena(){clearInterval(arenaTimer);arenaTimer=0;if(arena)clearTimeout(arena.next);arena=null}
+window.showArcade=function(){
+  if(!isTeacher()&&!isStudent()){showModePicker(true);toast('Elige un modo para entrar a la Zona de retos.');return false}
+  stopArena();state.view='arcade';
+  mainHTML(`<section class="v6-arena-page focus-enter"><div class="breadcrumb"><button onclick="goHome()">← Volver al mapa</button><span class="mini-label">Zona de retos</span></div><header class="v6-arena-head"><div><span class="eyebrow">Practica jugando · ejercicios nuevos en cada ronda</span><h1>Zona de retos ⚡</h1><p>Elige un reto. <b>Contrarreloj:</b> 60 segundos, +10 puntos por acierto y bonificación por racha. <b>Práctica:</b> 10 ejercicios sin tiempo y con la explicación de cada respuesta. Usa las teclas 1–4 para responder.</p></div></header><div class="v6-games">${ARCADE.map(a=>gameCardHTML(a)).join('')}</div><p class="fine" style="margin-top:18px">Cada ejercicio se genera al azar y su respuesta se calcula con las mismas reglas de los laboratorios. ${isTeacher()?'En modo profesor no se guardan récords.':'Tus récords suman XP: la mitad de tu mejor puntaje, hasta 150 XP por reto.'}</p></section>`);
+  focusMain();chatSuggestions();return true;
+};
+window.arcadeStart=function(id,mode='timed'){
+  const a=ARCADE.find(x=>x.id===id);if(!a)return;
+  if(!isTeacher()&&!isStudent()){showModePicker(true);return}
+  stopArena();state.view='arcade';
+  arena={a,mode,score:0,correct:0,total:0,streak:0,best:0,time:60000,left:60000,locked:false,q:null,next:0,last:performance.now(),hold:0,started:Date.now()};
+  mainHTML(`<section class="v6-arena-page focus-enter" style="${gameStyle(a)}"><div class="breadcrumb"><button onclick="showArcade()">← Todos los retos</button><span class="mini-label">${esc(a.title)} · ${mode==='timed'?'Contrarreloj':'Práctica'}</span></div><div class="v6-arena" id="v6-arena"></div></section>`);
+  Sound.play('start');track('reto_inicio',{accion:a.id,valor:mode==='timed'?'contrarreloj':'práctica'});
+  nextQuestion();focusMain();
+  if(mode==='timed')arenaTimer=setInterval(tickArena,200);
+};
+function hudHTML(){const a=arena,t=Math.max(0,Math.ceil(a.left/1000));return `<div class="v6-hud"><div class="v6-hud-game">${a.a.emoji} ${esc(a.a.title)}</div>${a.mode==='timed'?`<div class="v6-timer ${t<=10?'low':''}" id="v6-timer" style="--t:${a.left/a.time*100}">⏱ <b id="v6-time">${t}</b> s</div>`:`<div>📝 <b>${Math.min(a.total+(a.locked?0:1),10)}</b>/10</div>`}<div>⭐ <b id="v6-score">${a.score}</b></div><div title="Racha de aciertos">🔥 <b>${a.streak}</b></div></div>`}
+function renderArena(){
+  const box=$('v6-arena');if(!box||!arena)return;const a=arena,q=a.q;
+  box.innerHTML=hudHTML()+`<article class="v6-qcard" aria-live="polite"><span class="mini-label">${esc(q.topic)}</span><h2>${esc(q.prompt)}</h2>${q.code?`<div class="v6-qcode">${esc(q.code)}</div>`:''}<div class="v6-opts" role="group" aria-label="Opciones de respuesta">${q.options.map((o,j)=>{let cls='';if(a.locked){if(j===q.answer)cls='ok';else if(j===a.chosen)cls='ko';else cls='dim'}return `<button type="button" class="v6-opt ${cls}" ${a.locked?'disabled':''} onclick="arcadeAnswer(${j})"><i>${j+1}</i><span>${esc(o)}</span></button>`}).join('')}</div>${a.locked&&(a.mode==='practice'||a.chosen!==q.answer)?`<div class="v6-explain ${a.chosen===q.answer?'':'ko'}"><b>${a.chosen===q.answer?'✓ ¡Correcto!':'✕ La respuesta era: '+esc(q.options[q.answer])}</b> ${esc(q.explain)}</div>`:''}</article><div class="v6-arena-foot"><span>${a.mode==='timed'?'Responde rápido: una racha suma hasta +20 puntos extra.':'Sin prisa: lee la explicación antes de continuar.'}</span>${a.mode==='practice'&&a.locked?`<button class="btn" id="v6-next" onclick="arcadeNext()">${a.total>=10?'Ver mi resultado':'Siguiente ejercicio'} →</button>`:`<button class="btn secondary small" onclick="arcadeFinish()">Terminar ronda</button>`}</div>`;
+  if(a.locked&&a.mode==='practice')$('v6-next')?.focus({preventScroll:true});
+}
+function nextQuestion(){if(!arena)return;arena.q=arena.a.gen();arena.locked=false;arena.chosen=null;renderArena();document.querySelector('.v6-opt')?.focus({preventScroll:true})}
+function tickArena(){if(!arena||arena.mode!=='timed')return;const now=performance.now(),dt=now-arena.last;arena.last=now;if(arena.hold>now){arena.last=now;return}arena.left-=dt;const t=$('v6-timer'),s=$('v6-time');if(t){t.style.setProperty('--t',Math.max(0,arena.left/arena.time*100));t.classList.toggle('low',arena.left<=10000)}if(s)s.textContent=Math.max(0,Math.ceil(arena.left/1000));if(arena.left<=0)arcadeFinish()}
+window.arcadeAnswer=function(j){
+  if(!arena||arena.locked)return;const a=arena,q=a.q,ok=j===q.answer;a.locked=true;a.chosen=j;a.total++;
+  if(ok){a.correct++;a.streak++;a.best=Math.max(a.best,a.streak);a.score+=10+2*Math.min(a.streak,10);Sound.play('good')}else{a.streak=0;Sound.play('bad')}
+  if(isStudent()){const g=game();if(ok){g.streak++;g.bestStreak=Math.max(g.bestStreak,g.streak)}else g.streak=0;paintLevel()}
+  track('reto_respuesta',{accion:a.a.id,valor:q.options[j],correcto:ok,detalle:{tema:q.topic,ejercicio:q.prompt+(q.code?' ['+q.code+']':''),correcta:q.options[q.answer]}});
+  renderArena();
+  if(ok){const btn=document.querySelectorAll('.v6-opt')[j];Confetti.fromElement(btn,22);floatXP('+'+(10+2*Math.min(a.streak,10))+' pts',btn)}
+  if(a.mode==='timed'){const wait=ok?650:2600;a.hold=performance.now()+wait;a.next=setTimeout(()=>{if(arena===a){a.last=performance.now();nextQuestion()}},wait)}
+};
+window.arcadeNext=function(){if(!arena||!arena.locked)return;if(arena.mode==='practice'&&arena.total>=10)return arcadeFinish();nextQuestion()};
+window.arcadeFinish=function(){
+  if(!arena)return;const a=arena;clearInterval(arenaTimer);arenaTimer=0;clearTimeout(a.next);arena=null;
+  let rec=null,record=false,xpBefore=totalXP();
+  if(isStudent()){const g=game();rec=g.arcade[a.a.id]=Object.assign({plays:0,bestTimed:0,bestPractice:0,best:0,correct:0,total:0},g.arcade[a.a.id]);rec.plays++;rec.correct+=a.correct;rec.total+=a.total;const key=a.mode==='timed'?'bestTimed':'bestPractice';if(a.score>rec[key]){record=rec.plays>1||a.score>0;rec[key]=a.score}rec.best=Math.max(rec.bestTimed,rec.bestPractice);rec.last=new Date().toISOString();save()}
+  const gained=Math.max(0,totalXP()-xpBefore),acc=a.total?Math.round(100*a.correct/a.total):0;
+  track('reto_fin',{accion:a.a.id,valor:a.mode==='timed'?'contrarreloj':'práctica',puntaje:a.score,correcto:acc>=60,detalle:{aciertos:a.correct,intentos:a.total,mejor_racha:a.best,precision:acc,duracion_s:Math.round((Date.now()-a.started)/1000),record}});
+  const medal=a.score>=200?'🏆':a.score>=120?'🥇':a.score>=60?'🥈':a.total?'🥉':'🎮';
+  const box=$('v6-arena');
+  if(box)box.innerHTML=`<article class="v6-qcard v6-end"><span class="v6-big-emoji" aria-hidden="true">${medal}</span><span class="mini-label" style="display:block;margin-top:10px">${esc(a.a.title)} · ${a.mode==='timed'?'Contrarreloj':'Práctica'}</span><h2>${record?'¡Nuevo récord!':a.correct>=a.total*.8&&a.total?'¡Excelente ronda!':'¡Ronda terminada!'}</h2><div class="result-score">${a.score}<span>puntos</span></div><div class="v6-end-stats"><span>✅ ${a.correct}/${a.total} aciertos</span><span>🎯 ${acc} % de precisión</span><span>🔥 racha máxima ${a.best}</span>${gained?`<span style="color:var(--purple)">✦ +${gained} XP</span>`:''}</div>${rec?`<p class="fine">Tu récord: ${rec.bestTimed} pts contrarreloj · ${rec.bestPractice} pts práctica · ${rec.plays} rondas.</p>`:'<p class="fine">Modo profesor: la ronda no se guarda.</p>'}<div class="v6-modal-actions"><button class="btn" onclick="arcadeStart('${a.a.id}','${a.mode}')">Jugar otra vez ↻</button><button class="btn secondary" onclick="arcadeStart('${a.a.id}','${a.mode==='timed'?'practice':'timed'}')">${a.mode==='timed'?'🧘 Practicar sin tiempo':'⏱ Probar contrarreloj'}</button><button class="btn secondary" onclick="showArcade()">Elegir otro reto</button></div></article>`;
+  Sound.play(record?'level':'end');if(record||acc>=80)Confetti.burst({count:record?160:90,y:innerHeight*.3});
+  if(record)bitSays('¡Nuevo récord! 🏆 Tu cerebro de silicio está a tope.','party');
+  checkProgress();
+};
+document.addEventListener('keydown',e=>{
+  if(state.view!=='arcade'||!arena||$('v6-modal')||/INPUT|SELECT|TEXTAREA/.test(document.activeElement?.tagName||''))return;
+  const k=e.key.toLowerCase(),map={'1':0,'2':1,'3':2,'4':3,a:0,b:1,c:2,d:3};
+  if(!arena.locked&&k in map){e.preventDefault();arcadeAnswer(map[k])}
+  else if(arena.locked&&arena.mode==='practice'&&(k==='enter'||k===' ')&&document.activeElement?.id!=='v6-next'){e.preventDefault();arcadeNext()}
+});
+
+/* ------------------------------------------------------------------ registro en vivo (Google Sheets) */
+const REG='arquitecto-de-bits-registro',SESSION=uid(),SESSION_START=Date.now();
+let regCfg={endpoint:'',clave:'',curso:''},regQueue=[],regState={status:'off',inflight:false,backoff:0,retryAt:0,lastOk:0,lastError:''};
+function normEndpoint(v){v=String(v||'').trim();if(/^AKfy[\w-]{20,}$/.test(v))return 'https://script.google.com/macros/s/'+v+'/exec';const m=v.match(/^https:\/\/script\.google\.com\/(?:a\/macros\/[\w.-]+|macros)\/s\/[\w-]+\/exec/);return m?m[0]:''}
+function metaCfg(){try{return JSON.parse(document.querySelector('meta[name="registro-sheets"]')?.content||'{}')||{}}catch(e){return {}}}
+function loadReg(){
+  let stored={};try{stored=JSON.parse(localStorage.getItem(REG))||{}}catch(e){}
+  const meta=metaCfg(),file=window.REGISTRO_CONFIG||{},pickCfg=[meta,file,stored].find(c=>normEndpoint(c.endpoint))||{};
+  regCfg={endpoint:normEndpoint(pickCfg.endpoint),clave:String(pickCfg.clave||''),curso:String(pickCfg.curso||'')};
+  regQueue=Array.isArray(stored.queue)?stored.queue.filter(e=>e&&e.id).slice(-500):[];
+  const q=new URLSearchParams(location.search),h=normEndpoint(q.get('hoja'));
+  if(h){regCfg={endpoint:h,clave:q.get('clave')||'',curso:q.get('curso')||''};persistReg()}
+}
+function persistReg(){try{localStorage.setItem(REG,JSON.stringify({endpoint:regCfg.endpoint,clave:regCfg.clave,curso:regCfg.curso,queue:regQueue.slice(-500)}))}catch(e){}}
+window.registroActivo=()=>!!regCfg.endpoint;
+function deviceLabel(){const ua=navigator.userAgent,mobile=/Mobi|Android|iPhone|iPad/i.test(ua),br=/Edg\//.test(ua)?'Edge':/OPR\//.test(ua)?'Opera':/Firefox\//.test(ua)?'Firefox':/Chrome\//.test(ua)?'Chrome':/Safari\//.test(ua)?'Safari':'Otro';return (mobile?'Móvil':'Escritorio')+' · '+br+' · '+innerWidth+'×'+innerHeight}
+let flushSoon=0;
+function track(type,data={}){
+  if(!regCfg.endpoint)return;
+  if(!isStudent()&&!data.force)return;
+  const inModule=state.view==='module',m=inModule?current():null,lv=isStudent()?levelInfo(totalXP()):{n:''};
+  const ev={id:uid(),fecha_cliente:new Date().toISOString(),sesion:SESSION,curso:regCfg.curso,estudiante:data.estudiante||state.name||'',clave_estudiante:data.clave_estudiante||state.profileKey||'',modo:state.mode||'',vista:state.view||'',escena:m?m.code:'',titulo_escena:m?m.shortTitle:'',fase:m?['Aprende','Experimenta','Comprueba'][state.phase]:'',tipo:type,accion:String(data.accion??''),valor:data.valor===undefined||data.valor===null?'':String(data.valor).slice(0,500),correcto:data.correcto===undefined?'':(data.correcto?'Sí':'No'),puntaje:data.puntaje??'',detalle:data.detalle?JSON.stringify(data.detalle).slice(0,1800):'',xp:isStudent()?totalXP():'',nivel:lv.n,escenas_completadas:isStudent()?completedCount():'',misiones:isStudent()?totalMissions():'',insignias:isStudent()?Object.keys(game().badges).length:'',dispositivo:deviceLabel(),version:VERSION};
+  const last=regQueue[regQueue.length-1];
+  if(data.coalesce&&last&&!last._sending&&last.tipo===ev.tipo&&last.escena===ev.escena&&last.accion===ev.accion&&Date.parse(ev.fecha_cliente)-Date.parse(last.fecha_cliente)<2500)regQueue[regQueue.length-1]={...ev,id:last.id};
+  else regQueue.push(ev);
+  if(regQueue.length>500)regQueue=regQueue.slice(-500);
+  persistReg();setStatus(regState.status==='ok'||regState.status==='off'?'pending':regState.status);
+  clearTimeout(flushSoon);flushSoon=setTimeout(()=>flush(),regQueue.length>=12?150:1500);
+}
+window.V6_track=track;
+function payload(batch){return JSON.stringify({app:'arquitecto-de-bits',version:VERSION,clave:regCfg.clave,curso:regCfg.curso,eventos:batch.map(({_sending,...e})=>e)})}
+async function flush(force=false){
+  if(!regCfg.endpoint||regState.inflight||!regQueue.length)return;
+  if(!force&&Date.now()<regState.retryAt)return;
+  if(navigator.onLine===false){setStatus('offline');return}
+  const batch=regQueue.slice(0,40);batch.forEach(e=>e._sending=true);regState.inflight=true;setStatus('sending');
+  const body=payload(batch);let ok=false,err='';
+  try{const res=await fetch(regCfg.endpoint,{method:'POST',body,redirect:'follow',cache:'no-store'});const txt=await res.text();let j=null;try{j=JSON.parse(txt)}catch(e){}if(j&&j.ok)ok=true;else err=(j&&j.error)||'Respuesta inesperada del servidor ('+res.status+')'}
+  catch(e){try{await fetch(regCfg.endpoint,{method:'POST',body,mode:'no-cors',cache:'no-store'});ok=true}catch(e2){err='Sin conexión con Google'}}
+  regState.inflight=false;batch.forEach(e=>delete e._sending);
+  if(ok){const ids=new Set(batch.map(e=>e.id));regQueue=regQueue.filter(e=>!ids.has(e.id));regState.backoff=0;regState.retryAt=0;regState.lastOk=Date.now();regState.lastError='';persistReg();setStatus(regQueue.length?'pending':'ok');if(regQueue.length)setTimeout(()=>flush(),400)}
+  else{regState.backoff=Math.min(60000,Math.max(3000,regState.backoff*2));regState.retryAt=Date.now()+regState.backoff;regState.lastError=err;setStatus(/clave/i.test(err)?'denied':navigator.onLine===false||err==='Sin conexión con Google'?'offline':'error')}
+}
+function beacon(){
+  if(!regCfg.endpoint||!navigator.sendBeacon)return;
+  if(isStudent())track('sesion_fin',{valor:Math.round((Date.now()-SESSION_START)/1000)+' s'});
+  clearTimeout(flushSoon);if(!regQueue.length)return;
+  const batch=regQueue.filter(e=>!e._sending).slice(0,40);if(!batch.length)return;
+  if(navigator.sendBeacon(regCfg.endpoint,new Blob([payload(batch)],{type:'text/plain;charset=UTF-8'}))){const ids=new Set(batch.map(e=>e.id));regQueue=regQueue.filter(e=>!ids.has(e.id));persistReg()}
+}
+addEventListener('pagehide',beacon);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush(true);else if(isStudent())track('regreso',{})});
+addEventListener('online',()=>{regState.retryAt=0;flush(true)});
+setInterval(()=>flush(),6000);
+function setStatus(st){
+  regState.status=regCfg.endpoint?st:'off';const c=$('v6-cloud');if(!c)return;
+  c.hidden=!regCfg.endpoint;if(!regCfg.endpoint)return;
+  const n=regQueue.length,shown=regState.status==='pending'&&!regState.lastError?'sending':regState.status,label={ok:regState.lastOk?'En vivo':'Registro activo',sending:'Sincronizando…',pending:'Sincronizando…',offline:'Sin red · '+n,error:'Revisar registro',denied:'Clave incorrecta',off:''}[regState.status]||'En vivo';
+  c.dataset.status=shown;c.textContent='☁ '+label;
+  c.title='Registro en Google Sheets'+(regCfg.curso?' · '+regCfg.curso:'')+' · '+(regState.lastOk?'último envío '+new Date(regState.lastOk).toLocaleTimeString('es-CO'):'sin envíos todavía')+(regState.lastError?' · '+regState.lastError:'')+(isTeacher()?' · toca para configurar':'');
+}
+function registrationNote(){return regCfg.endpoint?'☁ Registro del curso activo'+(regCfg.curso?' ('+regCfg.curso+')':'')+': al entrar, tu nombre y tus interacciones —misiones, respuestas, retos y preguntas a Bit— se envían en tiempo real a la hoja de Google de tu profesor. No se verifica tu identidad.':'Registro local con tu nombre. No se verifica tu identidad ni se envían datos a servidores.'}
+window.registrationNote=registrationNote;
+function updateNotes(){
+  const r=$('registration-note');if(r){r.textContent=registrationNote();r.classList.toggle('v6-live-note',!!regCfg.endpoint)}
+  const c=$('chat-note');if(c)c.textContent=regCfg.endpoint?'Respuestas de una base didáctica predeterminada; Bit no usa IA. Tu profesor activó el registro del curso: tus preguntas se guardan en su hoja de Google.':'Respuestas de una base didáctica predeterminada. No usa IA ni envía tus preguntas a servidores.';
+  setStatus(regState.status==='off'?(regQueue.length?'pending':'ok'):regState.status);
+}
+function studentLink(){if(!/^https?:/.test(location.protocol)||!regCfg.endpoint)return '';const u=new URL(location.href);u.search='';u.hash='';u.searchParams.set('hoja',regCfg.endpoint);if(regCfg.clave)u.searchParams.set('clave',regCfg.clave);if(regCfg.curso)u.searchParams.set('curso',regCfg.curso);return u.toString()}
+function openRegistro(){
+  if(!isTeacher()){toast('La conexión con Google Sheets se configura en el modo profesor.');return}
+  const link=studentLink();
+  modal(`<span class="mini-label">Modo profesor · Registro en vivo</span><h2 id="v6-reg-title">☁ Conectar con Google Sheets</h2><p>Cada misión, respuesta, reto, pregunta a Bit y cambio de escena de tus estudiantes se agrega a tu hoja en segundos. Sin conexión, los eventos esperan en el navegador y se envían al volver la red.</p><ol class="v6-steps"><li>Abre tu hoja «El Arquitecto de Bits · Registro en vivo» y entra a <b>Extensiones → Apps Script</b>.</li><li>Pega el archivo <b>Code.gs</b> del repositorio, guarda y ejecuta <b>configurarHoja</b>.</li><li><b>Implementar → Nueva implementación → Aplicación web</b>: ejecutar como «Yo» y acceso «Cualquier usuario». Copia la URL que termina en <code>/exec</code>.</li></ol><form class="v6-form" onsubmit="event.preventDefault();V6.saveRegistro()"><label>URL de la aplicación web<input id="v6-reg-url" value="${esc(regCfg.endpoint)}" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off" spellcheck="false"></label><label>Clave del curso <small>Opcional. Debe coincidir con la propiedad CLAVE del script.</small><input id="v6-reg-key" value="${esc(regCfg.clave)}" autocomplete="off"></label><label>Curso o grupo <small>Aparece en cada fila de la hoja.</small><input id="v6-reg-course" value="${esc(regCfg.curso)}" placeholder="Arquitectura 2026-2 · Grupo A" autocomplete="off"></label><div class="v6-modal-actions" style="justify-content:flex-start;margin-top:4px"><button type="button" class="btn secondary" onclick="V6.testRegistro()">Probar conexión</button><button type="submit" class="btn">Guardar y activar</button>${regCfg.endpoint?'<button type="button" class="btn secondary" onclick="V6.disableRegistro()">Desactivar</button>':''}</div></form><div class="v6-result" id="v6-reg-result" role="status">${regCfg.endpoint?'Estado: '+esc(($('v6-cloud')?.textContent||'').replace('☁ ',''))+(regQueue.length?' · '+regQueue.length+' eventos en cola':''):'Sin configurar.'}</div>${link?`<label class="v6-form" style="margin-top:14px">Enlace para tus estudiantes<input readonly value="${esc(link)}" onclick="this.select()"></label>`:''}<p class="fine" style="margin-top:14px">Para repartir el archivo con la conexión incluida, guarda y después usa <b>↓ Descargar aplicación</b>. Informa a tus estudiantes que sus interacciones quedarán registradas.</p><div class="v6-modal-actions"><button type="button" class="btn secondary" onclick="V6.closeModal()">Cerrar</button></div>`,{left:true});
+  $('v6-modal')?.setAttribute('aria-labelledby','v6-reg-title');
+}
+function formCfg(){return {endpoint:normEndpoint($('v6-reg-url')?.value),clave:String($('v6-reg-key')?.value||'').trim(),curso:String($('v6-reg-course')?.value||'').trim().slice(0,80)}}
+function result(text,ok){const r=$('v6-reg-result');if(r){r.textContent=text;r.className='v6-result '+(ok===true?'ok':ok===false?'ko':'')}}
+async function testRegistro(){
+  const c=formCfg();if(!c.endpoint){result('La URL debe ser de script.google.com y terminar en /exec.',false);return}
+  result('Probando la conexión…');
+  try{const u=new URL(c.endpoint);u.searchParams.set('accion','ping');if(c.clave)u.searchParams.set('clave',c.clave);const res=await fetch(u,{cache:'no-store'});const j=await res.json();if(!j.ok)throw new Error(j.error||'La hoja rechazó la prueba');
+    const body=JSON.stringify({app:'arquitecto-de-bits',version:VERSION,clave:c.clave,curso:c.curso,eventos:[{id:uid(),fecha_cliente:new Date().toISOString(),sesion:SESSION,curso:c.curso,estudiante:'Prueba del profesor',clave_estudiante:'prueba-del-profesor',modo:'teacher',vista:state.view,escena:'',titulo_escena:'',fase:'',tipo:'prueba',accion:'probar conexión',valor:'',correcto:'',puntaje:'',detalle:'',xp:'',nivel:'',escenas_completadas:'',misiones:'',insignias:'',dispositivo:deviceLabel(),version:VERSION}]});
+    const post=await fetch(c.endpoint,{method:'POST',body,cache:'no-store'});const pj=await post.json();if(!pj.ok)throw new Error(pj.error||'No se pudo escribir la fila de prueba');
+    result('✓ Conexión correcta con «'+(j.hoja||'tu hoja')+'». Se escribió una fila de prueba en Eventos.',true)}
+  catch(e){result('✕ No se pudo comprobar: '+(e.message||e)+'. Revisa que la implementación tenga acceso «Cualquier usuario» y que la URL termine en /exec.',false)}
+}
+function saveRegistro(){
+  const c=formCfg();if(!c.endpoint){result('La URL debe ser de script.google.com y terminar en /exec.',false);return}
+  regCfg=c;persistReg();const meta=document.querySelector('meta[name="registro-sheets"]');if(meta)meta.content=JSON.stringify(c);
+  updateNotes();result('✓ Registro activado. Desde ahora las interacciones de tus estudiantes en este archivo se enviarán a la hoja.',true);toast('Registro en vivo activado.');
+  if(state.view==='home')goHome();
+}
+function disableRegistro(){regCfg={endpoint:'',clave:'',curso:''};regQueue=[];persistReg();const meta=document.querySelector('meta[name="registro-sheets"]');if(meta)meta.content='';updateNotes();closeModal();toast('Registro en vivo desactivado en este navegador.');if(state.view==='home')goHome()}
+
+/* ------------------------------------------------------------------ API pública e inicio */
+window.V6={version:VERSION,closeModal,openRegistro,testRegistro,saveRegistro,disableRegistro,flush:()=>flush(true),
+  toggleSound(){prefs.sound=!prefs.sound;savePrefs();applyPrefs();if(prefs.sound)Sound.play('good')},
+  toggleType(){prefs.classic=!prefs.classic;savePrefs();applyPrefs();toast(prefs.classic?'Tipografía clásica activada.':'Tipografía moderna activada.')},
+  exportSummary(){if(!isStudent())return null;const g=game(),lv=levelInfo(totalXP());return {xp:totalXP(),nivel:lv.n,titulo_nivel:lv.name,insignias:BADGES.filter(b=>g.badges[b.id]).map(b=>({id:b.id,titulo:b.title,fecha:g.badges[b.id]})),mejor_racha:g.bestStreak,retos:g.arcade}},
+  levelInfo,badges:()=>BADGES.map(({test,...b})=>b),registro:()=>({...regCfg,cola:regQueue.length,estado:regState.status}),arena:()=>arena&&{juego:arena.a.id,modo:arena.mode,puntaje:arena.score,aciertos:arena.correct,intentos:arena.total,restante:Math.round(arena.left),pregunta:arena.q&&{tema:arena.q.topic,opciones:arena.q.options,respuesta:arena.q.answer}}};
+document.addEventListener('click',e=>{if(e.target.closest('#v6-cloud')&&isTeacher())openRegistro()});
+loadReg();applyPrefs();updateNotes();paintLevel();
+if(state.view==='access'&&typeof showModePicker==='function')showModePicker(state.showStudent);
+track('sesion_inicio',{});
+})();
+
 </script>
 </body></html>
