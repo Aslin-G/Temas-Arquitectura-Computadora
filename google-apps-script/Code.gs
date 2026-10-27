@@ -11,12 +11,20 @@
  *
  * El script funciona como proyecto independiente (usa ID_HOJA) o dentro de la hoja (Extensiones → Apps Script).
  * Si cambias este código: Implementar → Gestionar implementaciones → Editar → Nueva versión (la URL se conserva).
+ *
+ * IA de Bit: el script también responde las preguntas del chat con DeepSeek cuando el navegador no puede llamar
+ * a DeepSeek directamente. Usa la clave que envía la aplicación o la guardada con el menú «Activar la IA de Bit».
  */
 
 const ID_HOJA = '1LuBhb1o5jS_nSA9nxHO_x_9FScc9YebUL4bv9bzocts';
 const APP_ID = 'arquitecto-de-bits';
 const MAX_EVENTOS_POR_ENVIO = 100;
 const MINUTOS_EN_LINEA = 5;
+
+const URL_IA = 'https://api.deepseek.com/chat/completions';
+const MODELO_IA = 'deepseek-chat';
+const LIMITE_IA_MINUTO = 12;   // preguntas por sesión de navegador y minuto
+const LIMITE_IA_DIA = 3000;    // preguntas por día para todo el curso
 
 const ESCENAS = [
   ['U1.1', 'Bits y números'], ['U1.2', 'Componentes digitales'], ['U1.3', 'Moore y FPGA'],
@@ -32,7 +40,7 @@ const TIPOS = {
   simulacion_accion: 'Acción en simulación', mision_lograda: 'Misión lograda', respuesta: 'Respuesta',
   cuestionario_completado: 'Cuestionario completado', cuestionario_reintento: 'Reintento de cuestionario',
   reinicio_simulacion: 'Reinicio de simulación', reinicio_progreso: 'Reinicio de progreso',
-  insignia: 'Insignia', nivel: 'Subida de nivel', chat_pregunta: 'Pregunta a Bit',
+  insignia: 'Insignia', nivel: 'Subida de nivel', chat_pregunta: 'Pregunta a Bit', chat_respuesta: 'Respuesta de Bit',
   regreso: 'Regreso a la pestaña', sesion_fin: 'Fin de sesión', prueba: 'Prueba de conexión'
 };
 
@@ -77,6 +85,8 @@ function doPost(e) {
     const datos = JSON.parse((e && e.postData && e.postData.contents) || '{}');
     if (datos.app !== APP_ID) return respuesta_({ok: false, error: 'Aplicación desconocida'});
     if (!claveValida_(datos.clave)) return respuesta_({ok: false, error: 'Clave del curso incorrecta'});
+    // El chat no toma el candado del registro: varias preguntas se responden a la vez.
+    if (datos.accion === 'bit') return respuesta_(responderBit_(datos));
     const eventos = (Array.isArray(datos.eventos) ? datos.eventos : [])
       .filter(ev => ev && typeof ev === 'object' && ev.id)
       .slice(0, MAX_EVENTOS_POR_ENVIO);
@@ -108,6 +118,7 @@ function doPost(e) {
 function doGet(e) {
   const p = (e && e.parameter) || {};
   if (!claveValida_(p.clave)) return respuesta_({ok: false, error: 'Clave del curso incorrecta'});
+  if (p.accion === 'ia') return respuesta_({ok: true, bit: true, ia: !!claveIA_({})});
   const ss = libro_();
   const hoja = ss.getSheetByName(HOJAS.eventos.nombre);
   return respuesta_({
@@ -134,6 +145,52 @@ function respuesta_(obj) {
 function claveValida_(clave) {
   const esperada = PropertiesService.getScriptProperties().getProperty('CLAVE');
   return !esperada || String(clave || '') === esperada;
+}
+
+/* ------------------------------------------------------------------ Bit con IA (DeepSeek) */
+
+function claveIA_(datos) {
+  const enviada = String((datos && datos.clave_ia) || '').trim();
+  if (/^sk-[\w-]{16,}$/.test(enviada)) return enviada;
+  return String(PropertiesService.getScriptProperties().getProperty('DEEPSEEK_KEY') || '').trim();
+}
+
+function responderBit_(datos) {
+  const clave = claveIA_(datos);
+  if (!clave) return {ok: false, error: 'La IA de Bit no está activada en el script'};
+  const mensajes = (Array.isArray(datos.mensajes) ? datos.mensajes : [])
+    .filter(m => m && ['system', 'user', 'assistant'].indexOf(m.role) >= 0 && typeof m.content === 'string')
+    .slice(-12)
+    .map(m => ({role: m.role, content: m.content.slice(0, 8000)}));
+  if (!mensajes.length || mensajes[mensajes.length - 1].role !== 'user') return {ok: false, error: 'Falta la pregunta'};
+
+  // Límites aproximados para que nadie agote el saldo de la clave con la URL pública.
+  const cache = CacheService.getScriptCache();
+  const minuto = 'ia:' + String(datos.sesion || 'anonimo').slice(0, 60) + ':' + Math.floor(Date.now() / 60000);
+  const dia = 'ia:dia:' + Utilities.formatDate(new Date(), 'America/Bogota', 'yyyyMMdd');
+  const usadosMinuto = Number(cache.get(minuto)) || 0;
+  const usadosDia = Number(cache.get(dia)) || 0;
+  if (usadosMinuto >= LIMITE_IA_MINUTO) return {ok: false, error: 'Demasiadas preguntas seguidas: espera un minuto'};
+  if (usadosDia >= LIMITE_IA_DIA) return {ok: false, error: 'Se alcanzó el límite diario de preguntas a la IA'};
+  cache.put(minuto, String(usadosMinuto + 1), 120);
+  cache.put(dia, String(usadosDia + 1), 21600);
+  return llamarDeepSeek_(clave, mensajes);
+}
+
+function llamarDeepSeek_(clave, mensajes) {
+  const res = UrlFetchApp.fetch(URL_IA, {
+    method: 'post',
+    contentType: 'application/json',
+    headers: {Authorization: 'Bearer ' + clave},
+    payload: JSON.stringify({model: MODELO_IA, messages: mensajes, temperature: 0.5, max_tokens: 700, stream: false}),
+    muteHttpExceptions: true
+  });
+  const codigo = res.getResponseCode();
+  let j = null;
+  try { j = JSON.parse(res.getContentText()); } catch (e) {}
+  const texto = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+  if (codigo === 200 && texto) return {ok: true, respuesta: String(texto).trim(), modelo: j.model || MODELO_IA};
+  return {ok: false, error: 'DeepSeek respondió ' + codigo + (j && j.error && j.error.message ? ': ' + j.error.message : '')};
 }
 
 /* ------------------------------------------------------------------ registro */
@@ -300,6 +357,7 @@ function onOpen() {
     .addItem('Definir clave del curso', 'definirClave')
     .addItem('Insertar un evento de prueba', 'insertarPrueba')
     .addItem('Borrar las filas de prueba', 'borrarPruebas')
+    .addItem('Activar y probar la IA de Bit (DeepSeek)', 'activarIA')
     .addSeparator()
     .addItem('Cómo publicar la aplicación web', 'mostrarAyuda')
     .addToUi();
@@ -415,6 +473,7 @@ function construirInstrucciones_(ss) {
     ['', 'Esta hoja recibe en tiempo real las interacciones de los estudiantes con la aplicación: ingreso, navegación, simulaciones, misiones, respuestas y preguntas a Bit.'],
     ['✅', 'La aplicación ya trae la dirección de este registro: los estudiantes solo abren la aplicación y escriben su nombre. El profesor no configura nada.'],
     ['ℹ️', 'Panel: resumen, avance por escena, top 10 y últimos eventos · Estudiantes: una fila por estudiante con su estado en línea · Eventos: registro completo · Respuestas, Misiones y Cuestionarios: detalle por tipo.'],
+    ['🤖', 'Bit responde con IA (DeepSeek). Las preguntas y las respuestas de Bit aparecen en Eventos como «Pregunta a Bit» y «Respuesta de Bit».'],
     ['🔁', 'Si se modifica el script: Implementar → Gestionar implementaciones → Editar → Nueva versión. La URL /exec se conserva.'],
     ['⚖️', 'Informa a tus estudiantes que sus interacciones se registran. La aplicación lo indica en la pantalla de ingreso y en el chat.']
   ];
@@ -431,6 +490,29 @@ function definirClave() {
   const props = PropertiesService.getScriptProperties();
   if (clave) props.setProperty('CLAVE', clave); else props.deleteProperty('CLAVE');
   ui.alert(clave ? 'Clave guardada. Debe coincidir con REGISTRO_CONFIG.clave en index.html.' : 'Clave eliminada: se aceptan envíos sin clave.');
+}
+
+/** Guarda la clave de DeepSeek en las propiedades del script (no en la hoja) y comprueba que la IA responde. */
+function activarIA() {
+  const ui = SpreadsheetApp.getUi();
+  const props = PropertiesService.getScriptProperties();
+  const actual = props.getProperty('DEEPSEEK_KEY');
+  const r = ui.prompt('IA de Bit (DeepSeek)',
+    (actual ? 'Ya hay una clave guardada (termina en …' + actual.slice(-4) + '). Pega otra para cambiarla o deja el campo vacío para conservarla.'
+      : 'Pega tu clave de API de DeepSeek (empieza por sk-).') + '\nSe guarda en las propiedades del script, no en la hoja.',
+    ui.ButtonSet.OK_CANCEL);
+  if (r.getSelectedButton() !== ui.Button.OK) return;
+  const nueva = r.getResponseText().trim();
+  if (nueva) {
+    if (!/^sk-[\w-]{16,}$/.test(nueva)) { ui.alert('Esa clave no parece de DeepSeek: debe empezar por sk-.'); return; }
+    props.setProperty('DEEPSEEK_KEY', nueva);
+  }
+  const clave = props.getProperty('DEEPSEEK_KEY');
+  if (!clave) { ui.alert('No hay ninguna clave guardada.'); return; }
+  const prueba = llamarDeepSeek_(clave, [{role: 'user', content: 'Responde solo con esta frase: Bit está listo para la clase.'}]);
+  ui.alert(prueba.ok
+    ? '✅ DeepSeek respondió: «' + prueba.respuesta + '»\n\nSi acabas de pegar este código, publica una versión nueva: Implementar → Gestionar implementaciones → Editar → Versión: Nueva versión → Implementar.'
+    : '⚠️ ' + prueba.error);
 }
 
 function insertarPrueba() {
@@ -458,6 +540,6 @@ function borrarPruebas() {
 
 function mostrarAyuda() {
   SpreadsheetApp.getUi().alert('Publicar la aplicación web',
-    '1. Implementar → Nueva implementación.\n2. Tipo: Aplicación web.\n3. Ejecutar como: Yo.\n4. Quién tiene acceso: Cualquier usuario.\n5. La URL que termina en /exec debe coincidir con REGISTRO_CONFIG.endpoint en index.html.\n\nSi cambias el código, usa Gestionar implementaciones → Editar → Nueva versión.',
+    '1. Implementar → Nueva implementación.\n2. Tipo: Aplicación web.\n3. Ejecutar como: Yo.\n4. Quién tiene acceso: Cualquier usuario.\n5. La URL que termina en /exec debe coincidir con REGISTRO_CONFIG.endpoint en index.html.\n\nSi cambias el código, usa Gestionar implementaciones → Editar → Nueva versión.\n\nIA de Bit: menú «Activar y probar la IA de Bit (DeepSeek)».',
     SpreadsheetApp.getUi().ButtonSet.OK);
 }

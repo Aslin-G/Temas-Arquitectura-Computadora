@@ -25,6 +25,7 @@ Para publicarla en internet: en GitHub, *Settings → Pages → Deploy from a br
 | Profesor | Acceso con contraseña y panel con el estado del registro y un botón para abrir la hoja. |
 | Seguimiento | Registro **en tiempo real en Google Sheets** de cada interacción del estudiante, ya integrado en la aplicación (ver abajo). |
 | Bitácora | Muestra nivel y colección de insignias; la descarga JSON incluye ese resumen. |
+| Bit con IA | El chat responde con **DeepSeek**, con el contexto de la escena, las misiones y el simulador; da pistas en lugar de soluciones durante la evaluación. Sin conexión vuelve a su base didáctica. |
 
 ## Correcciones de contenido
 
@@ -70,7 +71,27 @@ Opcional: en la hoja, menú **🎓 Arquitecto de Bits → Definir clave del curs
 - Solo se registran las sesiones de estudiantes.
 - El indicador **☁** de la barra superior muestra el estado: *En vivo*, *Sincronizando*, *Sin red* o *Revisar registro*.
 
-**Privacidad.** Se registran el nombre que escribe el estudiante y sus interacciones con la aplicación. Infórmalo a tus estudiantes; la aplicación lo avisa en la pantalla de ingreso, en el chat de Bit y con el indicador ☁.
+**Privacidad.** Se registran el nombre que escribe el estudiante y sus interacciones con la aplicación, incluidas las preguntas a Bit y sus respuestas. Las preguntas del chat se envían además a DeepSeek, sin el nombre del estudiante. Infórmalo a tus estudiantes; la aplicación lo avisa en la pantalla de ingreso, en el chat de Bit y con el indicador ☁.
+
+## Bit con inteligencia artificial (DeepSeek)
+
+Bit envía a DeepSeek (modelo `deepseek-chat`) la pregunta, las últimas cuatro preguntas con sus respuestas y el contexto de la escena: objetivo, conceptos, misiones, estado del simulador y, en *Comprueba*, el enunciado de la pregunta en pantalla. El nombre del estudiante no se envía. Las respuestas aparecen palabra por palabra y admiten **negritas**, listas y `código`.
+
+Bit obtiene la respuesta por el primer camino disponible:
+
+1. **Desde el navegador**, con la clave escrita en `window.BIT_IA.clave` (bloque `BIT_IA`, al inicio del último `<script>` de `index.html`).
+2. **A través del script de Google** (`Code.gs`), si el navegador no llega a DeepSeek o la página no trae clave. El script usa la clave que envía la página o la guardada con el menú **🎓 Arquitecto de Bits → Activar y probar la IA de Bit (DeepSeek)**, y limita el uso a 12 preguntas por minuto y navegador y a 3 000 por día.
+3. **Con la base didáctica** de siempre, si no hay conexión o fallan los dos caminos anteriores. Bit lo avisa en el chat.
+
+> **La clave no está en este repositorio.** El repositorio es público y una clave publicada puede ser usada por cualquiera; además, DeepSeek desactiva las claves que encuentra filtradas. El `index.html` de aquí trae `clave: ''`. La versión con la clave se entrega aparte, para compartirla solo con personas de confianza.
+
+Para que también funcione la versión publicada sin clave (por ejemplo, la de GitHub Pages), activa el segundo camino una sola vez:
+
+1. En la hoja, **Extensiones → Apps Script**: reemplaza `Code.gs` por el de este repositorio. Si ves `appsscript.json`, reemplázalo también: añade el permiso para conectarse a servicios externos.
+2. Guarda, recarga la hoja y usa el menú **🎓 Arquitecto de Bits → Activar y probar la IA de Bit (DeepSeek)**. Autoriza el permiso nuevo y pega la clave: se guarda en las propiedades del script, no en la hoja.
+3. **Implementar → Gestionar implementaciones → Editar → Versión: Nueva versión → Implementar.** La URL `/exec` no cambia.
+
+En la hoja, cada conversación aparece en **Eventos** como «Pregunta a Bit» y «Respuesta de Bit»; la columna *Acción* indica si respondió DeepSeek o la base didáctica.
 
 ## Estructura del repositorio
 

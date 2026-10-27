@@ -416,6 +416,23 @@ html[data-mode=teacher] .v6-cloud{cursor:pointer}
 a.btn{text-decoration:none}
 @media(min-width:761px){.footer{padding-right:270px}}
 .v6-theme-icon{width:17px;height:17px;display:block}
+/* Bit con IA: indicador de escritura, texto en flujo y formato ligero */
+.message.v6-typing{align-self:start;padding:14px 18px}
+.v6-dots{display:inline-flex;gap:6px;align-items:center;height:12px}
+.v6-dots i{width:8px;height:8px;border-radius:50%;background:var(--purple);opacity:.35;animation:v6-dot 1.1s ease-in-out infinite}
+.v6-dots i:nth-child(2){background:var(--blue);animation-delay:.15s}
+.v6-dots i:nth-child(3){background:var(--pink);animation-delay:.3s}
+@keyframes v6-dot{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-5px);opacity:1}}
+.message.v6-streaming::after{content:'▍';color:var(--purple);margin-left:2px;animation:v6-caret 1s steps(2) infinite}
+@keyframes v6-caret{50%{opacity:0}}
+.message code{background:var(--purple-soft);color:var(--purple);padding:1px 6px;border-radius:6px;font-weight:700}
+.message b{color:var(--ink)}
+.chat-panel[data-ia="ia"] .chat-head small{color:var(--purple);font-weight:700}
+.chat-panel.v6-busy .suggestions button{opacity:.5;pointer-events:none}
+.chat-form button:disabled{opacity:.55;cursor:progress}
+@media (prefers-reduced-motion:reduce){.v6-dots i,.message.v6-streaming::after{animation:none;opacity:1}}
+.chat-panel .suggestions{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:10px}
+.chat-panel .suggestions button{flex:none;white-space:nowrap}
 
 </style>
 </head>
@@ -428,7 +445,7 @@ a.btn{text-decoration:none}
 </div></header>
 <main id="main" tabindex="-1"></main>
 <footer class="footer"><div>Adaptación didáctica de <b>El Detective de Datos</b> · Diseño de referencia: <b>Aslin Gonzalo Botello Plata</b>.<br>El Arquitecto de Bits · Arquitectura de Computadoras · Obra derivada.</div><span>Sexta edición · 17 laboratorios · 85 preguntas · 16 insignias · Hecho para aprender jugando</span></footer>
-<button class="chat-launch" id="chat-launch" onclick="toggleChat(true)" aria-label="Abrir chat con Bit, tu guía local" aria-expanded="false" aria-controls="chat-panel"><span class="pet" data-pet></span><span><b>¿Lo vemos juntos?</b><small>Bit · Tu guía de laboratorio</small></span></button>
+<button class="chat-launch" id="chat-launch" onclick="toggleChat(true)" aria-label="Abrir chat con Bit, tu guía de laboratorio" aria-expanded="false" aria-controls="chat-panel"><span class="pet" data-pet></span><span><b>¿Lo vemos juntos?</b><small>Bit · Tu guía de laboratorio</small></span></button>
 <aside class="chat-panel" id="chat-panel" aria-label="Conversación con Bit" hidden><header class="chat-head"><span class="pet" data-pet></span><div><b>Bit</b><small>● Guía local · Sin conexión</small></div><button onclick="toggleChat(false)" aria-label="Cerrar conversación">×</button></header><div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div><div class="suggestions" id="suggestions"></div><form class="chat-form" onsubmit="event.preventDefault();sendChat()"><input id="chat-input" aria-label="Escribe una pregunta para Bit" placeholder="¿Qué es la memoria caché?" maxlength="300" autocomplete="off"><button aria-label="Enviar pregunta" type="submit">↑</button></form><p class="chat-note" id="chat-note">Respuestas de una base didáctica predeterminada. No usa IA ni envía tus preguntas a servidores.</p></aside>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script type="application/json" id="module-data">[
@@ -3852,7 +3869,7 @@ function lockIcon(){return '<svg viewBox="0 0 24 24" width="14" height="14" aria
 function sceneIcon(id){const number=modules.findIndex(m=>m.id===id),group=unitAt(Math.max(number,0));let inner='';if(group===0)inner='<rect x="9" y="18" width="12" height="28" rx="4"/><rect x="26" y="18" width="12" height="28" rx="4"/><rect x="43" y="18" width="12" height="28" rx="4"/><path d="M15 25v14m17-14v14m17-14v14"/>';else if(group===1||group===6)inner='<rect x="17" y="17" width="30" height="30" rx="7"/><rect x="25" y="25" width="14" height="14" rx="2"/><path d="M23 8v9m9-9v9m9-9v9M23 47v9m9-9v9m9-9v9M8 23h9m-9 9h9m-9 9h9m30-18h9m-9 9h9m-9 9h9"/>';else if(group===2)inner='<circle cx="13" cy="32" r="8"/><circle cx="50" cy="14" r="8"/><circle cx="50" cy="50" r="8"/><path d="m20 28 22-11m-22 19 22 11m-13-15h15m-3-4 4 4-4 4"/>';else if(group===3)inner='<path d="m32 8 25 13-25 13L7 21zM7 31l25 13 25-13M7 41l25 13 25-13"/>';else if(group===4)inner='<path d="M10 51h46M15 44V31h8v13m6 0V22h8v22m6 0V12h8v32M11 22l17-10 9 4 15-9"/>';else inner='<path d="M32 55V30m0 6c-17 0-21-13-21-13 17-2 21 8 21 8m0 13c17 0 21-14 21-14-17-1-21 9-21 9"/><path d="M18 16q14-11 28 0M24 21q8-6 16 0"/><circle cx="32" cy="25" r="2"/>';return `<svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`}
 function showModePicker(showStudent=false){save();if(isTeacher())teacherWorkspace=state.simStates;state.mode=null;state.view='access';state.showStudent=showStudent;mainHTML(`<section class="access-view focus-enter"><div class="access-story"><span class="eyebrow"><i class="status-dot"></i> Arquitectura de Computadoras · Laboratorio vivo</span><h1>Aprender por dentro.<br><em>Descubrir haciendo.</em></h1><p>Una ruta de 17 escenas para construir, conectar y comprender una computadora. Cada decisión deja una evidencia de aprendizaje.</p><div class="access-art">${heroDiagram()}<span class="access-pet pet" data-pet></span><span class="art-label">CONEXIONES QUE SE CONVIERTEN EN CONOCIMIENTO</span></div><div class="access-features"><span>◉ 51 misiones prácticas</span><span>✦ 85 preguntas</span><span>↗ Funciona sin conexión</span></div></div><div class="access-card panel"><span class="mini-label">Elige tu experiencia</span><h2>Tu laboratorio,<br>tu manera de explorarlo.</h2><button class="role-choice ${showStudent?'selected':''}" onclick="showModePicker(true)"><span class="role-symbol">✧</span><span><b>Soy estudiante</b><small>Misiones, cinco preguntas en orden y avance paso a paso.</small></span><span>→</span></button>${showStudent?`<form class="registration" id="registration" onsubmit="event.preventDefault();registerStudent()" novalidate><label for="full-name">Nombre completo del estudiante</label><input id="full-name" name="fullName" autocomplete="name" maxlength="80" placeholder="Nombres y apellidos" value="${esc(lastStudent)}" aria-describedby="name-help name-error"><p id="name-help">Usa el mismo nombre para continuar tu progreso en este navegador.</p><p class="form-error" id="name-error" role="alert" hidden></p><button class="btn" type="submit">Entrar a mi recorrido <span>→</span></button><p class="registration-note" id="registration-note">${typeof registrationNote==='function'?registrationNote():'Registro local con tu nombre. No se verifica tu identidad ni se envían datos a servidores.'}</p></form>`:''}<div class="role-divider"><span>o presenta en el aula</span></div><button class="role-choice teacher-choice" onclick="enterTeacher()"><span class="role-symbol">◈</span><span><b>Soy profesor</b><small>Acceso libre a todas las escenas, sin requisitos ni evaluación obligatoria.</small><span class="v6-lock-tag">🔒 Requiere contraseña</span></span><span>→</span></button><div class="mode-tip"><span class="pet" data-pet></span><p>La curiosidad abre el laboratorio. La experimentación conecta las ideas.</p></div></div></section>`);focusMain();if(showStudent)document.getElementById('full-name').focus();chatSuggestions()}
 function prepareStudentModels(profile){if(profile.modelRevision!==4){for(const m of modules){const r=state.records[m.id];if(!r||!r.passed){delete state.simStates[m.id];if(r){r.history=[];r.witnesses={}}}}profile.modelRevision=4}for(const m of modules){const data=state.simStates[m.id];if(!data||typeof data!=='object'||Array.isArray(data))continue;for(const [key,rule]of Object.entries(window.SIM_INPUT_SCHEMA?.[m.id]||{})){if(!Object.hasOwn(data,key))continue;const normalized=normalizeSimInput(rule,data[key]);data[key]=normalized===undefined?SIMS[m.id].initial()[key]:normalized}}}
-function registerStudent(){let e=document.getElementById('full-name');let name=e.value.trim().replace(/\s+/g,' ');if(!validName(name)){let error=document.getElementById('name-error');error.hidden=false;error.textContent='Escribe al menos un nombre y un apellido completos, usando letras.';e.setAttribute('aria-invalid','true');e.focus();return false}save();lastStudent=name;let key=name.toLocaleLowerCase('es');let p=profiles[key];if(!p||typeof p!=='object')p={name,records:{},simStates:{},current:0};profiles[key]=p;state.mode='student';state.profileKey=key;state.name=name;state.records=p.records&&typeof p.records==='object'?p.records:{};state.simStates=p.simStates&&typeof p.simStates==='object'?p.simStates:{};state.game=p.game&&typeof p.game==='object'&&!Array.isArray(p.game)?p.game:{};prepareStudentModels(p);state.current=bounded(p.current,0,16);if(!canEnterModule(state.current))state.current=Math.max(0,modules.findIndex(m=>!completed(m)));state.phase=0;clearChat();save();goHome();toast('¡Bienvenido, '+name.split(' ')[0]+'! Tu recorrido está listo.');return true}
+function registerStudent(){let e=document.getElementById('full-name');let name=e.value.trim().replace(/\s+/g,' ');if(!validName(name)){let error=document.getElementById('name-error');error.hidden=false;error.textContent='Escribe al menos un nombre y un apellido completos, usando letras.';e.setAttribute('aria-invalid','true');e.focus();return false}save();lastStudent=name;let key=name.toLocaleLowerCase('es');let p=profiles[key];if(!p||typeof p!=='object')p={name,records:{},simStates:{},current:0};profiles[key]=p;state.mode='student';state.profileKey=key;state.name=name;state.records=p.records&&typeof p.records==='object'?p.records:{};state.simStates=p.simStates&&typeof p.simStates==='object'?p.simStates:{};state.game=p.game&&typeof p.game==='object'&&!Array.isArray(p.game)?p.game:{};prepareStudentModels(p);state.current=bounded(p.current,0,16);if(!canEnterModule(state.current))state.current=Math.max(0,modules.findIndex(m=>!completed(m)));state.phase=0;clearChat();save();goHome();toast('¡Hola, '+name.split(' ')[0]+'! Tu recorrido está listo.');return true}
 function enterTeacher(){save();state.mode='teacher';state.name='';state.profileKey=null;state.records={};state.game={};state.simStates=teacherWorkspace;state.current=0;state.phase=1;clearChat();applyMode();goHome()}
 function clearChat(){document.getElementById('chat-log').innerHTML='';document.getElementById('chat-panel').hidden=true;document.getElementById('chat-launch').hidden=false;document.getElementById('chat-launch').setAttribute('aria-expanded','false');chatOpen=false}
 function firstPending(){const n=modules.findIndex(m=>!completed(m));return n<0?0:n}
@@ -3950,7 +3967,7 @@ const glossary=[
 function numericReply(raw){const q=norm(raw),negative=/-\s*\d/.test(raw);if(!/(?:en|a) (?:binario|hexadecimal|decimal)/.test(q))return null;if(negative)return 'Para representar negativos en binario necesitamos fijar el ancho y el convenio, por ejemplo complemento a dos de 8 bits. Prueba primero una conversión sin signo: “10 en binario”.';let match=q.match(/\b([0-9a-f]{1,6})\b/g)?.filter(x=>/\d/.test(x));if(!match||match.length!==1)return null;let v=match[0],n;if(/(?:en|a) binario/.test(q)||/(?:en|a) hexadecimal/.test(q)){if(!/^\d+$/.test(v))return null;n=Number(v);if(n>65535)return 'Puedo convertir enteros sin signo de 0 a 65535. Para otros formatos necesito una regla de representación concreta.';return `Tomando ${n} como número decimal: ${n}₁₀ = ${n.toString(2).padStart(n<=255?8:16,'0')}₂ = 0x${n.toString(16).toUpperCase()}. En binario cada posición pesa una potencia de 2.`}if(/(?:en|a) decimal/.test(q)&&/binario|binaria/.test(q)&&/^[01]+$/.test(v))return `${v}₂ = ${parseInt(v,2)}₁₀. Se suman los pesos de las posiciones que tienen un 1, de derecha a izquierda: 1, 2, 4, 8, 16…`;return null}
 
 const KB=knowledge();
-function answerLocal(query){let q=norm(query),m=current();if(!q)return 'Escribe una pregunta o elige una sugerencia.';if(/^(hola|buenas|buenos dias|hey|gracias|muchas gracias)$/.test(q))return '¡Hola! Soy Bit. Te acompaño a explorar cómo funciona una computadora. Puedo explicar conceptos, darte una pista o repasar una pregunta. Mis respuestas están preparadas dentro de este archivo.';if(/^(ayuda|como empiezo|que hago|instrucciones|como funciona la app|como usar)$/.test(q))return isTeacher()?'En modo profesor todas las escenas están abiertas. Elige Simulación, manipula los controles y usa Ampliar para presentar. Las preguntas son opcionales y ninguna demostración cambia el progreso de los estudiantes.':'Sigue tres pasos: Aprende, Experimenta y Comprueba. Consigue las tres misiones de la escena; después responde cinco preguntas una por una. Con al menos cuatro aciertos se abre la siguiente escena. Tus misiones y tu mejor resultado se conservan al repetir.';if(/^(pista|dame una pista|reto|ayudame con el reto|mi siguiente mision)$/.test(q)){const task=(MISSIONS[m.id]||[]).find(t=>!record(m).missions[t.id]);return isTeacher()?'Puedes proponer al grupo: '+(MISSIONS[m.id]?.[0]?.help||m.hint):task?'Tu siguiente misión: '+task.title+'\n\n'+task.help:'Ya lograste las tres misiones. Abre Comprueba y responde las cinco preguntas en orden.';}if(/^(explicame este tema|resumen|tema actual|que estoy aprendiendo)$/.test(q))return m.objective+'\n\n'+m.analogy;if(/\bprogreso\b|\bbitacora\b|guardar (?:mi |el )?avance/.test(q))return 'Tu avance se guarda en este navegador cuando el guardado local está disponible. En Mi bitácora puedes consultar resultados, insignias y retos, descargar un resumen o imprimirlo. El HTML funciona sin conexión; copiarlo a otro dispositivo no copia el progreso de este navegador.'+(typeof registroActivo==='function'&&registroActivo()?' Además, tu profesor activó el registro del curso: tus interacciones se envían a su hoja de Google.':'');if(/\bapi\b|inteligencia artificial|eres ia/.test(q))return 'Soy un tutor local con respuestas predeterminadas. No estoy conectado a inteligencia artificial ni hago llamadas a una API. El archivo incluye un punto de extensión para conectar un proveedor más adelante.';
+function answerLocal(query){let q=norm(query),m=current();if(!q)return 'Escribe una pregunta o elige una sugerencia.';if(/^(hola|buenas|buenos dias|hey|gracias|muchas gracias)$/.test(q))return '¡Hola! Soy Bit. Te acompaño a explorar cómo funciona una computadora. Puedo explicar conceptos, darte una pista o repasar una pregunta. Mis respuestas están preparadas dentro de este archivo.';if(/^(ayuda|como empiezo|que hago|instrucciones|como funciona la app|como usar)$/.test(q))return isTeacher()?'En modo profesor todas las escenas están abiertas. Elige Simulación, manipula los controles y usa Ampliar para presentar. Las preguntas son opcionales y ninguna demostración cambia el progreso de los estudiantes.':'Sigue tres pasos: Aprende, Experimenta y Comprueba. Consigue las tres misiones de la escena; después responde cinco preguntas una por una. Con al menos cuatro aciertos se abre la siguiente escena. Tus misiones y tu mejor resultado se conservan al repetir.';if(/^(pista|dame una pista|reto|ayudame con el reto|mi siguiente mision)$/.test(q)){const task=(MISSIONS[m.id]||[]).find(t=>!record(m).missions[t.id]);return isTeacher()?'Puedes proponer al grupo: '+(MISSIONS[m.id]?.[0]?.help||m.hint):task?'Tu siguiente misión: '+task.title+'\n\n'+task.help:'Ya lograste las tres misiones. Abre Comprueba y responde las cinco preguntas en orden.';}if(/^(explicame este tema|resumen|tema actual|que estoy aprendiendo)$/.test(q))return m.objective+'\n\n'+m.analogy;if(/\bprogreso\b|\bbitacora\b|guardar (?:mi |el )?avance/.test(q))return 'Tu avance se guarda en este navegador cuando el guardado local está disponible. En Mi bitácora puedes consultar resultados, insignias y retos, descargar un resumen o imprimirlo. El HTML funciona sin conexión; copiarlo a otro dispositivo no copia el progreso de este navegador.'+(typeof registroActivo==='function'&&registroActivo()?' Además, tu profesor activó el registro del curso: tus interacciones se envían a su hoja de Google.':'');if(/\bapi\b|inteligencia artificial|eres ia/.test(q))return window.bitIAActiva&&window.bitIAActiva()?'Soy Bit. Cuando hay conexión respondo con inteligencia artificial (el modelo DeepSeek); si no la hay, uso respuestas preparadas dentro de este archivo, como esta.':'Soy un tutor local con respuestas predeterminadas: no estoy conectado a inteligencia artificial ni hago llamadas a una API.';
 let numeric=numericReply(query);if(numeric)return numeric;
 let exact=KB.find(k=>norm(k.q)===q);if(exact)return exact.a;
 let matches=glossary.filter(g=>g.aliases.some(a=>(' '+q+' ').includes(' '+a+' ')));
@@ -4073,6 +4090,16 @@ window.REGISTRO_CONFIG = {
   clave: '',
   curso: '',
   hoja: 'https://docs.google.com/spreadsheets/d/1LuBhb1o5jS_nSA9nxHO_x_9FScc9YebUL4bv9bzocts/edit'
+};
+
+/* BIT CON IA (DeepSeek). Con «clave», el navegador llama directamente a DeepSeek. Sin clave, o si el navegador
+   no puede llegar a DeepSeek, Bit pide la respuesta a la aplicación web de Apps Script (que guarda su propia clave).
+   Sin ninguna de las dos responde con su base didáctica. La clave queda visible en el código de la página:
+   entrega esa versión solo a personas de confianza y no la publiques en un repositorio público. */
+window.BIT_IA = {
+  endpoint: 'https://api.deepseek.com/chat/completions',
+  modelo: 'deepseek-chat',
+  clave: ''
 };
 
 (()=>{
@@ -4267,8 +4294,6 @@ renderQuizSummary=function(){
 const baseRetry=retryQuiz;retryQuiz=function(){const r=baseRetry();if(isStudent())track('cuestionario_reintento',{});return r};
 const baseReset=resetSim;resetSim=function(){const r=baseReset();if(isStudent())track('reinicio_simulacion',{});return r};
 const baseResetProgress=resetProgress;resetProgress=function(){const before=state.game;const r=baseResetProgress();if(isStudent()&&state.game!==before){track('reinicio_progreso',{});paintLevel()}return r};
-const baseAsk=askBit;
-askBit=async function(q){if(isStudent()){game().chat++;save();track('chat_pregunta',{valor:String(q).slice(0,300)})}const r=await baseAsk(q);checkProgress();return r};
 const baseRegister=registerStudent;
 registerStudent=function(){const ok=baseRegister();if(ok){game();track('ingreso_estudiante',{valor:state.name});checkProgress(true);flush(true)}return ok};
 const basePaint=paintTop;paintTop=function(){basePaint();paintLevel()};
@@ -4392,9 +4417,155 @@ function registrationNote(){return regCfg.endpoint?'☁ Registro del curso activ
 window.registrationNote=registrationNote;
 function updateNotes(){
   const r=$('registration-note');if(r){r.textContent=registrationNote();r.classList.toggle('v6-live-note',!!regCfg.endpoint)}
-  const c=$('chat-note');if(c)c.textContent=regCfg.endpoint?'Respuestas de una base didáctica predeterminada; Bit no usa IA. Tu profesor activó el registro del curso: tus preguntas se guardan en su hoja de Google.':'Respuestas de una base didáctica predeterminada. No usa IA ni envía tus preguntas a servidores.';
+  paintIA();
   setStatus(regState.status==='off'?(regQueue.length?'pending':'ok'):regState.status);
 }
+/* ------------------------------------------------------------------ Bit con inteligencia artificial (DeepSeek) */
+const IA=window.BIT_IA||{};
+const iaCfg={endpoint:String(IA.endpoint||'https://api.deepseek.com/chat/completions'),modelo:String(IA.modelo||'deepseek-chat'),clave:String(IA.clave||'').trim()};
+/* proxy: '?' sin comprobar, 'si' el script responde con IA, 'no' el script no tiene la función o no tiene clave. */
+const ia={busy:false,hist:[],owner:'',proxy:'?',proxyCheck:0,directOff:false,probing:null};
+function iaModo(){if(navigator.onLine===false)return 'offline';return (iaCfg.clave&&!ia.directOff)||ia.proxy==='si'?'ia':'local'}
+window.bitIAActiva=()=>iaModo()==='ia';
+function chatNoteText(){
+  const teacher=isTeacher(),reg=regCfg.endpoint&&!teacher;
+  if(iaModo()==='ia')return 'Bit usa IA (DeepSeek) y puede equivocarse. '+(teacher?'Las preguntas se envían a DeepSeek; en modo profesor no se guarda nada en la hoja.':'Tus preguntas se envían a DeepSeek'+(reg?' y quedan, con sus respuestas, en la hoja de tu profesor':'')+'. No escribas datos personales.');
+  return 'Respuestas de una base didáctica predeterminada. '+(teacher?'En modo profesor no se guarda nada en la hoja.':reg?'Tus preguntas y las respuestas de Bit se guardan en la hoja de tu profesor.':'No usa IA ni envía tus preguntas a servidores.');
+}
+function paintIA(){
+  const mode=iaModo(),small=document.querySelector('.chat-head small');
+  if(small)small.textContent=mode==='ia'?'● Con IA · DeepSeek':mode==='offline'?'● Sin conexión · Guía local':'● Guía local';
+  const note=$('chat-note');if(note)note.textContent=chatNoteText();
+  const panel=$('chat-panel');if(panel){panel.classList.toggle('v6-busy',ia.busy);panel.dataset.ia=mode}
+  const send=document.querySelector('.chat-form button[type=submit]');if(send)send.disabled=ia.busy;
+}
+function iaProbe(){
+  if(!regCfg.endpoint){ia.proxy='no';return Promise.resolve('no')}
+  if(ia.proxy!=='?'&&Date.now()<ia.proxyCheck)return Promise.resolve(ia.proxy);
+  if(!ia.probing)ia.probing=fetch(regCfg.endpoint+'?accion=ia&clave='+encodeURIComponent(regCfg.clave),{cache:'no-store'})
+    .then(r=>r.json()).then(j=>{ia.proxy=j&&j.ok&&j.ia?'si':'no'}).catch(()=>{ia.proxy='no'})
+    .then(()=>{ia.proxyCheck=Date.now()+(ia.proxy==='si'?36e5:6e5);ia.probing=null;paintIA();return ia.proxy});
+  return ia.probing;
+}
+function iaSystem(q){
+  const m=current(),ctx=BitTutor.getContext(),teacher=isTeacher(),inModule=state.view==='module';
+  const lines=[
+    'Eres Bit, el compañero de laboratorio de «El Arquitecto de Bits», una aplicación con 17 escenas interactivas para aprender Arquitectura de Computadoras. Cada escena tiene tres fases: Aprende (teoría), Experimenta (una simulación con tres misiones) y Comprueba (cinco preguntas; con las tres misiones y al menos cuatro aciertos se abre la escena siguiente).',
+    teacher?'Hablas con el profesor o la profesora del curso, que usa la aplicación para enseñar.':'Hablas con un estudiante.',
+    'Cómo respondes:',
+    '- Siempre en español, con un tono cálido, claro y motivador. Sé breve: de dos a seis frases (unas 120 palabras como máximo), salvo que te pidan más detalle.',
+    '- Explica con analogías cotidianas y, cuando ayude, con un ejemplo numérico paso a paso. Revisa tus cuentas antes de responder.',
+    '- Formato: texto plano. Puedes usar **negritas**, listas con guiones y `código`. No uses tablas, encabezados, HTML ni LaTeX: escribe las fórmulas en línea, por ejemplo 2^(n/2) o P ≈ α·C·V²·f.',
+    '- Si no sabes algo o no estás seguro, dilo con honestidad. No inventes datos, fechas ni cifras.',
+    teacher?'- Puedes dar respuestas completas, ideas para la clase, preguntas para el grupo y errores frecuentes de los estudiantes.':'- Si te piden la respuesta de una pregunta de la evaluación (Comprueba) o la solución directa de una misión, no la des: ofrece una pista y una pregunta que guíe su razonamiento. Explicar los conceptos sí está permitido.',
+    '- Temas: arquitectura y organización de computadoras, electrónica digital, sistemas numéricos, microcontroladores PIC, IoT y el uso de esta aplicación. Si preguntan otra cosa, responde en una frase amable y vuelve al tema.',
+    '- Usa un lenguaje apropiado para el aula y no pidas datos personales.',
+    '- Si te preguntan qué eres: eres Bit, un tutor que responde con el modelo de IA DeepSeek; puedes equivocarte, así que conviene contrastar con la teoría de la escena.',
+    '- Cuando sea natural, termina proponiendo algo concreto para probar en la simulación.',
+    '',
+    'Contexto actual:',
+    inModule?'Escena '+m.code+' · '+m.title+'. Fase: '+ctx.phase+'.':'Pantalla: '+({home:'inicio',progress:'bitácora del estudiante',access:'ingreso'}[state.view]||state.view)+'. Escena seleccionada: '+m.code+' · '+m.title+'.',
+    'Objetivo: '+m.objective,
+    'Analogía de la escena: '+m.analogy,
+    'Conceptos clave:\n'+(m.concepts||[]).map(c=>'- '+c.term+': '+c.text).join('\n'),
+    'Misiones de la simulación:\n'+ctx.missions.map(t=>'- '+(t.achieved?'lograda':'pendiente')+': '+t.title+' (ayuda: '+t.help+')').join('\n')
+  ];
+  try{if(inModule&&state.phase===1)lines.push('Estado actual del simulador (JSON): '+JSON.stringify(simState()).slice(0,600))}catch(e){}
+  if(inModule&&state.phase===2&&isStudent()){const r=record(m),qq=m.questions[r.cursor];if(qq)lines.push('Pregunta de evaluación que tiene en pantalla: «'+qq.q+'». No reveles cuál opción es la correcta.')}
+  const ref=String(answerLocal(q)||'');
+  if(ref&&!/^(No tengo una respuesta preparada|Puedo ayudarte con Arquitectura|Escribe una pregunta)/.test(ref)&&!/dentro de este archivo|inteligencia artificial/.test(ref))
+    lines.push('','Nota de la base didáctica de la aplicación para esta pregunta (puede no corresponder exactamente; úsala solo si es pertinente):\n'+ref);
+  return lines.join('\n');
+}
+function iaMessages(q){
+  const owner=(state.mode||'')+':'+(state.profileKey||'');
+  if(ia.owner!==owner){ia.owner=owner;ia.hist=[]}
+  return [{role:'system',content:iaSystem(q)},...ia.hist.slice(-8),{role:'user',content:q}];
+}
+function iaHTML(t){
+  return esc(t).replace(/^#{1,6}\s*(.+)$/gm,'<b>$1</b>').replace(/\*\*([^*\n]+)\*\*/g,'<b>$1</b>').replace(/`([^`\n]+)`/g,'<code>$1</code>').replace(/^[ \t]*[-*•][ \t]+/gm,'• ').replace(/\n{3,}/g,'\n\n');
+}
+function chatBubble(){
+  const e=document.createElement('div');e.className='message v6-typing';e.setAttribute('aria-busy','true');
+  e.innerHTML='<span class="v6-dots" role="img" aria-label="Bit está escribiendo"><i></i><i></i><i></i></span>';
+  const log=$('chat-log');log.appendChild(e);log.scrollTop=log.scrollHeight;return e;
+}
+let paintFrame=0;
+function paintBubble(e,text,html=true){
+  cancelAnimationFrame(paintFrame);
+  paintFrame=requestAnimationFrame(()=>{
+    const log=$('chat-log'),near=log.scrollHeight-log.scrollTop-log.clientHeight<80;
+    e.classList.remove('v6-typing');e.classList.add('v6-streaming');
+    if(html)e.innerHTML=iaHTML(text);else e.textContent=text;
+    if(near)log.scrollTop=log.scrollHeight;
+  });
+}
+async function iaDirect(msgs,bubble){
+  const ctl=new AbortController();let timer=setTimeout(()=>ctl.abort(),25000),out='';
+  try{
+    const res=await fetch(iaCfg.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+iaCfg.clave},body:JSON.stringify({model:iaCfg.modelo,messages:msgs,stream:true,temperature:.5,max_tokens:700}),signal:ctl.signal});
+    if(!res.ok){const err=new Error('DeepSeek respondió '+res.status);err.status=res.status;throw err}
+    clearTimeout(timer);timer=setTimeout(()=>ctl.abort(),60000);
+    const rd=res.body.getReader(),dec=new TextDecoder();let buf='';
+    try{
+      for(;;){
+        const {value,done}=await rd.read();if(done)break;
+        buf+=dec.decode(value,{stream:true});let i;
+        while((i=buf.indexOf('\n'))>=0){
+          const line=buf.slice(0,i).trim();buf=buf.slice(i+1);
+          if(!line.startsWith('data:'))continue;const data=line.slice(5).trim();if(data==='[DONE]')continue;
+          try{const d=JSON.parse(data).choices?.[0]?.delta?.content;if(d){out+=d;paintBubble(bubble,out)}}catch(e){}
+        }
+      }
+    }catch(e){if(out.length<40)throw e;out+=' …'}
+    return out.trim();
+  }finally{clearTimeout(timer)}
+}
+async function iaProxy(msgs){
+  const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),45000);
+  try{
+    const res=await fetch(regCfg.endpoint,{method:'POST',body:JSON.stringify({app:'arquitecto-de-bits',version:VERSION,clave:regCfg.clave,curso:regCfg.curso,accion:'bit',sesion:SESSION,clave_ia:iaCfg.clave||undefined,mensajes:msgs}),redirect:'follow',cache:'no-store',signal:ctl.signal});
+    const j=await res.json();
+    if(j&&j.ok&&typeof j.respuesta==='string'&&j.respuesta.trim()){ia.proxy='si';ia.proxyCheck=Date.now()+36e5;return j.respuesta.trim()}
+    /* Un script anterior a la IA acepta el envío pero no trae respuesta. */
+    if(j&&j.ok){ia.proxy='no';ia.proxyCheck=Date.now()+6e5}
+    throw new Error((j&&j.error)||'El registro no devolvió respuesta');
+  }finally{clearTimeout(timer)}
+}
+askBit=async function(q){
+  q=String(q??'').trim();if(!q)return;
+  if(ia.busy){toast('Bit está terminando de responder…');return}
+  if(!chatOpen)toggleChat(true);
+  chatPush(q,true);
+  const who=state.profileKey,student=isStudent();
+  if(student){game().chat++;save();track('chat_pregunta',{valor:q.slice(0,300)})}
+  ia.busy=true;paintIA();
+  const bubble=chatBubble(),t0=Date.now();let text='',source='base',error='';
+  if(customResponder){try{text=String(await customResponder(q,BitTutor.getContext())||'').trim();source='personalizado'}catch(e){error=e.message}}
+  else if(navigator.onLine!==false){
+    if(!iaCfg.clave||ia.directOff)await iaProbe();
+    const msgs=iaMessages(q);
+    if(iaCfg.clave&&!ia.directOff){try{text=await iaDirect(msgs,bubble);source='deepseek'}catch(e){error=e.message;if(e.status===401)ia.directOff=true}}
+    if(!text&&(iaCfg.clave?ia.proxy!=='no':ia.proxy==='si')){try{text=await iaProxy(msgs);source='deepseek-google'}catch(e){error=error||e.message}}
+  }
+  const viaIA=!!text;
+  if(!viaIA){
+    const tried=iaCfg.clave||ia.proxy==='si'||customResponder;
+    text=(navigator.onLine===false&&(iaCfg.clave||ia.proxy==='si')?'Estoy sin conexión a internet. Te respondo con mi base didáctica:\n\n':tried?'No pude conectarme con la IA en este momento. Te respondo con mi base didáctica:\n\n':'')+answerLocal(q);
+  }
+  cancelAnimationFrame(paintFrame);
+  bubble.classList.remove('v6-typing','v6-streaming');bubble.removeAttribute('aria-busy');
+  if(viaIA)bubble.innerHTML=iaHTML(text);else bubble.textContent=text;
+  bubble.scrollIntoView({block:'nearest',behavior:'smooth'});
+  if(viaIA&&state.profileKey===who&&ia.owner===(state.mode||'')+':'+(state.profileKey||'')){ia.hist.push({role:'user',content:q},{role:'assistant',content:text});ia.hist=ia.hist.slice(-8)}
+  ia.busy=false;paintIA();
+  if(student&&isStudent()&&state.profileKey===who){track('chat_respuesta',{accion:viaIA?'DeepSeek':'Base didáctica',valor:text,detalle:{ms:Date.now()-t0,fuente:source,error:error||undefined}});checkProgress()}
+};
+const baseSend=sendChat;sendChat=function(){if(ia.busy){toast('Bit está terminando de responder…');return}return baseSend()};
+const baseToggleChat=toggleChat;toggleChat=function(open){const r=baseToggleChat(open);if(open){paintIA();if(!iaCfg.clave||ia.directOff)iaProbe()}return r};
+const baseClearChat=clearChat;clearChat=function(){ia.hist=[];return baseClearChat()};
+addEventListener('online',paintIA);addEventListener('offline',paintIA);
+
 /* ------------------------------------------------------------------ acceso del profesor con contraseña */
 /* Solo se guarda la huella SHA-256 de la contraseña. Es una barrera para el aula, no un control de seguridad del servidor. */
 const TEACHER_HASH='708628e30651835eaf72d0fcd4a368de621adcb8dd303edf3ba5ab86e1774e49';
