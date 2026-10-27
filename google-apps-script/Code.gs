@@ -1,20 +1,19 @@
 /**
  * El Arquitecto de Bits · Registro en vivo con Google Sheets
  *
- * Recibe los eventos que envía la aplicación (index.html) y los organiza en hojas:
- *   Panel · Estudiantes · Eventos · Respuestas · Misiones · Cuestionarios · Retos · Instrucciones
+ * Recibe los eventos que envía la aplicación (index.html) y los organiza en la hoja ID_HOJA:
+ *   Panel · Estudiantes · Eventos · Respuestas · Misiones · Cuestionarios · Instrucciones
  *
- * Instalación (una sola vez):
- *   1. Abre la hoja de cálculo → Extensiones → Apps Script. Pega este archivo como Code.gs y guarda.
- *   2. Ejecuta la función configurarHoja y acepta los permisos.
- *   3. Implementar → Nueva implementación → Tipo: Aplicación web.
- *      Ejecutar como: «Yo». Quién tiene acceso: «Cualquier usuario».
- *   4. Copia la URL que termina en /exec y pégala en la aplicación (modo profesor → ☁ Registro en vivo).
+ * Publicación (una sola vez, la hace el dueño de la hoja):
+ *   Implementar → Nueva implementación → Tipo: Aplicación web.
+ *   Ejecutar como: «Yo». Quién tiene acceso: «Cualquier usuario». Autoriza el acceso a la hoja.
+ *   La URL que termina en /exec es la que la aplicación usa en REGISTRO_CONFIG.endpoint.
  *
- * Opcional: menú «🎓 Arquitecto de Bits → Definir clave del curso» para rechazar envíos sin la clave.
- * Si cambias este código, crea una nueva versión en Implementar → Gestionar implementaciones.
+ * El script funciona como proyecto independiente (usa ID_HOJA) o dentro de la hoja (Extensiones → Apps Script).
+ * Si cambias este código: Implementar → Gestionar implementaciones → Editar → Nueva versión (la URL se conserva).
  */
 
+const ID_HOJA = '1LuBhb1o5jS_nSA9nxHO_x_9FScc9YebUL4bv9bzocts';
 const APP_ID = 'arquitecto-de-bits';
 const MAX_EVENTOS_POR_ENVIO = 100;
 const MINUTOS_EN_LINEA = 5;
@@ -28,18 +27,12 @@ const ESCENAS = [
   ['U6.1', 'PIC: ADC, GPIO y timer'], ['U6.2', 'IoT y riego inteligente'], ['U7.0', 'El ciclo de instrucción']
 ];
 
-const RETOS = {
-  binario: 'Binario relámpago', puertas: 'Puertas en acción', alu: 'Banderas de la ALU',
-  cache: '¿HIT o MISS?', rendimiento: 'Velocidad y Amdahl', mcu: 'Microcontrolador en acción'
-};
-
 const TIPOS = {
   ingreso_estudiante: 'Ingreso', vista: 'Navegación', simulacion_ajuste: 'Ajuste en simulación',
   simulacion_accion: 'Acción en simulación', mision_lograda: 'Misión lograda', respuesta: 'Respuesta',
   cuestionario_completado: 'Cuestionario completado', cuestionario_reintento: 'Reintento de cuestionario',
   reinicio_simulacion: 'Reinicio de simulación', reinicio_progreso: 'Reinicio de progreso',
   insignia: 'Insignia', nivel: 'Subida de nivel', chat_pregunta: 'Pregunta a Bit',
-  reto_inicio: 'Inicio de reto', reto_respuesta: 'Respuesta en reto', reto_fin: 'Fin de reto',
   regreso: 'Regreso a la pestaña', sesion_fin: 'Fin de sesión', prueba: 'Prueba de conexión'
 };
 
@@ -56,15 +49,14 @@ const HOJAS = {
     nombre: 'Estudiantes', color: '#0ea5e9',
     columnas: ['Estudiante', 'Clave del estudiante', 'Curso', 'Primera conexión', 'Última actividad', 'Estado',
       'Escena actual', 'Escenas completadas', 'Misiones logradas', 'Respuestas', 'Aciertos', '% de aciertos',
-      'XP', 'Nivel', 'Insignias', 'Rondas de retos', 'Mejor puntaje en retos', 'Preguntas a Bit', 'Eventos',
-      'Último dispositivo'],
-    anchos: [200, 170, 140, 150, 150, 150, 100, 100, 100, 90, 80, 90, 70, 60, 75, 90, 110, 100, 75, 220]
+      'XP', 'Nivel', 'Insignias', 'Preguntas a Bit', 'Eventos', 'Último dispositivo'],
+    anchos: [200, 170, 140, 150, 150, 150, 170, 100, 100, 90, 80, 90, 70, 60, 75, 100, 75, 220]
   },
   respuestas: {
     nombre: 'Respuestas', color: '#8b5cf6',
-    columnas: ['Fecha y hora', 'Curso', 'Estudiante', 'Origen', 'Escena o reto', 'Pregunta', 'Respuesta elegida',
+    columnas: ['Fecha y hora', 'Curso', 'Estudiante', 'Escena', 'Título de la escena', 'Pregunta', 'Respuesta elegida',
       'Respuesta correcta', '¿Correcta?', 'Clave del estudiante'],
-    anchos: [150, 130, 190, 110, 150, 420, 200, 200, 85, 160]
+    anchos: [150, 130, 190, 70, 170, 420, 200, 200, 85, 160]
   },
   misiones: {
     nombre: 'Misiones', color: '#10b981',
@@ -75,12 +67,6 @@ const HOJAS = {
     nombre: 'Cuestionarios', color: '#f59e0b',
     columnas: ['Fecha y hora', 'Curso', 'Estudiante', 'Escena', 'Título de la escena', 'Puntaje (de 5)', 'Resultado', 'Clave del estudiante'],
     anchos: [150, 130, 190, 70, 190, 100, 110, 160]
-  },
-  retos: {
-    nombre: 'Retos', color: '#ec4899',
-    columnas: ['Fecha y hora', 'Curso', 'Estudiante', 'Reto', 'Modo', 'Puntaje', 'Aciertos', 'Intentos',
-      'Precisión', 'Mejor racha', 'Duración (s)', '¿Récord?', 'Clave del estudiante'],
-    anchos: [150, 130, 190, 190, 110, 70, 70, 70, 80, 85, 90, 80, 160]
   }
 };
 
@@ -122,7 +108,7 @@ function doPost(e) {
 function doGet(e) {
   const p = (e && e.parameter) || {};
   if (!claveValida_(p.clave)) return respuesta_({ok: false, error: 'Clave del curso incorrecta'});
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = libro_();
   const hoja = ss.getSheetByName(HOJAS.eventos.nombre);
   return respuesta_({
     ok: true,
@@ -131,6 +117,14 @@ function doGet(e) {
     eventos: hoja ? Math.max(0, hoja.getLastRow() - 1) : 0,
     mensaje: p.accion === 'ping' ? 'Conexión correcta' : 'Registro en vivo de El Arquitecto de Bits activo'
   });
+}
+
+function libro_() {
+  try {
+    const activo = SpreadsheetApp.getActiveSpreadsheet();
+    if (activo) return activo;
+  } catch (e) {}
+  return SpreadsheetApp.openById(ID_HOJA);
 }
 
 function respuesta_(obj) {
@@ -145,9 +139,9 @@ function claveValida_(clave) {
 /* ------------------------------------------------------------------ registro */
 
 function registrar_(eventos, datos) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = libro_();
   const ahora = new Date();
-  const filas = {eventos: [], respuestas: [], misiones: [], cuestionarios: [], retos: []};
+  const filas = {eventos: [], respuestas: [], misiones: [], cuestionarios: []};
 
   eventos.forEach(ev => {
     const curso = texto_(ev.curso || datos.curso);
@@ -160,12 +154,10 @@ function registrar_(eventos, datos) {
       numero_(ev.nivel), numero_(ev.escenas_completadas), numero_(ev.misiones), numero_(ev.insignias),
       texto_(ev.detalle), texto_(ev.sesion), texto_(ev.dispositivo), texto_(ev.version), texto_(ev.id)]);
 
-    if (tipo === 'respuesta' || tipo === 'reto_respuesta') {
-      const reto = tipo === 'reto_respuesta';
-      filas.respuestas.push([fecha, curso, texto_(ev.estudiante), reto ? 'Zona de retos' : 'Cuestionario',
-        reto ? texto_(RETOS[ev.accion] || ev.accion) : texto_(ev.escena),
-        texto_(reto ? [detalle.tema, detalle.ejercicio].filter(Boolean).join(' · ') : detalle.pregunta),
-        texto_(ev.valor), texto_(detalle.correcta), texto_(ev.correcto), texto_(ev.clave_estudiante)]);
+    if (tipo === 'respuesta') {
+      filas.respuestas.push([fecha, curso, texto_(ev.estudiante), texto_(ev.escena), texto_(ev.titulo_escena),
+        texto_(detalle.pregunta), texto_(ev.valor), texto_(detalle.correcta), texto_(ev.correcto),
+        texto_(ev.clave_estudiante)]);
     }
     if (tipo === 'mision_lograda') {
       filas.misiones.push([fecha, curso, texto_(ev.estudiante), texto_(ev.escena), texto_(ev.titulo_escena),
@@ -174,12 +166,6 @@ function registrar_(eventos, datos) {
     if (tipo === 'cuestionario_completado') {
       filas.cuestionarios.push([fecha, curso, texto_(ev.estudiante), texto_(ev.escena), texto_(ev.titulo_escena),
         numero_(ev.puntaje), ev.correcto === 'Sí' ? 'Aprobado' : 'Por repetir', texto_(ev.clave_estudiante)]);
-    }
-    if (tipo === 'reto_fin') {
-      filas.retos.push([fecha, curso, texto_(ev.estudiante), texto_(RETOS[ev.accion] || ev.accion), texto_(ev.valor),
-        numero_(ev.puntaje), numero_(detalle.aciertos), numero_(detalle.intentos),
-        detalle.precision === undefined ? '' : Number(detalle.precision) / 100, numero_(detalle.mejor_racha),
-        numero_(detalle.duracion_s), detalle.record ? 'Sí' : 'No', texto_(ev.clave_estudiante)]);
     }
   });
 
@@ -220,7 +206,7 @@ function actualizarEstudiantes_(ss, eventos, ahora, datos) {
       existentes.push(clave);
       actual = new Array(n).fill('');
       actual[3] = ahora;
-      [7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18].forEach(i => { actual[i] = 0; });
+      [7, 8, 9, 10, 12, 13, 14, 15, 16].forEach(i => { actual[i] = 0; });
     }
     lista.forEach(ev => {
       actual[0] = texto_(ev.estudiante) || actual[0];
@@ -237,14 +223,10 @@ function actualizarEstudiantes_(ss, eventos, ahora, datos) {
       if (ev.xp !== '' && ev.xp !== undefined) actual[12] = numero_(ev.xp);
       if (ev.nivel !== '' && ev.nivel !== undefined) actual[13] = numero_(ev.nivel);
       if (ev.insignias !== '' && ev.insignias !== undefined) actual[14] = numero_(ev.insignias);
-      if (ev.tipo === 'reto_fin') {
-        actual[15] = (Number(actual[15]) || 0) + 1;
-        actual[16] = Math.max(Number(actual[16]) || 0, Number(ev.puntaje) || 0);
-      }
-      if (ev.tipo === 'chat_pregunta') actual[17] = (Number(actual[17]) || 0) + 1;
+      if (ev.tipo === 'chat_pregunta') actual[15] = (Number(actual[15]) || 0) + 1;
       if (ev.tipo === 'reinicio_progreso') { actual[7] = 0; actual[8] = 0; }
-      actual[18] = (Number(actual[18]) || 0) + 1;
-      actual[19] = texto_(ev.dispositivo) || actual[19];
+      actual[16] = (Number(actual[16]) || 0) + 1;
+      actual[17] = texto_(ev.dispositivo) || actual[17];
     });
     // Las columnas F y L son fórmulas. setFormula usa la sintaxis en inglés en cualquier configuración regional.
     hoja.getRange(fila, 1, 1, 5).setValues([actual.slice(0, 5)]);
@@ -325,7 +307,7 @@ function onOpen() {
 
 /** Crea o repara todas las hojas, formatos y el Panel. Se puede ejecutar varias veces sin perder datos. */
 function configurarHoja() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = libro_();
   ss.setSpreadsheetTimeZone(Session.getScriptTimeZone() || 'America/Bogota');
   try { ss.setRecalculationInterval(SpreadsheetApp.RecalculationInterval.MINUTE); } catch (e) {}
   Object.keys(HOJAS).forEach(k => {
@@ -342,7 +324,7 @@ function configurarHoja() {
 }
 
 function ordenar_(ss) {
-  ['Panel', 'Estudiantes', 'Eventos', 'Respuestas', 'Misiones', 'Cuestionarios', 'Retos', 'Instrucciones'].forEach((nombre, i) => {
+  ['Panel', 'Estudiantes', 'Eventos', 'Respuestas', 'Misiones', 'Cuestionarios', 'Instrucciones'].forEach((nombre, i) => {
     const hoja = ss.getSheetByName(nombre);
     if (hoja) { ss.setActiveSheet(hoja); ss.moveActiveSheet(i + 1); }
   });
@@ -368,7 +350,7 @@ function construirPanel_(ss) {
     ['Eventos de hoy', '=COUNTIF(Eventos!A2:A,">="&TODAY())'],
     ['Misiones logradas', '=COUNTA(Misiones!A2:A)'],
     ['% de aciertos', '=IFERROR(COUNTIF(Respuestas!I2:I,"Sí")/COUNTA(Respuestas!I2:I),"—")'],
-    ['Rondas de retos', '=COUNTA(Retos!A2:A)']
+    ['Cuestionarios aprobados', '=COUNTIF(Cuestionarios!G2:G,"Aprobado")']
   ];
   tarjetas.forEach((t, i) => {
     hoja.getRange(4, i + 1).setValue(t[0]).setFontColor('#6b7280').setFontWeight('bold').setWrap(true);
@@ -389,7 +371,7 @@ function construirPanel_(ss) {
       '=COUNTIF(Cuestionarios!D2:D,"' + code + '")',
       '=COUNTIFS(Cuestionarios!D2:D,"' + code + '",Cuestionarios!G2:G,"Aprobado")',
       '=IFERROR(AVERAGEIF(Cuestionarios!D2:D,"' + code + '",Cuestionarios!F2:F),"")',
-      '=IFERROR(COUNTIFS(Respuestas!E2:E,"' + code + '",Respuestas!I2:I,"Sí")/COUNTIF(Respuestas!E2:E,"' + code + '"),"")'
+      '=IFERROR(COUNTIFS(Respuestas!D2:D,"' + code + '",Respuestas!I2:I,"Sí")/COUNTIF(Respuestas!D2:D,"' + code + '"),"")'
     ]]);
   });
   hoja.getRange(9, 5, ESCENAS.length, 1).setNumberFormat('0.0');
@@ -430,14 +412,10 @@ function construirInstrucciones_(ss) {
   hoja.setColumnWidth(2, 820);
   const pasos = [
     ['', '🎓 El Arquitecto de Bits · Registro en vivo'],
-    ['', 'Esta hoja recibe en tiempo real las interacciones de los estudiantes con la aplicación.'],
-    ['1', 'Extensiones → Apps Script. Pega el archivo Code.gs del repositorio y guarda.'],
-    ['2', 'Ejecuta la función configurarHoja (o usa el menú 🎓 → Configurar o reparar las hojas) y acepta los permisos.'],
-    ['3', 'Implementar → Nueva implementación → Aplicación web. Ejecutar como: Yo. Quién tiene acceso: Cualquier usuario.'],
-    ['4', 'Copia la URL que termina en /exec. En la aplicación entra como profesor y pulsa ☁ Conectar hoja.'],
-    ['5', 'Pega la URL, prueba la conexión y guarda. Reparte el enlace para estudiantes o descarga la aplicación ya configurada.'],
-    ['🔐', 'Opcional: menú 🎓 → Definir clave del curso. La misma clave debe escribirse en la aplicación.'],
-    ['ℹ️', 'Panel: resumen y ranking · Estudiantes: una fila por estudiante · Eventos: todo lo que ocurre · Respuestas, Misiones, Cuestionarios y Retos: detalles por tipo.'],
+    ['', 'Esta hoja recibe en tiempo real las interacciones de los estudiantes con la aplicación: ingreso, navegación, simulaciones, misiones, respuestas y preguntas a Bit.'],
+    ['✅', 'La aplicación ya trae la dirección de este registro: los estudiantes solo abren la aplicación y escriben su nombre. El profesor no configura nada.'],
+    ['ℹ️', 'Panel: resumen, avance por escena, top 10 y últimos eventos · Estudiantes: una fila por estudiante con su estado en línea · Eventos: registro completo · Respuestas, Misiones y Cuestionarios: detalle por tipo.'],
+    ['🔁', 'Si se modifica el script: Implementar → Gestionar implementaciones → Editar → Nueva versión. La URL /exec se conserva.'],
     ['⚖️', 'Informa a tus estudiantes que sus interacciones se registran. La aplicación lo indica en la pantalla de ingreso y en el chat.']
   ];
   hoja.getRange(1, 1, pasos.length, 2).setValues(pasos).setWrap(true).setVerticalAlignment('top');
@@ -452,7 +430,7 @@ function definirClave() {
   const clave = r.getResponseText().trim();
   const props = PropertiesService.getScriptProperties();
   if (clave) props.setProperty('CLAVE', clave); else props.deleteProperty('CLAVE');
-  ui.alert(clave ? 'Clave guardada. Escríbela también en la aplicación (modo profesor → ☁ Registro en vivo).' : 'Clave eliminada: se aceptan envíos sin clave.');
+  ui.alert(clave ? 'Clave guardada. Debe coincidir con REGISTRO_CONFIG.clave en index.html.' : 'Clave eliminada: se aceptan envíos sin clave.');
 }
 
 function insertarPrueba() {
@@ -468,7 +446,7 @@ function insertarPrueba() {
 }
 
 function borrarPruebas() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = libro_();
   const hoja = ss.getSheetByName(HOJAS.eventos.nombre);
   if (!hoja || hoja.getLastRow() < 2) return;
   const valores = hoja.getRange(2, 4, hoja.getLastRow() - 1, 1).getValues();
@@ -480,6 +458,6 @@ function borrarPruebas() {
 
 function mostrarAyuda() {
   SpreadsheetApp.getUi().alert('Publicar la aplicación web',
-    '1. Implementar → Nueva implementación.\n2. Tipo: Aplicación web.\n3. Ejecutar como: Yo.\n4. Quién tiene acceso: Cualquier usuario.\n5. Copia la URL que termina en /exec y pégala en la aplicación (modo profesor → ☁ Conectar hoja).\n\nSi cambias el código, usa Gestionar implementaciones → Editar → Nueva versión.',
+    '1. Implementar → Nueva implementación.\n2. Tipo: Aplicación web.\n3. Ejecutar como: Yo.\n4. Quién tiene acceso: Cualquier usuario.\n5. La URL que termina en /exec debe coincidir con REGISTRO_CONFIG.endpoint en index.html.\n\nSi cambias el código, usa Gestionar implementaciones → Editar → Nueva versión.',
     SpreadsheetApp.getUi().ButtonSet.OK);
 }

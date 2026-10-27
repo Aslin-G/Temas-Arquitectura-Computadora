@@ -2,11 +2,8 @@
 <html lang="es" data-theme="light">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="17 laboratorios interactivos y gamificados de Arquitectura de Computadoras: misiones, retos, insignias y registro opcional en Google Sheets. Un único archivo que también funciona sin conexión.">
+<meta name="description" content="17 laboratorios interactivos y gamificados de Arquitectura de Computadoras: misiones, niveles, insignias y registro en vivo del progreso en Google Sheets. Un único archivo que también funciona sin conexión.">
 <meta name="theme-color" content="#4f46e5">
-<meta name="registro-sheets" content="">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@500;700&family=Nunito:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap">
 <title>El Arquitecto de Bits · Arquitectura de Computadoras</title>
 <style>
 :root{color-scheme:light;--paper:#eee8dc;--paper2:#e5ddcc;--card:#fffcf5;--card2:#f5f0e5;--ink:#232d30;--muted:#626e6d;--line:#d7d1c2;--teal:#25675e;--teal-soft:#e3efe8;--gold:#865716;--gold-soft:#f5e9cb;--rust:#aa4936;--rust-soft:#fae8df;--shadow:0 12px 35px #353c3410;--serif:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,'Segoe UI',sans-serif;--mono:ui-monospace,'SFMono-Regular',Consolas,monospace}
@@ -168,9 +165,8 @@ body{background-image:radial-gradient(ellipse at 4% 4%,#b0d6ff33,transparent 34%
 
 
 /* Fourth edition: one typeface, clearer reading, one instruction per mission. */
-:root{--serif:'Space Grotesk','Segoe UI',system-ui,sans-serif;--sans:'Nunito','Segoe UI',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;--diagram:'Barlow Semi Condensed','Arial Narrow','Segoe UI',sans-serif}
-html.classic-type{--serif:'Times New Roman',Times,serif;--sans:'Times New Roman',Times,serif;--mono:'Times New Roman',Times,serif;--diagram:'Times New Roman',Times,serif}
-html.classic-type *,html.classic-type *::before,html.classic-type *::after{font-family:'Times New Roman',Times,serif!important}
+:root{--serif:'Times New Roman',Times,serif;--sans:'Times New Roman',Times,serif;--mono:'Times New Roman',Times,serif}
+*,*::before,*::after{font-family:'Times New Roman',Times,serif!important}
 body{font-size:17px;line-height:1.6}
 .mission-head{padding:24px}.mission-head h2{font-size:29px;margin:10px 0}.mission-head>p{font-size:16px;line-height:1.5}
 .mission-item p,.sim-note,.concept p,.objective,.analogy,.steps li{font-size:17px;line-height:1.6}
@@ -186,7 +182,7 @@ body{font-size:17px;line-height:1.6}
 .question-number{font-size:16px}.question-number>span,.question-fine,.question-actions>span{font-size:15px}.quiz-intro p,.feedback,.answer,.review-answers details,.teacher-question li,.teacher-question details{font-size:18px}
 .result-score,.rgb-preview b,.range-control output,.bit,.timeline button{font-variant-numeric:tabular-nums}
 .chat-log,.message{font-size:17px}.suggestions button,.chat-note{font-size:13px}.chat-form input{font-size:17px}
-.sim-board text,.home-course-picture text,.access-art text{font-family:var(--diagram)!important}
+.sim-board text{font-family:'Times New Roman',Times,serif!important}
 @media(max-width:600px){.mission-head{padding:20px}.mission-item p,.sim-note{font-size:17px}.phase-tab{font-size:14px}.brand-title{font-size:19px}.brand-sub{font-size:8px!important;letter-spacing:.5px}.top-actions .textbtn{font-size:12px}.top-inner{gap:5px}.mission-item h3{font-size:22px}.home-intro h1{font-size:41px}.journey-preview-meta{flex-wrap:wrap;gap:7px}.journey-legend{font-size:12px}.journey-stop-label{font-size:15px}.sim-header{padding:17px}.sim-header h2{font-size:24px}}
 
 /* Light states and finite actions are intentionally separate. */
@@ -198,7 +194,7 @@ body{font-size:17px;line-height:1.6}
 .viz-controls button:disabled{opacity:.48}.viz-controls .viz-read{color:var(--orange);border-color:var(--orange);background:var(--orange-soft)}.viz-controls label{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--muted);margin-left:auto}.viz-toolbar>small{display:block;margin-top:9px;font-size:12px;color:var(--muted)}
 .viz-controls button:hover:enabled{border-color:var(--blue);box-shadow:0 2px 6px #1232}.viz-controls button:focus-visible,.viz-controls select:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
 #sim-content .pulse,#sim-content .v2-flow,#sim-content .signal,#sim-content .v2-water,#sim-content .v2-rotor,#sim-content .v2-glow,#sim-content .v2-blink,#sim-content .v2-breathe{animation:none!important}
-#sim-content [data-viz-route]{animation:none!important;transition:stroke-width .15s,opacity .15s}.viz-route-active{stroke-opacity:1!important;stroke-width:3.5!important;opacity:1!important;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--orange) 45%,transparent))}.viz-packet-layer{pointer-events:none}.viz-packet-layer text{font-family:var(--diagram)!important}.viz-node-active{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--blue) 40%,transparent))}
+#sim-content [data-viz-route]{animation:none!important;transition:stroke-width .15s,opacity .15s}.viz-route-active{stroke-opacity:1!important;stroke-width:3.5!important;opacity:1!important;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--orange) 45%,transparent))}.viz-packet-layer{pointer-events:none}.viz-packet-layer text{font-family:'Times New Roman',Times,serif!important}.viz-node-active{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--blue) 40%,transparent))}
 .bulb-bank{display:grid!important;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px!important;padding:18px 14px 14px!important;background:radial-gradient(ellipse at 50% 0,var(--blue-soft),var(--card2));border-radius:14px!important;border:1px solid var(--line)}
 .bulb-bank .bulb-switch{position:relative;min-width:0;min-height:155px;padding:8px 4px 10px!important;display:flex;flex-direction:column;align-items:center;background:var(--card)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:12px!important;box-shadow:0 4px 0 var(--line)!important;transition:transform .15s,border-color .18s,background .18s}
 .bulb-bank .bulb-switch:hover{transform:translateY(-3px);filter:none}.bulb-bank .bulb-switch:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)!important}.bulb-bank .bulb-switch.on{border-color:var(--yellow)!important;background:linear-gradient(180deg,var(--yellow-soft),var(--card))!important}
@@ -218,11 +214,6 @@ html[data-theme=dark] .bulb-switch.on .bulb-glass{fill:#ffe06a;stroke:#edbc46}ht
 /* Sexta edición: más color, juego y registro en vivo. Se apoya en las capas anteriores sin reemplazarlas. */
 :root{--v6-grad:linear-gradient(135deg,#4f7dff 0%,#8b5cf6 52%,#ec4899 100%);--v6-grad-warm:linear-gradient(135deg,#f59e0b,#f97316 45%,#ec4899);--v6-grad-cool:linear-gradient(135deg,#06b6d4,#3b82f6 55%,#8b5cf6);--v6-grad-green:linear-gradient(135deg,#10b981,#06b6d4);--v6-shadow:0 10px 30px -14px rgba(49,46,129,.32);--v6-shadow-lg:0 26px 60px -22px rgba(49,46,129,.45);--v6-ring:0 0 0 4px color-mix(in srgb,var(--purple) 18%,transparent)}
 html[data-theme=dark]{--v6-shadow:0 10px 30px -14px rgba(0,0,0,.65);--v6-shadow-lg:0 26px 60px -20px rgba(0,0,0,.75)}
-body{font-family:var(--sans);font-size:16px;line-height:1.65}
-html.classic-type body{font-size:17px}
-h1,h2,h3,h4{font-family:var(--serif);letter-spacing:-.02em}
-.metric strong,.result-score,.journey-node-number,.timeline button,.bit-digit,.range-control output,.rgb-preview b{font-family:var(--mono)}
-code,pre,kbd{font-family:var(--mono);font-size:.92em}
 body::after{content:'';position:fixed;inset:-15%;z-index:-1;pointer-events:none;background:radial-gradient(38% 32% at 12% 18%,rgba(99,132,255,.26),transparent 70%),radial-gradient(34% 30% at 88% 12%,rgba(255,170,90,.22),transparent 70%),radial-gradient(36% 34% at 78% 88%,rgba(190,120,255,.2),transparent 70%),radial-gradient(30% 28% at 8% 86%,rgba(60,220,190,.18),transparent 70%);animation:v6-aurora 28s ease-in-out infinite alternate}
 html[data-theme=dark] body::after{opacity:.55}
 @keyframes v6-aurora{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(2%,-2%,0) scale(1.05) rotate(2deg)}100%{transform:translate3d(-2%,1%,0) scale(1.02) rotate(-2deg)}}
@@ -231,7 +222,6 @@ html[data-theme=dark] body::after{opacity:.55}
 .topbar{background:color-mix(in srgb,var(--card) 84%,transparent);box-shadow:0 8px 26px -22px rgba(49,46,129,.7)}
 .brand-mark{background:var(--v6-grad);box-shadow:0 8px 18px -8px #6d5cf6;border-radius:11px}
 .brand-title{background:var(--v6-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-html.classic-type .brand-title{color:transparent}
 .mode-label{font-weight:700}
 html[data-mode=student] #xp{display:none}
 .v6-level{display:flex;align-items:center;gap:8px;border:1px solid color-mix(in srgb,var(--purple) 32%,var(--line));background:var(--card);border-radius:40px;padding:3px 13px 3px 3px;box-shadow:var(--v6-shadow);color:var(--ink);transition:transform .2s}
@@ -239,15 +229,12 @@ html[data-mode=student] #xp{display:none}
 .v6-level-ring{--p:0;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--purple) calc(var(--p) * 1%),var(--line) 0);flex-shrink:0}
 .v6-level-ring b{width:28px;height:28px;border-radius:50%;background:var(--v6-grad);color:#fff;display:grid;place-items:center;font:800 13px var(--mono)}
 .v6-level-text{display:flex;flex-direction:column;line-height:1.15;text-align:left;min-width:0}
-.v6-level-text small{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.3px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#v6-level-xp{font:800 12px var(--mono);color:var(--purple)}
+.v6-level-text small{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.2px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#v6-level-xp{font:700 14px var(--mono);color:var(--purple)}
 .v6-streak{font:800 13px var(--mono);color:var(--orange);background:var(--orange-soft);border:1px solid color-mix(in srgb,var(--orange) 35%,transparent);border-radius:20px;padding:5px 10px;white-space:nowrap}
 .v6-streak.hot{animation:v6-flame 1.2s ease-in-out infinite}
 @keyframes v6-flame{50%{transform:scale(1.08);box-shadow:0 0 0 4px color-mix(in srgb,var(--orange) 15%,transparent)}}
-.top-actions .v6-arcade-btn{background:var(--v6-grad);color:#fff;border-radius:30px;font-weight:800;padding:7px 14px;box-shadow:0 8px 18px -10px #8b5cf6;white-space:nowrap}
-.top-actions .v6-arcade-btn:hover{filter:brightness(1.08)}
-html[data-mode=access] .v6-arcade-btn{display:none}
-.v6-cloud{display:inline-flex;align-items:center;gap:6px;font:800 11px var(--mono);border-radius:20px;padding:5px 10px;background:var(--green-soft);color:var(--green);border:1px solid color-mix(in srgb,var(--green) 35%,transparent);white-space:nowrap;cursor:default}
+.v6-cloud{display:inline-flex;align-items:center;gap:6px;font:700 13px var(--mono);border-radius:20px;padding:5px 10px;background:var(--green-soft);color:var(--green);border:1px solid color-mix(in srgb,var(--green) 35%,transparent);white-space:nowrap;cursor:default}
 .v6-cloud:before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px color-mix(in srgb,currentColor 22%,transparent)}
 .v6-cloud[data-status=ok]:before{animation:v6-live 1.8s ease-in-out infinite}
 .v6-cloud[data-status=sending]{background:var(--blue-soft);color:var(--blue);border-color:color-mix(in srgb,var(--blue) 35%,transparent)}
@@ -255,7 +242,7 @@ html[data-mode=access] .v6-arcade-btn{display:none}
 .v6-cloud[data-status=error],.v6-cloud[data-status=denied]{background:var(--red-soft);color:var(--red);border-color:color-mix(in srgb,var(--red) 35%,transparent)}
 html[data-mode=teacher] .v6-cloud{cursor:pointer}
 @keyframes v6-live{50%{opacity:.35}}
-#v6-type[aria-pressed=true],#v6-sound[aria-pressed=false]{background:var(--purple-soft);border-color:var(--purple)}
+#v6-sound[aria-pressed=false]{background:var(--purple-soft);border-color:var(--purple)}
 
 /* Botones, paneles y pestañas */
 .btn:not(.secondary):not(.semantic-action):not(.journey-open){background:var(--v6-grad);border-color:transparent;color:#fff;box-shadow:0 10px 22px -12px #6d5cf6}
@@ -320,7 +307,7 @@ html[data-mode=teacher] .v6-cloud{cursor:pointer}
 .v6-bits{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit}
 .v6-bits i{position:absolute;bottom:-24px;font:800 15px var(--mono);font-style:normal;color:var(--purple);opacity:0;animation:v6-rise 9s linear infinite}
 .v6-bits i:nth-child(3n){color:var(--blue)}.v6-bits i:nth-child(3n+1){color:var(--pink)}.v6-bits i:nth-child(4n){color:var(--orange)}
-@keyframes v6-rise{0%{transform:translateY(0) rotate(0);opacity:0}12%{opacity:.55}85%{opacity:.35}100%{transform:translateY(-330px) rotate(25deg);opacity:0}}
+@keyframes v6-rise{0%,28%{opacity:0}0%{transform:translateY(0) rotate(0)}45%{opacity:.5}85%{opacity:.3}100%{transform:translateY(-330px) rotate(25deg);opacity:0}}
 .access-features span:nth-child(4){color:var(--pink)}
 .journey-stop.is-selected .journey-node:before{animation:v6-ring 2.6s ease-in-out infinite}
 @keyframes v6-ring{50%{box-shadow:0 0 0 9px color-mix(in srgb,var(--journey-color) 12%,transparent),0 5px 12px color-mix(in srgb,var(--journey-color) 20%,transparent)}}
@@ -362,7 +349,7 @@ html[data-mode=teacher] .v6-cloud{cursor:pointer}
 /* Panel del jugador en el inicio */
 .v6-player{display:grid;grid-template-columns:minmax(260px,1.1fr) 2fr;gap:18px;margin:22px 0 8px}
 .v6-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--v6-shadow);position:relative;overflow:hidden}
-.v6-level-card{background:linear-gradient(140deg,#4f46e5,#8b5cf6 55%,#ec4899);color:#fff;border:0}
+.v6-level-card{background:linear-gradient(140deg,#4f46e5,#8b5cf6 55%,#ec4899);color:#fff;border:0;display:flex;flex-direction:column;justify-content:center}
 .v6-level-card:after{content:'';position:absolute;width:220px;height:220px;right:-70px;top:-90px;border-radius:50%;background:rgba(255,255,255,.12)}
 .v6-level-card .mini-label{color:#fff;opacity:.85}
 .v6-level-card h3{font-size:26px;margin:4px 0 2px;color:#fff}
@@ -382,60 +369,7 @@ html[data-mode=teacher] .v6-cloud{cursor:pointer}
 .v6-next{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--blue-soft);color:var(--blue);font-weight:700;font-size:14px}
 .v6-next span{flex:1}
 
-/* Zona de retos */
-.v6-arcade-teaser{margin:34px 0 10px}
-.v6-arcade-teaser .section-head h2,.v6-arena-head h1{background:var(--v6-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.v6-games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.v6-game{--g:var(--blue);--gs:var(--blue-soft);position:relative;overflow:hidden;text-align:left;background:linear-gradient(150deg,var(--gs),var(--card) 75%);border:1px solid color-mix(in srgb,var(--g) 30%,var(--line));border-radius:22px;padding:20px;box-shadow:var(--v6-shadow);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
-.v6-game:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:var(--v6-shadow-lg)}
-.v6-game .v6-game-emoji{font-size:38px;line-height:1;width:62px;height:62px;border-radius:18px;display:grid;place-items:center;background:var(--card);box-shadow:var(--v6-shadow);margin-bottom:6px}
-.v6-game h3{font-size:21px;color:var(--g)}
-.v6-game p{font-size:13px;color:var(--muted);line-height:1.5}
-.v6-game .v6-game-unit{font:800 10px var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--g)}
-.v6-game .v6-game-best{font:700 12px var(--mono);color:var(--muted);margin-top:auto;padding-top:8px}
-.v6-game-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.v6-game-actions button{border-radius:12px;padding:9px 13px;font-weight:800;font-size:13px;border:1px solid var(--g);background:var(--card);color:var(--g);transition:background .2s,color .2s,transform .15s}
-.v6-game-actions button:first-child{background:var(--g);color:#fff}
-.v6-game-actions button:hover{transform:translateY(-2px)}
-.v6-game:after{content:'';position:absolute;width:140px;height:140px;border-radius:50%;right:-50px;top:-50px;background:var(--g);opacity:.08}
-.v6-arena-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:30px 0 18px}
-.v6-arena-head h1{font-size:clamp(34px,4vw,52px);letter-spacing:-1.5px;line-height:1.05;margin-top:8px}
-.v6-arena-head p{color:var(--muted);max-width:620px;margin-top:8px}
-.v6-arena{max-width:860px;margin:10px auto 0}
-.v6-hud{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.v6-hud>div{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 14px;box-shadow:var(--v6-shadow);font-weight:800}
-.v6-hud b{font:800 20px var(--mono)}
-.v6-hud .v6-timer{--t:100;position:relative;overflow:hidden}
-.v6-hud .v6-timer:after{content:'';position:absolute;left:0;bottom:0;height:4px;width:calc(var(--t) * 1%);background:var(--v6-grad);transition:width .25s linear}
-.v6-hud .v6-timer.low b{color:var(--red);animation:v6-live .6s infinite}
-.v6-hud .v6-hud-game{margin-right:auto;color:var(--g)}
-.v6-qcard{background:var(--card);border-radius:24px;border:1px solid var(--line);border-top:6px solid var(--g);padding:26px 28px;box-shadow:var(--v6-shadow-lg);animation:v6-enter .35s ease-out}
-.v6-qcard .mini-label{color:var(--g)}
-.v6-qcard h2{font-size:24px;margin:10px 0 14px;line-height:1.35}
-.v6-qcode{font:800 clamp(22px,3.6vw,34px) var(--mono);letter-spacing:1px;text-align:center;padding:18px 14px;margin:6px 0 18px;border-radius:16px;background:linear-gradient(135deg,var(--gs),var(--card2));color:var(--ink);overflow-wrap:anywhere}
-.v6-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.v6-opt{display:flex;align-items:center;gap:12px;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:14px 16px;font:700 17px var(--mono);color:var(--ink);transition:transform .15s,border-color .2s,background .2s;min-height:62px}
-.v6-opt i{font:800 13px var(--mono);font-style:normal;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;background:var(--card2);color:var(--muted)}
-.v6-opt:nth-child(1) i{background:var(--blue-soft);color:var(--blue)}.v6-opt:nth-child(2) i{background:var(--orange-soft);color:var(--orange)}.v6-opt:nth-child(3) i{background:var(--purple-soft);color:var(--purple)}.v6-opt:nth-child(4) i{background:var(--green-soft);color:var(--green)}
-.v6-opt:not(:disabled):hover{transform:translateY(-3px);border-color:var(--g)}
-.v6-opt:disabled{opacity:1}
-.v6-opt.ok{border-color:var(--green);background:var(--green-soft);animation:v6-correct .6s}
-.v6-opt.ko{border-color:var(--red);background:var(--red-soft);animation:v6-shake .45s}
-.v6-opt.dim{opacity:.45}
-.v6-explain{margin-top:16px;padding:14px 16px;border-radius:14px;background:var(--blue-soft);color:var(--ink);font-size:15px;line-height:1.6}
-.v6-explain.ko{background:var(--red-soft)}
-.v6-explain b{color:var(--blue)}
-.v6-explain.ko b{color:var(--red)}
-.v6-arena-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap;color:var(--muted);font-size:13px}
-.v6-end{text-align:center;padding:34px 26px}
-.v6-end .result-score{margin:10px 0}
-.v6-end-stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0}
-.v6-end-stats span{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:8px 14px;font-weight:800}
-.v6-mode-switch{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:5px;gap:4px;box-shadow:var(--v6-shadow)}
-.v6-mode-switch button{border-radius:12px;padding:9px 14px;font-weight:800;font-size:13px;background:none;color:var(--muted)}
-.v6-mode-switch button[aria-pressed=true]{background:var(--v6-grad);color:#fff}
-
-/* Bitácora: insignias y retos */
+/* Bitácora: insignias */
 .v6-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0 26px}
 .v6-badge{border-radius:18px;padding:16px 14px;background:linear-gradient(150deg,var(--purple-soft),var(--card));border:1px solid color-mix(in srgb,var(--purple) 30%,var(--line));text-align:center}
 .v6-badge span{font-size:36px;display:block;line-height:1.1}
@@ -464,11 +398,24 @@ html[data-mode=teacher] .v6-cloud{cursor:pointer}
 .brand-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand>span:last-child{min-width:0}.top-actions .textbtn{white-space:nowrap}.mode-label{max-width:200px}
 .access-art .art-label{top:14px;bottom:auto}
 @media(max-width:1120px){.v6-level-text small{max-width:90px}}
-@media(max-width:900px){.v6-player{grid-template-columns:1fr}.v6-games{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:760px){.v6-level-text,.v6-streak{display:none}.v6-level{padding:2px;border-radius:50%}.top-actions .v6-arcade-btn span{display:none}.top-actions .v6-arcade-btn{padding:6px 10px}.v6-cloud{font-size:0;padding:6px}.v6-cloud:before{margin:0}.v6-bit-bubble{right:12px;bottom:78px}.phase-tabs{width:100%}.v6-opts{grid-template-columns:1fr}.v6-qcard{padding:20px}}
-@media(max-width:600px){html[data-mode=student] .top-actions .bitacora-btn{display:none}.top-actions{gap:3px!important}.v6-level-ring{width:31px;height:31px}.v6-level-ring b{width:24px;height:24px;font-size:12px}.top-actions .v6-arcade-btn{padding:5px 8px}.v6-games{grid-template-columns:minmax(0,1fr)}.v6-pop-stack{top:auto;bottom:86px;right:12px}.v6-modal-card{padding:24px 20px}.v6-hud>div{padding:7px 11px}.v6-hud b{font-size:17px}.v6-arena-head{padding-top:22px}}
+@media(max-width:900px){.v6-player{grid-template-columns:1fr}}
+@media(max-width:760px){.v6-level-text,.v6-streak{display:none}.v6-level{padding:2px;border-radius:50%}.v6-cloud{font-size:0;padding:6px}.v6-cloud:before{margin:0}.v6-bit-bubble{right:12px;bottom:78px}.phase-tabs{width:100%}}
+@media(max-width:600px){html[data-mode=student] .top-actions .bitacora-btn{display:none}.top-actions{gap:3px!important}.v6-level-ring{width:31px;height:31px}.v6-level-ring b{width:24px;height:24px;font-size:12px}.v6-pop-stack{top:auto;bottom:86px;right:12px}.v6-modal-card{padding:24px 20px}}
 @media(prefers-reduced-motion:reduce){body::after,.heading-art,.journey-node-emoji,.journey-stop.is-selected .journey-node:before,.v6-bits i,.home-course-picture svg path,.access-art svg path,.v6-level-emoji,.v6-big-emoji,.v6-streak.hot,.focus-enter:not(.lab-top)>*{animation:none!important}.v6-bits{display:none}}
-@media print{.v6-transient,.v6-arcade-btn,.v6-level,.v6-streak,.v6-cloud,#v6-sound,#v6-type,.v6-arcade-teaser,.v6-game-actions,body::after{display:none!important}.v6-card,.v6-badge{box-shadow:none;break-inside:avoid}.v6-level-card{background:#fff!important;color:#111!important;border:1px solid #999!important}.v6-level-card *{color:#111!important}}
+@media print{.v6-transient,.v6-level,.v6-streak,.v6-cloud,#v6-sound,body::after{display:none!important}.v6-card,.v6-badge{box-shadow:none;break-inside:avoid}.v6-level-card{background:#fff!important;color:#111!important;border:1px solid #999!important}.v6-level-card *{color:#111!important}}
+
+/* Acceso del profesor */
+.v6-lock{font-size:52px;line-height:1;display:inline-block;animation:v6-medal .8s cubic-bezier(.3,1.6,.5,1)}
+.v6-pass-row{display:flex;gap:8px;align-items:stretch}
+.v6-pass-row input{flex:1;min-width:0;font-size:18px;letter-spacing:1px}
+.v6-pass-row input[aria-invalid=true]{border-color:var(--red);background:var(--red-soft)}
+.v6-modal-card .v6-pass-error{color:var(--red);font-weight:700;font-size:15px;margin-top:2px}
+.teacher-choice .v6-lock-tag{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;color:var(--purple);background:var(--purple-soft);border-radius:20px;padding:2px 9px}
+
+/* Auditoría estética: enlaces con aspecto de botón, pie libre del botón de Bit e ícono del tema. */
+a.btn{text-decoration:none}
+@media(min-width:761px){.footer{padding-right:270px}}
+.v6-theme-icon{width:17px;height:17px;display:block}
 
 </style>
 </head>
@@ -477,10 +424,10 @@ html[data-mode=teacher] .v6-cloud{cursor:pointer}
 <header class="topbar"><div class="top-inner">
 <button class="brand" onclick="goHome()" aria-label="El Arquitecto de Bits, volver al inicio"><span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="16" height="16" rx="3"/><path d="M12 3v5m8-5v5M12 24v5m8-5v5M3 12h5m-5 8h5m16-8h5m-5 8h5M12 13h8v7h-8z"/></svg></span><span><span class="brand-title">El Arquitecto de Bits</span><span class="brand-sub">Arquitectura de Computadoras</span></span></button>
 <button class="mode-label" id="mode-label" onclick="showModePicker()" title="Cambiar modo">Elegir modo</button><div class="top-progress"><span id="progress-label">0 / 17 completados</span><div class="tiny-progress" role="progressbar" aria-label="Progreso del recorrido" aria-valuemin="0" aria-valuemax="17" aria-valuenow="0"><i id="progress-fill" style="width:0%"></i></div></div>
-<div class="top-actions"><span class="xp" id="xp">✦ 0 XP</span><span class="v6-cloud" id="v6-cloud" role="status" hidden></span><span class="v6-streak" id="v6-streak" title="Racha de respuestas correctas" hidden>🔥 <b>0</b></span><button class="v6-level" id="v6-level" onclick="showProgress()" aria-label="Tu nivel y experiencia" hidden><span class="v6-level-ring" id="v6-level-ring" aria-hidden="true"><b id="v6-level-n">1</b></span><span class="v6-level-text"><small id="v6-level-name">Chispa curiosa</small><span id="v6-level-xp">0 XP</span></span></button><button class="textbtn v6-arcade-btn" id="v6-arcade-btn" onclick="showArcade()" title="Zona de retos">🎮 <span>Retos</span></button><button class="textbtn bitacora-btn" onclick="showProgress()">Mi bitácora</button><button class="iconbtn" onclick="toggleTheme()" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema">◐</button><button class="iconbtn" id="v6-sound" onclick="V6.toggleSound()" aria-pressed="true" aria-label="Activar o silenciar los sonidos" title="Sonido">🔊</button><button class="iconbtn hide-mobile" id="v6-type" onclick="V6.toggleType()" aria-pressed="false" aria-label="Usar la tipografía clásica" title="Tipografía clásica">Aa</button><button class="iconbtn hide-mobile" id="projection-btn" onclick="toggleProjection()" aria-label="Activar modo proyección" aria-pressed="false" title="Modo proyección">⛶</button><button class="iconbtn hide-mobile" onclick="downloadHTML()" aria-label="Descargar aplicación HTML" title="Descargar HTML">↓</button></div>
+<div class="top-actions"><span class="xp" id="xp">✦ 0 XP</span><span class="v6-cloud" id="v6-cloud" role="status" hidden></span><span class="v6-streak" id="v6-streak" title="Racha de respuestas correctas" hidden>🔥 <b>0</b></span><button class="v6-level" id="v6-level" onclick="showProgress()" aria-label="Tu nivel y experiencia" hidden><span class="v6-level-ring" id="v6-level-ring" aria-hidden="true"><b id="v6-level-n">1</b></span><span class="v6-level-text"><small id="v6-level-name">Chispa curiosa</small><span id="v6-level-xp">0 XP</span></span></button><button class="textbtn bitacora-btn" onclick="showProgress()">Mi bitácora</button><button class="iconbtn" onclick="toggleTheme()" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><svg class="v6-theme-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button><button class="iconbtn" id="v6-sound" onclick="V6.toggleSound()" aria-pressed="true" aria-label="Activar o silenciar los sonidos" title="Sonido">🔊</button><button class="iconbtn hide-mobile" id="projection-btn" onclick="toggleProjection()" aria-label="Activar modo proyección" aria-pressed="false" title="Modo proyección">⛶</button><button class="iconbtn hide-mobile" onclick="downloadHTML()" aria-label="Descargar aplicación HTML" title="Descargar HTML">↓</button></div>
 </div></header>
 <main id="main" tabindex="-1"></main>
-<footer class="footer"><div>Adaptación didáctica de <b>El Detective de Datos</b> · Diseño de referencia: <b>Aslin Gonzalo Botello Plata</b>.<br>El Arquitecto de Bits · Arquitectura de Computadoras · Obra derivada.</div><span>Sexta edición · 17 laboratorios · 85 preguntas · 6 retos · Hecho para aprender jugando</span></footer>
+<footer class="footer"><div>Adaptación didáctica de <b>El Detective de Datos</b> · Diseño de referencia: <b>Aslin Gonzalo Botello Plata</b>.<br>El Arquitecto de Bits · Arquitectura de Computadoras · Obra derivada.</div><span>Sexta edición · 17 laboratorios · 85 preguntas · 16 insignias · Hecho para aprender jugando</span></footer>
 <button class="chat-launch" id="chat-launch" onclick="toggleChat(true)" aria-label="Abrir chat con Bit, tu guía local" aria-expanded="false" aria-controls="chat-panel"><span class="pet" data-pet></span><span><b>¿Lo vemos juntos?</b><small>Bit · Tu guía de laboratorio</small></span></button>
 <aside class="chat-panel" id="chat-panel" aria-label="Conversación con Bit" hidden><header class="chat-head"><span class="pet" data-pet></span><div><b>Bit</b><small>● Guía local · Sin conexión</small></div><button onclick="toggleChat(false)" aria-label="Cerrar conversación">×</button></header><div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div><div class="suggestions" id="suggestions"></div><form class="chat-form" onsubmit="event.preventDefault();sendChat()"><input id="chat-input" aria-label="Escribe una pregunta para Bit" placeholder="¿Qué es la memoria caché?" maxlength="300" autocomplete="off"><button aria-label="Enviar pregunta" type="submit">↑</button></form><p class="chat-note" id="chat-note">Respuestas de una base didáctica predeterminada. No usa IA ni envía tus preguntas a servidores.</p></aside>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
@@ -3903,7 +3850,7 @@ const unitNames=['Fundamentos digitales','La unidad aritmético-lógica','Entrad
 const unitAt=i=>i<3?0:i<6?1:i<9?2:i<12?3:i<14?4:i<16?5:6;
 function lockIcon(){return '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg>'}
 function sceneIcon(id){const number=modules.findIndex(m=>m.id===id),group=unitAt(Math.max(number,0));let inner='';if(group===0)inner='<rect x="9" y="18" width="12" height="28" rx="4"/><rect x="26" y="18" width="12" height="28" rx="4"/><rect x="43" y="18" width="12" height="28" rx="4"/><path d="M15 25v14m17-14v14m17-14v14"/>';else if(group===1||group===6)inner='<rect x="17" y="17" width="30" height="30" rx="7"/><rect x="25" y="25" width="14" height="14" rx="2"/><path d="M23 8v9m9-9v9m9-9v9M23 47v9m9-9v9m9-9v9M8 23h9m-9 9h9m-9 9h9m30-18h9m-9 9h9m-9 9h9"/>';else if(group===2)inner='<circle cx="13" cy="32" r="8"/><circle cx="50" cy="14" r="8"/><circle cx="50" cy="50" r="8"/><path d="m20 28 22-11m-22 19 22 11m-13-15h15m-3-4 4 4-4 4"/>';else if(group===3)inner='<path d="m32 8 25 13-25 13L7 21zM7 31l25 13 25-13M7 41l25 13 25-13"/>';else if(group===4)inner='<path d="M10 51h46M15 44V31h8v13m6 0V22h8v22m6 0V12h8v32M11 22l17-10 9 4 15-9"/>';else inner='<path d="M32 55V30m0 6c-17 0-21-13-21-13 17-2 21 8 21 8m0 13c17 0 21-14 21-14-17-1-21 9-21 9"/><path d="M18 16q14-11 28 0M24 21q8-6 16 0"/><circle cx="32" cy="25" r="2"/>';return `<svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`}
-function showModePicker(showStudent=false){save();if(isTeacher())teacherWorkspace=state.simStates;state.mode=null;state.view='access';state.showStudent=showStudent;mainHTML(`<section class="access-view focus-enter"><div class="access-story"><span class="eyebrow"><i class="status-dot"></i> Arquitectura de Computadoras · Laboratorio vivo</span><h1>Aprender por dentro.<br><em>Descubrir haciendo.</em></h1><p>Una ruta de 17 escenas para construir, conectar y comprender una computadora. Cada decisión deja una evidencia de aprendizaje.</p><div class="access-art">${heroDiagram()}<span class="access-pet pet" data-pet></span><span class="art-label">CONEXIONES QUE SE CONVIERTEN EN CONOCIMIENTO</span></div><div class="access-features"><span>◉ 51 misiones prácticas</span><span>✦ 85 preguntas</span><span>↗ Funciona sin conexión</span></div></div><div class="access-card panel"><span class="mini-label">Elige tu experiencia</span><h2>Tu laboratorio,<br>tu manera de explorarlo.</h2><button class="role-choice ${showStudent?'selected':''}" onclick="showModePicker(true)"><span class="role-symbol">✧</span><span><b>Soy estudiante</b><small>Misiones, cinco preguntas en orden y avance paso a paso.</small></span><span>→</span></button>${showStudent?`<form class="registration" id="registration" onsubmit="event.preventDefault();registerStudent()" novalidate><label for="full-name">Nombre completo del estudiante</label><input id="full-name" name="fullName" autocomplete="name" maxlength="80" placeholder="Nombres y apellidos" value="${esc(lastStudent)}" aria-describedby="name-help name-error"><p id="name-help">Usa el mismo nombre para continuar tu progreso en este navegador.</p><p class="form-error" id="name-error" role="alert" hidden></p><button class="btn" type="submit">Entrar a mi recorrido <span>→</span></button><p class="registration-note" id="registration-note">${typeof registrationNote==='function'?registrationNote():'Registro local con tu nombre. No se verifica tu identidad ni se envían datos a servidores.'}</p></form>`:''}<div class="role-divider"><span>o presenta en el aula</span></div><button class="role-choice teacher-choice" onclick="enterTeacher()"><span class="role-symbol">◈</span><span><b>Soy profesor</b><small>Acceso libre a todas las escenas, sin requisitos ni evaluación obligatoria.</small></span><span>→</span></button><div class="mode-tip"><span class="pet" data-pet></span><p>La curiosidad abre el laboratorio. La experimentación conecta las ideas.</p></div></div></section>`);focusMain();if(showStudent)document.getElementById('full-name').focus();chatSuggestions()}
+function showModePicker(showStudent=false){save();if(isTeacher())teacherWorkspace=state.simStates;state.mode=null;state.view='access';state.showStudent=showStudent;mainHTML(`<section class="access-view focus-enter"><div class="access-story"><span class="eyebrow"><i class="status-dot"></i> Arquitectura de Computadoras · Laboratorio vivo</span><h1>Aprender por dentro.<br><em>Descubrir haciendo.</em></h1><p>Una ruta de 17 escenas para construir, conectar y comprender una computadora. Cada decisión deja una evidencia de aprendizaje.</p><div class="access-art">${heroDiagram()}<span class="access-pet pet" data-pet></span><span class="art-label">CONEXIONES QUE SE CONVIERTEN EN CONOCIMIENTO</span></div><div class="access-features"><span>◉ 51 misiones prácticas</span><span>✦ 85 preguntas</span><span>↗ Funciona sin conexión</span></div></div><div class="access-card panel"><span class="mini-label">Elige tu experiencia</span><h2>Tu laboratorio,<br>tu manera de explorarlo.</h2><button class="role-choice ${showStudent?'selected':''}" onclick="showModePicker(true)"><span class="role-symbol">✧</span><span><b>Soy estudiante</b><small>Misiones, cinco preguntas en orden y avance paso a paso.</small></span><span>→</span></button>${showStudent?`<form class="registration" id="registration" onsubmit="event.preventDefault();registerStudent()" novalidate><label for="full-name">Nombre completo del estudiante</label><input id="full-name" name="fullName" autocomplete="name" maxlength="80" placeholder="Nombres y apellidos" value="${esc(lastStudent)}" aria-describedby="name-help name-error"><p id="name-help">Usa el mismo nombre para continuar tu progreso en este navegador.</p><p class="form-error" id="name-error" role="alert" hidden></p><button class="btn" type="submit">Entrar a mi recorrido <span>→</span></button><p class="registration-note" id="registration-note">${typeof registrationNote==='function'?registrationNote():'Registro local con tu nombre. No se verifica tu identidad ni se envían datos a servidores.'}</p></form>`:''}<div class="role-divider"><span>o presenta en el aula</span></div><button class="role-choice teacher-choice" onclick="enterTeacher()"><span class="role-symbol">◈</span><span><b>Soy profesor</b><small>Acceso libre a todas las escenas, sin requisitos ni evaluación obligatoria.</small><span class="v6-lock-tag">🔒 Requiere contraseña</span></span><span>→</span></button><div class="mode-tip"><span class="pet" data-pet></span><p>La curiosidad abre el laboratorio. La experimentación conecta las ideas.</p></div></div></section>`);focusMain();if(showStudent)document.getElementById('full-name').focus();chatSuggestions()}
 function prepareStudentModels(profile){if(profile.modelRevision!==4){for(const m of modules){const r=state.records[m.id];if(!r||!r.passed){delete state.simStates[m.id];if(r){r.history=[];r.witnesses={}}}}profile.modelRevision=4}for(const m of modules){const data=state.simStates[m.id];if(!data||typeof data!=='object'||Array.isArray(data))continue;for(const [key,rule]of Object.entries(window.SIM_INPUT_SCHEMA?.[m.id]||{})){if(!Object.hasOwn(data,key))continue;const normalized=normalizeSimInput(rule,data[key]);data[key]=normalized===undefined?SIMS[m.id].initial()[key]:normalized}}}
 function registerStudent(){let e=document.getElementById('full-name');let name=e.value.trim().replace(/\s+/g,' ');if(!validName(name)){let error=document.getElementById('name-error');error.hidden=false;error.textContent='Escribe al menos un nombre y un apellido completos, usando letras.';e.setAttribute('aria-invalid','true');e.focus();return false}save();lastStudent=name;let key=name.toLocaleLowerCase('es');let p=profiles[key];if(!p||typeof p!=='object')p={name,records:{},simStates:{},current:0};profiles[key]=p;state.mode='student';state.profileKey=key;state.name=name;state.records=p.records&&typeof p.records==='object'?p.records:{};state.simStates=p.simStates&&typeof p.simStates==='object'?p.simStates:{};state.game=p.game&&typeof p.game==='object'&&!Array.isArray(p.game)?p.game:{};prepareStudentModels(p);state.current=bounded(p.current,0,16);if(!canEnterModule(state.current))state.current=Math.max(0,modules.findIndex(m=>!completed(m)));state.phase=0;clearChat();save();goHome();toast('¡Bienvenido, '+name.split(' ')[0]+'! Tu recorrido está listo.');return true}
 function enterTeacher(){save();state.mode='teacher';state.name='';state.profileKey=null;state.records={};state.game={};state.simStates=teacherWorkspace;state.current=0;state.phase=1;clearChat();applyMode();goHome()}
@@ -4116,12 +4063,17 @@ bits=function(n,b,act){return `<div class="chip-row binary-bits bulb-bank" aria-
 })();
 </script>
 <script id="v6-layer">
-/* Sexta edición: niveles, insignias, Zona de retos y registro en vivo con Google Sheets.
+/* Sexta edición: niveles, insignias, contraseña de profesor y registro en vivo con Google Sheets.
    Esta capa envuelve el motor anterior: los modelos, las misiones y las reglas de acceso no cambian.
 
-   REGISTRO EN GOOGLE SHEETS (opcional). Pega aquí la URL /exec de tu aplicación web de Apps Script,
-   o configúrala desde el modo profesor (botón ☁ Registro en vivo). Ver README.md. */
-window.REGISTRO_CONFIG = {endpoint: '', clave: '', curso: ''};
+   REGISTRO EN GOOGLE SHEETS. La aplicación ya trae la dirección de la aplicación web de Apps Script
+   (google-apps-script/Code.gs) que escribe en la hoja del curso. Los estudiantes no configuran nada. */
+window.REGISTRO_CONFIG = {
+  endpoint: '',
+  clave: '',
+  curso: '',
+  hoja: 'https://docs.google.com/spreadsheets/d/1LuBhb1o5jS_nSA9nxHO_x_9FScc9YebUL4bv9bzocts/edit'
+};
 
 (()=>{
 'use strict';
@@ -4130,20 +4082,17 @@ const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
 const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 const P=a=>a[Math.floor(Math.random()*a.length)];
 const nf=(v,d=2)=>Number(v).toLocaleString('es-CO',{maximumFractionDigits:d});
-const minus=v=>String(v).replace('-','−');
 const uid=()=>(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2,10));
 const $=id=>document.getElementById(id);
 
 /* ------------------------------------------------------------------ preferencias */
 const PREF='arquitecto-de-bits-preferencias';
-const prefs={sound:true,classic:false};
+const prefs={sound:true};
 try{Object.assign(prefs,JSON.parse(localStorage.getItem(PREF))||{})}catch(e){}
 function savePrefs(){try{localStorage.setItem(PREF,JSON.stringify(prefs))}catch(e){}}
 function applyPrefs(){
-  document.documentElement.classList.toggle('classic-type',!!prefs.classic);
-  const s=$('v6-sound'),t=$('v6-type');
+  const s=$('v6-sound');
   if(s){s.textContent=prefs.sound?'🔊':'🔇';s.setAttribute('aria-pressed',String(!!prefs.sound));s.title=prefs.sound?'Silenciar sonidos':'Activar sonidos'}
-  if(t){t.setAttribute('aria-pressed',String(!!prefs.classic));t.title=prefs.classic?'Volver a la tipografía moderna':'Usar la tipografía clásica (Times New Roman)'}
 }
 
 /* ------------------------------------------------------------------ sonido sintetizado (sin archivos) */
@@ -4151,7 +4100,7 @@ const Sound=(()=>{
   let ctx=null;
   const ac=()=>{if(!ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;ctx=new C()}if(ctx.state==='suspended')ctx.resume();return ctx};
   const tone=(c,f,start,dur,type='sine',gain=.06)=>{const t=c.currentTime+start,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(gain,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g).connect(c.destination);o.start(t);o.stop(t+dur+.05)};
-  const songs={tick:[[880,0,.05,'triangle',.025]],good:[[523,0,.12],[659,.08,.12],[784,.16,.22]],bad:[[247,0,.16,'triangle',.05],[196,.12,.26,'triangle',.045]],mission:[[523,0,.1],[659,.08,.1],[784,.16,.1],[1047,.24,.32]],badge:[[988,0,.1],[1319,.1,.3]],level:[[392,0,.12],[523,.12,.12],[659,.24,.12],[784,.36,.14],[1047,.52,.5]],start:[[440,0,.08],[660,.09,.12]],end:[[784,0,.12],[659,.12,.12],[523,.24,.3]]};
+  const songs={tick:[[880,0,.05,'triangle',.025]],good:[[523,0,.12],[659,.08,.12],[784,.16,.22]],bad:[[247,0,.16,'triangle',.05],[196,.12,.26,'triangle',.045]],mission:[[523,0,.1],[659,.08,.1],[784,.16,.1],[1047,.24,.32]],badge:[[988,0,.1],[1319,.1,.3]],level:[[392,0,.12],[523,.12,.12],[659,.24,.12],[784,.36,.14],[1047,.52,.5]]};
   return {play(name){if(!prefs.sound)return;try{const c=ac();if(!c)return;(songs[name]||[]).forEach(n=>tone(c,n[0],n[1],n[2],n[3],n[4]))}catch(e){}}};
 })();
 
@@ -4191,22 +4140,21 @@ function modal(html,{onClose,left=false}={}){
   closeModal();const m=document.createElement('div');m.className='v6-modal v6-transient';m.id='v6-modal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
   m.innerHTML=`<div class="v6-modal-card ${left?'left':''}" tabindex="-1">${html}</div>`;
   m.addEventListener('click',e=>{if(e.target===m)closeModal()});m._onClose=onClose;document.body.appendChild(m);
-  const first=m.querySelector('[data-autofocus]')||m.querySelector('button,input')||m.querySelector('.v6-modal-card');setTimeout(()=>first?.focus(),30);return m;
+  const first=m.querySelector('[data-autofocus]')||m.querySelector('button,input')||m.querySelector('.v6-modal-card');first?.focus();requestAnimationFrame(()=>{if(m.isConnected&&!m.contains(document.activeElement))first?.focus()});return m;
 }
 function closeModal(){const m=$('v6-modal');if(m){const f=m._onClose;m.remove();if(typeof f==='function')f()}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('v6-modal'))closeModal()});
 
 /* ------------------------------------------------------------------ niveles, XP e insignias */
-const LEVELS=[[0,'Chispa curiosa','✨'],[100,'Explorador de bits','💡'],[250,'Domador de compuertas','🔀'],[450,'Constructor de ALU','🧮'],[700,'Piloto de buses','🚌'],[1000,'Guardián de la memoria','💾'],[1400,'Estratega de la caché','⚡'],[1900,'Ingeniero de sistemas','🛠️'],[2500,'Diseñador de arquitecturas','🏗️'],[3200,'Arquitecto de Bits','👑']];
+const LEVELS=[[0,'Chispa curiosa','✨'],[100,'Explorador de bits','💡'],[250,'Domador de compuertas','🔀'],[450,'Constructor de ALU','🧮'],[700,'Piloto de buses','🚌'],[1000,'Guardián de la memoria','💾'],[1350,'Estratega de la caché','⚡'],[1750,'Ingeniero de sistemas','🛠️'],[2150,'Diseñador de arquitecturas','🏗️'],[2600,'Arquitecto de Bits','👑']];
 function levelInfo(xp){let i=0;while(i+1<LEVELS.length&&xp>=LEVELS[i+1][0])i++;const [min,name,emoji]=LEVELS[i],next=i+1<LEVELS.length?LEVELS[i+1]:null;return {n:i+1,name,emoji,min,next:next?next[0]:null,nextName:next?next[1]:null,pct:next?Math.max(0,Math.min(1,(xp-min)/(next[0]-min))):1}}
-function game(){if(!state.game||typeof state.game!=='object'||Array.isArray(state.game))state.game={};const g=state.game;for(const k of ['badges','arcade','failed'])if(!g[k]||typeof g[k]!=='object')g[k]={};for(const k of ['streak','bestStreak','chat'])g[k]=Math.max(0,Number(g[k])||0);return g}
+function game(){if(!state.game||typeof state.game!=='object'||Array.isArray(state.game))state.game={};const g=state.game;for(const k of ['badges','failed'])if(!g[k]||typeof g[k]!=='object')g[k]={};for(const k of ['streak','bestStreak','chat'])g[k]=Math.max(0,Number(g[k])||0);return g}
 const completedCount=()=>modules.filter(completed).length;
 const totalMissions=()=>modules.reduce((a,m)=>a+missionCount(m),0);
 const bestSum=()=>modules.reduce((a,m)=>a+record(m).best,0);
 const baseXP=()=>modules.reduce((a,m)=>a+record(m).best*20+missionCount(m)*25,0);
-const arcadeXP=()=>Object.values(game().arcade).reduce((a,x)=>a+Math.min(150,Math.floor((Number(x&&x.best)||0)/2)),0);
 const badgeXP=()=>Object.keys(game().badges).length*15;
-function totalXP(){return isStudent()?baseXP()+arcadeXP()+badgeXP():0}
+function totalXP(){return isStudent()?baseXP()+badgeXP():0}
 window.totalXP=totalXP;
 
 const BADGES=[
@@ -4218,9 +4166,6 @@ const BADGES=[
   {id:'perseverancia',emoji:'💪',title:'Perseverancia',desc:'Supera una evaluación después de un intento sin aprobar.',test:()=>!!game().comeback},
   {id:'explorador',emoji:'🔭',title:'Explorador incansable',desc:'Realiza 150 interacciones en los laboratorios.',test:()=>modules.reduce((a,m)=>a+record(m).explored,0)>=150},
   {id:'curioso',emoji:'💬',title:'Mente curiosa',desc:'Hazle 5 preguntas a Bit.',test:()=>game().chat>=5},
-  {id:'jugador',emoji:'🎮',title:'Jugador de bits',desc:'Termina tu primera ronda en la Zona de retos.',test:()=>Object.keys(game().arcade).length>=1},
-  {id:'campeon',emoji:'🏆',title:'Campeón contrarreloj',desc:'Consigue 150 puntos en una ronda de 60 segundos.',test:()=>Object.values(game().arcade).some(x=>(Number(x&&x.bestTimed)||0)>=150)},
-  {id:'coleccionista',emoji:'🕹️',title:'Coleccionista de retos',desc:'Juega los seis retos.',test:()=>Object.keys(game().arcade).length>=6},
   ...window.TIMELINE_THEMES.map((t,u)=>({id:'unidad-'+(u+1),emoji:t.emoji,color:t.color,title:'Unidad '+(u+1)+' · '+t.label,desc:'Completa todas las escenas de la unidad '+(u+1)+'.',test:()=>modules.every((m,i)=>unitAt(i)!==u||completed(m))})),
   {id:'arquitecto',emoji:'👑',title:'Arquitecto de Bits',desc:'Completa las 17 escenas del recorrido.',test:()=>completedCount()===17}
 ];
@@ -4237,7 +4182,6 @@ function paintLevel(){
   const x=$('xp');if(x)x.textContent='✦ '+xp+' XP';
 }
 
-let celebrateQueue=Promise.resolve();
 function checkProgress(silent=false){
   if(!isStudent())return;
   const g=game(),earned=[];
@@ -4272,7 +4216,6 @@ finishInteraction=function(won=[]){
   checkProgress();
 };
 
-const pendingSets=new Map();
 const baseSet=simSet;
 simSet=function(key,value,source){
   const id=state.view==='module'?current().id:null,r=baseSet(key,value,source);
@@ -4333,7 +4276,6 @@ const basePaint=paintTop;paintTop=function(){basePaint();paintLevel()};
 let lastView='';
 const baseMain=mainHTML;
 mainHTML=function(...args){
-  if(state.view!=='arcade')stopArena();
   const out=baseMain(...args);
   const key=state.view+(state.view==='module'?':'+current().id+':'+state.phase:'');
   if(key!==lastView){lastView=key;if(isStudent())track('vista',{accion:state.view,valor:state.view==='module'?['Aprende','Experimenta','Comprueba'][state.phase]:''})}
@@ -4346,27 +4288,24 @@ const baseModePicker=showModePicker;
 showModePicker=function(showStudent=false){
   const r=baseModePicker(showStudent);
   const art=document.querySelector('.access-art');if(art&&!art.querySelector('.v6-bits'))art.insertAdjacentHTML('afterbegin',bitsRain());
-  const feats=document.querySelector('.access-features');if(feats&&feats.children.length===3)feats.insertAdjacentHTML('beforeend','<span>🎮 6 retos · '+BADGES.length+' insignias</span>');
+  const feats=document.querySelector('.access-features');if(feats&&feats.children.length===3)feats.insertAdjacentHTML('beforeend','<span>🏅 '+BADGES.length+' insignias · 10 niveles</span>');
   updateNotes();return r;
 };
 
 function nextGoal(){
-  const i=modules.findIndex(m=>!completed(m));if(i<0)return {text:'¡Completaste las 17 escenas! Supera tus récords en la Zona de retos.',action:'showArcade()',label:'Ir a los retos'};
+  const i=modules.findIndex(m=>!completed(m));if(i<0)return {text:'¡Completaste las 17 escenas! Repasa cualquier escena cuando quieras.',action:'showProgress()',label:'Ver mi bitácora'};
   const m=modules[i],task=(MISSIONS[m.id]||[]).find(t=>!record(m).missions[t.id]);
   return task?{text:'Escena '+(i+1)+' · '+m.shortTitle+': «'+task.title+'».',action:`goModule(${i},1)`,label:'Ir a la misión'}:{text:'Escena '+(i+1)+' · '+m.shortTitle+': responde tus cinco preguntas.',action:`goModule(${i},2)`,label:'Responder'};
 }
 function statHTML(emoji,value,label,color){return `<div class="v6-stat" style="--stat:var(--${color});--stat-soft:var(--${color}-soft)"><span aria-hidden="true">${emoji}</span><b>${value}</b><small>${label}</small></div>`}
-function levelCardHTML(){const xp=totalXP(),lv=levelInfo(xp);return `<div class="v6-card v6-level-card"><div class="v6-level-head"><span class="v6-level-emoji" aria-hidden="true">${lv.emoji}</span><div><span class="mini-label">Nivel ${lv.n} de ${LEVELS.length}</span><h3>${esc(lv.name)}</h3><p>${nf(xp,0)} XP acumulados</p></div></div><div class="v6-xpbar" role="progressbar" aria-label="Progreso hacia el siguiente nivel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(lv.pct*100)}"><i style="width:${Math.round(lv.pct*100)}%"></i></div><p>${lv.next?'Faltan <b>'+(lv.next-xp)+' XP</b> para «'+esc(lv.nextName)+'».':'¡Nivel máximo alcanzado!'} Ganas XP con misiones (25), aciertos en tu mejor evaluación (20), insignias (15) y retos.</p></div>`}
+function levelCardHTML(){const xp=totalXP(),lv=levelInfo(xp);return `<div class="v6-card v6-level-card"><div class="v6-level-head"><span class="v6-level-emoji" aria-hidden="true">${lv.emoji}</span><div><span class="mini-label">Nivel ${lv.n} de ${LEVELS.length}</span><h3>${esc(lv.name)}</h3><p>${nf(xp,0)} XP acumulados</p></div></div><div class="v6-xpbar" role="progressbar" aria-label="Progreso hacia el siguiente nivel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(lv.pct*100)}"><i style="width:${Math.round(lv.pct*100)}%"></i></div><p>${lv.next?'Faltan <b>'+(lv.next-xp)+' XP</b> para «'+esc(lv.nextName)+'».':'¡Nivel máximo alcanzado!'} Ganas XP con cada misión (25), cada acierto de tu mejor evaluación (20) y cada insignia (15).</p></div>`}
 function playerPanelHTML(){
   const g=game(),earned=BADGES.filter(b=>g.badges[b.id]),goal=nextGoal();
   return `<section class="v6-player" aria-label="Tu panel de jugador">${levelCardHTML()}<div class="v6-card"><span class="mini-label">Tu progreso en el juego</span><div class="v6-stats" style="margin-top:12px">${statHTML('🧩',completedCount()+'/17','escenas','blue')}${statHTML('✅',totalMissions()+'/51','misiones','green')}${statHTML('🎯',bestSum()+'/85','aciertos','purple')}${statHTML('🔥',g.bestStreak,'mejor racha','orange')}${statHTML('🏅',earned.length+'/'+BADGES.length,'insignias','pink')}</div><div class="v6-badge-row">${earned.slice(-8).map(b=>`<span class="v6-mini-badge" title="${esc(b.title)}">${b.emoji}</span>`).join('')||'<small>Tu primera insignia llegará con tu primera misión.</small>'}<button class="textbtn" onclick="showProgress()" style="margin-left:auto;color:var(--purple)">Ver colección →</button></div><div class="v6-next"><span>🎯 <b>Próximo objetivo:</b> ${esc(goal.text)}</span><button class="btn small" onclick="${goal.action}">${goal.label} →</button></div></div></section>`;
 }
 function teacherPanelHTML(){
-  const on=registroActivo();
-  return `<section class="v6-teacher" aria-label="Herramientas del aula"><div class="v6-card"><span aria-hidden="true">☁️</span><div style="flex:1"><b>Registro en vivo con Google Sheets</b><p>${on?'Activo'+(regCfg.curso?' · Curso '+esc(regCfg.curso):'')+'. Cada interacción de tus estudiantes llega a la hoja en segundos.':'Desactivado. Conecta tu hoja para seguir en tiempo real misiones, respuestas y retos.'}</p></div><button class="btn small" onclick="V6.openRegistro()">${on?'Revisar conexión':'Conectar hoja'}</button></div><div class="v6-card"><span aria-hidden="true">🎮</span><div style="flex:1"><b>Zona de retos para la clase</b><p>Proyecta una ronda contrarreloj y compitan por equipos.</p></div><button class="btn small" onclick="showArcade()">Abrir retos</button></div></section>`;
-}
-function arcadeTeaserHTML(){
-  return `<section class="v6-arcade-teaser"><div class="section-head"><div><span class="eyebrow">Practica jugando</span><h2>Zona de retos ⚡</h2><p>Seis juegos con ejercicios nuevos en cada ronda. Contrarreloj de 60 segundos o práctica sin prisa.</p></div><button class="btn" onclick="showArcade()">Entrar a la Zona de retos →</button></div><div class="v6-games">${ARCADE.map(a=>gameCardHTML(a,false)).join('')}</div></section>`;
+  const on=registroActivo(),hoja=String((window.REGISTRO_CONFIG||{}).hoja||'');
+  return `<section class="v6-teacher" aria-label="Herramientas del aula"><div class="v6-card"><span aria-hidden="true">☁️</span><div style="flex:1"><b>Registro en vivo con Google Sheets</b><p>${on?'Activo. Cada interacción de los estudiantes llega a la hoja del curso en segundos: no hay nada que configurar.':'Pendiente de publicar la aplicación web de Apps Script. Mientras tanto, el progreso queda solo en cada navegador.'}</p></div>${/^https:\/\/docs\.google\.com\//.test(hoja)?`<a class="btn small" href="${esc(hoja)}" target="_blank" rel="noopener">Abrir la hoja ↗</a>`:''}</div><div class="v6-card"><span aria-hidden="true">⛶</span><div style="flex:1"><b>Modo presentación</b><p>Abre una escena y usa Ampliar para proyectar la simulación en el aula.</p></div><button class="btn small" onclick="goModule(${Math.max(0,state.current)},1)">Presentar →</button></div></section>`;
 }
 const baseHome=goHome;
 goHome=function(){
@@ -4374,8 +4313,7 @@ goHome=function(){
   if(state.view!=='home')return r;
   if(isStudent())checkProgress(true);
   const intro=document.querySelector('.home-intro');
-  if(intro){intro.insertAdjacentHTML('afterend',isStudent()?playerPanelHTML():isTeacher()?teacherPanelHTML():'');const pic=document.querySelector('.home-course-picture');if(pic&&!pic.querySelector('.v6-bits')){pic.style.position='relative';pic.insertAdjacentHTML('afterbegin',bitsRain(10))}}
-  const journey=document.querySelector('.learning-journey');if(journey)journey.insertAdjacentHTML('afterend',arcadeTeaserHTML());
+  if(intro)intro.insertAdjacentHTML('afterend',isStudent()?playerPanelHTML():isTeacher()?teacherPanelHTML():'');
   return r;
 };
 const baseProgress=showProgress;
@@ -4384,153 +4322,21 @@ showProgress=function(){
   if(state.view!=='progress')return r;
   const g=game(),id=document.querySelector('.student-identity');
   const badges=`<div class="v6-section-title"><h2>🏅 Insignias</h2><span class="pill">${BADGES.filter(b=>g.badges[b.id]).length} / ${BADGES.length}</span></div><div class="v6-badges">${BADGES.map(b=>{const at=g.badges[b.id];return `<div class="v6-badge ${at?'':'locked'}"><span aria-hidden="true">${b.emoji}</span><b>${esc(b.title)}</b><small>${esc(b.desc)}</small>${at?`<small style="color:var(--green);font-weight:800">✓ ${new Date(at).toLocaleDateString('es-CO')}</small>`:''}</div>`}).join('')}</div>`;
-  const arcade=`<div class="v6-section-title"><h2>🎮 Récords de la Zona de retos</h2><button class="btn small secondary no-print" onclick="showArcade()">Jugar →</button></div><div class="table-scroll"><table class="report-table"><thead><tr><th scope="col">Reto</th><th scope="col">Rondas</th><th scope="col">Récord contrarreloj</th><th scope="col">Récord práctica</th><th scope="col">Precisión</th></tr></thead><tbody>${ARCADE.map(a=>{const x=g.arcade[a.id]||{};return `<tr><td>${a.emoji} ${esc(a.title)}</td><td>${x.plays||0}</td><td>${x.bestTimed||0}</td><td>${x.bestPractice||0}</td><td>${x.total?Math.round(100*x.correct/x.total)+' %':'—'}</td></tr>`}).join('')}</tbody></table></div>`;
   const anchor=document.querySelector('.progress-view .result-actions')||id;
-  if(anchor)anchor.insertAdjacentHTML('afterend',`<div class="v6-player" style="grid-template-columns:1fr">${levelCardHTML()}</div>`+badges+arcade);
+  if(anchor)anchor.insertAdjacentHTML('afterend',`<div class="v6-player" style="grid-template-columns:1fr">${levelCardHTML()}</div>`+badges);
   return r;
 };
-
-/* ------------------------------------------------------------------ Zona de retos: ejercicios generados y verificados */
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function options(correct,distractors,fallback){
-  const set=[String(correct)];
-  for(const d of distractors){const t=String(d);if(d!==null&&d!==undefined&&!set.includes(t)&&set.length<4)set.push(t)}
-  for(let guard=0;set.length<4&&guard<80;guard++){const t=String(fallback());if(!set.includes(t))set.push(t)}
-  const opts=shuffle(set);return {options:opts,answer:opts.indexOf(String(correct))};
-}
-const weights=n=>[...bin(n)].map((c,i)=>c==='1'?2**(7-i):0).filter(Boolean);
-function genBinario(){
-  const t=P(['b2d','b2d','d2h','h2d','d2b','bus']);
-  if(t==='b2d'){const n=R(1,255),w=weights(n);return {...options(n,[n^(1<<R(0,7)),parseInt([...bin(n)].reverse().join(''),2),n^(1<<R(0,7)),n+1,n-1].filter(x=>x>=0&&x<=255&&x!==n),()=>R(0,255)),topic:'Binario → decimal',prompt:'¿Cuánto vale este byte en decimal?',code:bin(n)+'₂',explain:`Suma los pesos de los bits en 1: ${w.join(' + ')} = ${n}.`}}
-  if(t==='d2h'){const n=R(16,255),hi=n>>4,lo=n&15,c='0x'+hx(n);return {...options(c,['0x'+hx(lo*16+hi),n<100?'0x'+String(n).padStart(2,'0'):null,'0x'+hx((n+16)&255),'0x'+hx(n^1)],()=>'0x'+hx(R(16,255))),topic:'Decimal → hexadecimal',prompt:'¿Cómo se escribe este número decimal en hexadecimal?',code:String(n),explain:`${n} = ${hi} × 16 + ${lo}. ${hi} se escribe ${hi.toString(16).toUpperCase()} y ${lo} se escribe ${lo.toString(16).toUpperCase()}: ${c}.`}}
-  if(t==='h2d'){const n=R(16,255),hi=n>>4,lo=n&15;return {...options(n,[lo*16+hi,hi<10&&lo<10?hi*10+lo:null,n+16<=255?n+16:n-16,n-1],()=>R(16,255)),topic:'Hexadecimal → decimal',prompt:'¿Qué valor decimal tiene este número hexadecimal?',code:'0x'+hx(n),explain:`0x${hx(n)} = ${hi} × 16 + ${lo} = ${hi*16} + ${lo} = ${n}.`}}
-  if(t==='d2b'){const n=R(1,255),w=weights(n),ks=shuffle([0,1,2,3,4,5,6,7]);return {...options(bin(n),ks.slice(0,3).map(k=>bin(n^(1<<k))),()=>bin(R(0,255))),topic:'Decimal → binario',prompt:'¿Qué byte representa este número decimal?',code:String(n),explain:`${n} = ${w.join(' + ')}. Esos pesos se encienden: ${bin(n)}.`}}
-  const L=P([4,8,10,12,16,20]),c=2**L;return {...options(nf(c,0),[nf(2*L,0),nf(L*L,0),nf(2**(L-1),0),nf(2**(L+1),0)],()=>nf(2**R(3,22),0)),topic:'Bus de direcciones',prompt:`Un bus de direcciones tiene ${L} líneas. ¿Cuántas posiciones distintas puede seleccionar?`,code:L+' líneas → ?',explain:`Cada línea duplica las combinaciones: 2^${L} = ${nf(c,0)} direcciones, numeradas de 0 a ${nf(c-1,0)}.`};
-}
-const GATES={AND:[(a,b)=>a&b,'vale 1 solo si ambos bits son 1'],OR:[(a,b)=>a|b,'vale 1 si al menos un bit es 1'],XOR:[(a,b)=>a^b,'vale 1 si los bits son diferentes'],NAND:[(a,b)=>~(a&b)&15,'es la negación de AND: vale 0 solo si ambos bits son 1'],NOR:[(a,b)=>~(a|b)&15,'es la negación de OR: vale 1 solo si ambos bits son 0']};
-function genPuertas(){
-  const a=R(0,15),b=R(0,15),op=P(Object.keys(GATES)),res=GATES[op][0](a,b);
-  const others=Object.keys(GATES).filter(k=>k!==op).map(k=>bin(GATES[k][0](a,b),4));
-  return {...options(bin(res,4),shuffle(others).concat([bin(res^(1<<R(0,3)),4)]),()=>bin(R(0,15),4)),topic:'Operación '+op,prompt:`Calcula la operación bit a bit con 4 bits. ${op} ${GATES[op][1]}.`,code:`${bin(a,4)} ${op} ${bin(b,4)}`,explain:`Columna por columna: ${[3,2,1,0].map(k=>`${a>>k&1}·${b>>k&1}→${res>>k&1}`).join(', ')}. Resultado: ${bin(res,4)} (${res} en decimal).`};
-}
-function genALU(){
-  const op=P(['add','add','add','sub','sub']);let a,b;
-  if(op==='add'){const c=P(['carry','overflow','zero','normal','neg']);
-    if(c==='carry'){a=R(129,255);b=R(256-a,255)}else if(c==='overflow'){a=R(64,127);b=R(128-a,127)}else if(c==='zero'){a=R(1,255);b=256-a}else if(c==='normal'){a=R(0,90);b=R(0,37)}else{a=R(128,191);b=R(128,383-a)}}
-  else{const c=P(['borrow','overflow','zero','normal']);
-    if(c==='borrow'){a=R(0,120);b=R(a+1,127)}else if(c==='overflow'){a=R(1,127);b=R(128,Math.min(255,a+128))}else if(c==='zero'){a=b=R(1,255)}else{a=R(60,127);b=R(0,a-1)}}
-  const r=aluResult(a,b,op),first=op==='add'?['C',r.c]:['B',r.borrow],flags=[first,['Z',r.z],['N',r.n],['V',r.v]];
-  const fmt=f=>f.map(([k,v])=>k+'='+v).join(' · ');
-  const flips=shuffle([0,1,2,3]).slice(0,3).map(k=>fmt(flags.map(([n,v],i)=>[n,i===k?1-v:v])));
-  const sym=op==='add'?'+':'−',signed=op==='add'?r.sa+r.sb:r.sa-r.sb;
-  const why=op==='add'?`${a} + ${b} = ${a+b}${a+b>=256?' ≥ 256: sobra un noveno bit, C = 1':' < 256: cabe en 8 bits, C = 0'}`:`${a} ${a<b?'<':'≥'} ${b}: ${a<b?'la resta sin signo necesita préstamo, B = 1':'no hace falta préstamo, B = 0'}`;
-  return {...options(fmt(flags),flips,()=>fmt(flags.map(([n])=>[n,R(0,1)]))),topic:op==='add'?'Suma de 8 bits':'Resta de 8 bits',prompt:`ALU de 8 bits: ¿qué banderas produce ${a} ${sym} ${b}? (${op==='add'?'C = acarreo':'B = préstamo'}, Z = cero, N = signo, V = desbordamiento con signo)`,code:`${bin(a)} ${sym} ${bin(b)}`,explain:`Se guarda ${bin(r.r)} = ${r.r}. ${why}. Z = ${r.z} porque el resultado ${r.r===0?'es':'no es'} cero. N = ${r.n}: copia el bit 7. Con signo: ${minus(r.sa)} ${sym} ${minus(r.sb)} = ${minus(signed)}, ${r.v?'fuera':'dentro'} del rango −128…127, así que V = ${r.v}.`};
-}
-function cacheRun(seq){const lines=[null,null,null,null];return seq.map(a=>{const i=a%4,t=Math.floor(a/4),old=lines[i],hit=!!old&&old.tag===t;if(!hit)lines[i]={tag:t,address:a};return {a,i,t,hit,old}})}
-function genCache(){
-  if(Math.random()<.65){
-    const seq=Array.from({length:3},()=>R(0,15)),base=P(seq),target=Math.random()<.5?base:(base+4*R(1,3))%16;
-    const run=cacheRun([...seq,target]),last=run[3],other=(last.i+R(1,3))%4,ok=(last.hit?'HIT':'MISS')+' · línea '+last.i;
-    const why=!last.old?`La línea ${last.i} estaba vacía: MISS obligatorio y se carga desde RAM.`:last.hit?`La línea ${last.i} ya guarda la etiqueta ${last.t} (dirección ${last.old.address}): HIT.`:`La línea ${last.i} guarda la etiqueta ${last.old.tag} (dirección ${last.old.address}), no la ${last.t}: MISS por conflicto.`;
-    return {...options(ok,['HIT · línea '+last.i,'MISS · línea '+last.i,'HIT · línea '+other,'MISS · línea '+other],()=>P(['HIT','MISS'])+' · línea '+R(0,3)),topic:'Mapeo directo',prompt:`Caché de mapeo directo con 4 líneas, inicialmente vacía. Se leyeron, en orden, ${seq.join(', ')}. ¿Qué ocurre al leer ${target}?`,code:`${seq.join(' → ')} → ${target} ?`,explain:`${target} mod 4 = ${last.i} (línea) y ⌊${target} / 4⌋ = ${last.t} (etiqueta). ${why}`};
-  }
-  const pool=shuffle([0,1,2,3,4,5,6,7,8]).slice(0,3),seq=Array.from({length:4},()=>P(pool)),run=cacheRun(seq),hits=run.filter(x=>x.hit).length,cost=hits+(4-hits)*21;
-  return {...options(cost+' ciclos',[(cost+20)+' ciclos',cost>24?(cost-20)+' ciclos':null,'84 ciclos','4 ciclos',(4*21-hits)+' ciclos'],()=>(4+20*R(0,4))+' ciclos'),topic:'Costo de accesos',prompt:`Desde una caché vacía de 4 líneas (mapeo directo), ¿cuántos ciclos cuesta leer ${seq.join(', ')}? Un HIT cuesta 1 ciclo; un MISS, 21.`,code:seq.join(' → '),explain:run.map(x=>`${x.a}: ${x.hit?'HIT (1)':'MISS (21)'}`).join(' · ')+`. Total: ${cost} ciclos; tasa de aciertos ${hits}/4 = ${hits*25} %.`};
-}
-function genRend(){
-  const t=P(['amdahl','amdahl','time','freq']);
-  if(t==='amdahl'){const p=P([50,60,75,80,90,95]),N=P([2,4,8,16]),f=p/100,den=(1-f)+f/N,S=1/den;return {...options(nf(S)+'×',[N+'×',nf(1/(1-f))+'×',nf(1/((1-f)/N+f))+'×',nf(f*N)+'×'],()=>nf(S+R(1,9)/10)+'×'),topic:'Ley de Amdahl',prompt:`Una tarea es ${p} % paralelizable y esa parte se reparte entre ${N} núcleos ideales. ¿Cuál es la aceleración total?`,code:`p = ${nf(f)} · N = ${N}`,explain:`S = 1 / [(1 − ${nf(f)}) + ${nf(f)}/${N}] = 1 / ${nf(den,4)} ≈ ${nf(S)}×. El ${100-p} % secuencial limita la mejora: ni con infinitos núcleos se superaría ${nf(1/(1-f))}×.`}}
-  if(t==='time'){const I=P([500,1000,1500,2000,3000]),c=P([1,1.5,2,2.5,3]),f=P([1,2,2.5,3,4]),T=I*c/(f*1000);return {...options(nf(T,3)+' s',[nf(I*c*f/1000,3)+' s',nf(I/(f*1000),3)+' s',nf(I*c/f,3)+' s',nf(T*2,3)+' s'],()=>nf(T*P([.25,.5,1.5,3]),3)+' s'),topic:'Tiempo de CPU',prompt:`Un programa ejecuta ${nf(I,0)} millones de instrucciones con CPI ${nf(c,1)} a ${nf(f,1)} GHz efectivos. ¿Cuánto tarda?`,code:'t = I × CPI ÷ f',explain:`t = ${nf(I,0)} × 10⁶ × ${nf(c,1)} ÷ (${nf(f,1)} × 10⁹) = ${nf(T,3)} s. GHz son miles de millones de ciclos por segundo.`}}
-  const fn=P([2,2.4,3,3.2,3.6,4]),pct=P([50,60,70,75,80,90]),fe=fn*pct/100;return {...options(nf(fe)+' GHz',[nf(fn*(1-pct/100))+' GHz',nf(fn/(pct/100))+' GHz',nf(fn-pct/100)+' GHz',nf(fn)+' GHz'],()=>nf(fe+R(1,9)/10)+' GHz'),topic:'Frecuencia efectiva',prompt:`Por temperatura, un procesador de ${nf(fn,1)} GHz nominales trabaja al ${pct} %. ¿Cuál es su frecuencia efectiva?`,code:`${nf(fn,1)} GHz × ${pct} %`,explain:`f efectiva = ${nf(fn,1)} × ${pct}/100 = ${nf(fe)} GHz. La misma tarea tarda ${nf(100/pct)} veces más que a frecuencia nominal.`};
-}
-function genMCU(){
-  if(Math.random()<.6){const tenths=R(1,49),V=tenths/10,code=Math.floor(tenths*1024/50),exact=tenths*1024/50;return {...options(code,[Math.floor(tenths*1023/50),Math.round(exact),Math.floor(tenths*255/50),code+1,code-1].filter(x=>x>=0),()=>code+R(-6,6)),topic:'ADC de 10 bits',prompt:`ADC ideal de 10 bits con referencia de 5 V (código = mín(1023, ⌊V / 5 × 1024⌋)). ¿Qué código produce ${nf(V,1)} V?`,code:nf(V,1)+' V → ?',explain:`⌊${nf(V,1)} / 5 × 1024⌋ = ⌊${nf(exact,2)}⌋ = ${code}. Cada código equivale a 5/1024 ≈ 4,88 mV.`}}
-  const s=R(0,255),k=P([10,32,50,64,100,128,200,256,300]),sum=s+k,fin=sum%256,ov=Math.floor(sum/256),lab=(v,o)=>`Valor ${v} · ${o} desbordamiento${o===1?'':'s'}`;
-  return {...options(lab(fin,ov),[sum>255?lab(sum,0):null,lab(fin,ov+1),lab((fin+1)%256,ov),ov?lab(fin,ov-1):lab((fin+255)%256,1)],()=>lab(R(0,255),R(0,2))),topic:'Temporizador de 8 bits',prompt:`Un temporizador de 8 bits vale ${s} y recibe ${k} pulsos. ¿En qué valor queda y cuántos desbordamientos ocurren?`,code:`${s} + ${k} pulsos`,explain:`${s} + ${k} = ${sum} = ${ov} × 256 + ${fin}. El contador solo guarda 0…255: queda en ${fin} con ${ov} desbordamiento${ov===1?'':'s'}.`};
-}
-const ARCADE=[
-  {id:'binario',emoji:'🔢',title:'Binario relámpago',unit:0,desc:'Convierte entre binario, decimal y hexadecimal, y cuenta direcciones.',gen:genBinario},
-  {id:'puertas',emoji:'🔀',title:'Puertas en acción',unit:0,desc:'Calcula AND, OR, XOR, NAND y NOR bit a bit.',gen:genPuertas},
-  {id:'alu',emoji:'🧮',title:'Banderas de la ALU',unit:1,desc:'Predice acarreo, préstamo, cero, signo y desbordamiento.',gen:genALU},
-  {id:'cache',emoji:'⚡',title:'¿HIT o MISS?',unit:3,desc:'Sigue una caché de mapeo directo y calcula su costo.',gen:genCache},
-  {id:'rendimiento',emoji:'🚀',title:'Velocidad y Amdahl',unit:4,desc:'Tiempo de CPU, frecuencia efectiva y aceleración paralela.',gen:genRend},
-  {id:'mcu',emoji:'🌱',title:'Microcontrolador en acción',unit:5,desc:'Convierte voltajes con el ADC y cuenta con el temporizador.',gen:genMCU}
-];
-window.V6_GENERATORS=Object.fromEntries(ARCADE.map(a=>[a.id,a.gen]));
-const themeOf=a=>window.TIMELINE_THEMES[a.unit];
-const gameStyle=a=>{const t=themeOf(a);return `--g:${t.color};--gs:${t.soft}`};
-function gameCardHTML(a,full=true){
-  const x=isStudent()?game().arcade[a.id]:null,t=themeOf(a);
-  return `<article class="v6-game" style="${gameStyle(a)}"><span class="v6-game-emoji" aria-hidden="true">${a.emoji}</span><span class="v6-game-unit">Unidad ${a.unit+1} · ${esc(t.label)}</span><h3>${esc(a.title)}</h3><p>${esc(a.desc)}</p><span class="v6-game-best">${x?'Récord: '+(x.bestTimed||0)+' pts contrarreloj · '+(x.plays||0)+' rondas':'Aún sin jugar'}</span><div class="v6-game-actions"><button type="button" onclick="arcadeStart('${a.id}','timed')">⏱ Contrarreloj</button><button type="button" onclick="arcadeStart('${a.id}','practice')">🧘 Práctica</button></div></article>`;
-}
-let arena=null,arenaTimer=0;
-function stopArena(){clearInterval(arenaTimer);arenaTimer=0;if(arena)clearTimeout(arena.next);arena=null}
-window.showArcade=function(){
-  if(!isTeacher()&&!isStudent()){showModePicker(true);toast('Elige un modo para entrar a la Zona de retos.');return false}
-  stopArena();state.view='arcade';
-  mainHTML(`<section class="v6-arena-page focus-enter"><div class="breadcrumb"><button onclick="goHome()">← Volver al mapa</button><span class="mini-label">Zona de retos</span></div><header class="v6-arena-head"><div><span class="eyebrow">Practica jugando · ejercicios nuevos en cada ronda</span><h1>Zona de retos ⚡</h1><p>Elige un reto. <b>Contrarreloj:</b> 60 segundos, +10 puntos por acierto y bonificación por racha. <b>Práctica:</b> 10 ejercicios sin tiempo y con la explicación de cada respuesta. Usa las teclas 1–4 para responder.</p></div></header><div class="v6-games">${ARCADE.map(a=>gameCardHTML(a)).join('')}</div><p class="fine" style="margin-top:18px">Cada ejercicio se genera al azar y su respuesta se calcula con las mismas reglas de los laboratorios. ${isTeacher()?'En modo profesor no se guardan récords.':'Tus récords suman XP: la mitad de tu mejor puntaje, hasta 150 XP por reto.'}</p></section>`);
-  focusMain();chatSuggestions();return true;
-};
-window.arcadeStart=function(id,mode='timed'){
-  const a=ARCADE.find(x=>x.id===id);if(!a)return;
-  if(!isTeacher()&&!isStudent()){showModePicker(true);return}
-  stopArena();state.view='arcade';
-  arena={a,mode,score:0,correct:0,total:0,streak:0,best:0,time:60000,left:60000,locked:false,q:null,next:0,last:performance.now(),hold:0,started:Date.now()};
-  mainHTML(`<section class="v6-arena-page focus-enter" style="${gameStyle(a)}"><div class="breadcrumb"><button onclick="showArcade()">← Todos los retos</button><span class="mini-label">${esc(a.title)} · ${mode==='timed'?'Contrarreloj':'Práctica'}</span></div><div class="v6-arena" id="v6-arena"></div></section>`);
-  Sound.play('start');track('reto_inicio',{accion:a.id,valor:mode==='timed'?'contrarreloj':'práctica'});
-  nextQuestion();focusMain();
-  if(mode==='timed')arenaTimer=setInterval(tickArena,200);
-};
-function hudHTML(){const a=arena,t=Math.max(0,Math.ceil(a.left/1000));return `<div class="v6-hud"><div class="v6-hud-game">${a.a.emoji} ${esc(a.a.title)}</div>${a.mode==='timed'?`<div class="v6-timer ${t<=10?'low':''}" id="v6-timer" style="--t:${a.left/a.time*100}">⏱ <b id="v6-time">${t}</b> s</div>`:`<div>📝 <b>${Math.min(a.total+(a.locked?0:1),10)}</b>/10</div>`}<div>⭐ <b id="v6-score">${a.score}</b></div><div title="Racha de aciertos">🔥 <b>${a.streak}</b></div></div>`}
-function renderArena(){
-  const box=$('v6-arena');if(!box||!arena)return;const a=arena,q=a.q;
-  box.innerHTML=hudHTML()+`<article class="v6-qcard" aria-live="polite"><span class="mini-label">${esc(q.topic)}</span><h2>${esc(q.prompt)}</h2>${q.code?`<div class="v6-qcode">${esc(q.code)}</div>`:''}<div class="v6-opts" role="group" aria-label="Opciones de respuesta">${q.options.map((o,j)=>{let cls='';if(a.locked){if(j===q.answer)cls='ok';else if(j===a.chosen)cls='ko';else cls='dim'}return `<button type="button" class="v6-opt ${cls}" ${a.locked?'disabled':''} onclick="arcadeAnswer(${j})"><i>${j+1}</i><span>${esc(o)}</span></button>`}).join('')}</div>${a.locked&&(a.mode==='practice'||a.chosen!==q.answer)?`<div class="v6-explain ${a.chosen===q.answer?'':'ko'}"><b>${a.chosen===q.answer?'✓ ¡Correcto!':'✕ La respuesta era: '+esc(q.options[q.answer])}</b> ${esc(q.explain)}</div>`:''}</article><div class="v6-arena-foot"><span>${a.mode==='timed'?'Responde rápido: una racha suma hasta +20 puntos extra.':'Sin prisa: lee la explicación antes de continuar.'}</span>${a.mode==='practice'&&a.locked?`<button class="btn" id="v6-next" onclick="arcadeNext()">${a.total>=10?'Ver mi resultado':'Siguiente ejercicio'} →</button>`:`<button class="btn secondary small" onclick="arcadeFinish()">Terminar ronda</button>`}</div>`;
-  if(a.locked&&a.mode==='practice')$('v6-next')?.focus({preventScroll:true});
-}
-function nextQuestion(){if(!arena)return;arena.q=arena.a.gen();arena.locked=false;arena.chosen=null;renderArena();document.querySelector('.v6-opt')?.focus({preventScroll:true})}
-function tickArena(){if(!arena||arena.mode!=='timed')return;const now=performance.now(),dt=now-arena.last;arena.last=now;if(arena.hold>now){arena.last=now;return}arena.left-=dt;const t=$('v6-timer'),s=$('v6-time');if(t){t.style.setProperty('--t',Math.max(0,arena.left/arena.time*100));t.classList.toggle('low',arena.left<=10000)}if(s)s.textContent=Math.max(0,Math.ceil(arena.left/1000));if(arena.left<=0)arcadeFinish()}
-window.arcadeAnswer=function(j){
-  if(!arena||arena.locked)return;const a=arena,q=a.q,ok=j===q.answer;a.locked=true;a.chosen=j;a.total++;
-  if(ok){a.correct++;a.streak++;a.best=Math.max(a.best,a.streak);a.score+=10+2*Math.min(a.streak,10);Sound.play('good')}else{a.streak=0;Sound.play('bad')}
-  if(isStudent()){const g=game();if(ok){g.streak++;g.bestStreak=Math.max(g.bestStreak,g.streak)}else g.streak=0;paintLevel()}
-  track('reto_respuesta',{accion:a.a.id,valor:q.options[j],correcto:ok,detalle:{tema:q.topic,ejercicio:q.prompt+(q.code?' ['+q.code+']':''),correcta:q.options[q.answer]}});
-  renderArena();
-  if(ok){const btn=document.querySelectorAll('.v6-opt')[j];Confetti.fromElement(btn,22);floatXP('+'+(10+2*Math.min(a.streak,10))+' pts',btn)}
-  if(a.mode==='timed'){const wait=ok?650:2600;a.hold=performance.now()+wait;a.next=setTimeout(()=>{if(arena===a){a.last=performance.now();nextQuestion()}},wait)}
-};
-window.arcadeNext=function(){if(!arena||!arena.locked)return;if(arena.mode==='practice'&&arena.total>=10)return arcadeFinish();nextQuestion()};
-window.arcadeFinish=function(){
-  if(!arena)return;const a=arena;clearInterval(arenaTimer);arenaTimer=0;clearTimeout(a.next);arena=null;
-  let rec=null,record=false,xpBefore=totalXP();
-  if(isStudent()){const g=game();rec=g.arcade[a.a.id]=Object.assign({plays:0,bestTimed:0,bestPractice:0,best:0,correct:0,total:0},g.arcade[a.a.id]);rec.plays++;rec.correct+=a.correct;rec.total+=a.total;const key=a.mode==='timed'?'bestTimed':'bestPractice';if(a.score>rec[key]){record=rec.plays>1||a.score>0;rec[key]=a.score}rec.best=Math.max(rec.bestTimed,rec.bestPractice);rec.last=new Date().toISOString();save()}
-  const gained=Math.max(0,totalXP()-xpBefore),acc=a.total?Math.round(100*a.correct/a.total):0;
-  track('reto_fin',{accion:a.a.id,valor:a.mode==='timed'?'contrarreloj':'práctica',puntaje:a.score,correcto:acc>=60,detalle:{aciertos:a.correct,intentos:a.total,mejor_racha:a.best,precision:acc,duracion_s:Math.round((Date.now()-a.started)/1000),record}});
-  const medal=a.score>=200?'🏆':a.score>=120?'🥇':a.score>=60?'🥈':a.total?'🥉':'🎮';
-  const box=$('v6-arena');
-  if(box)box.innerHTML=`<article class="v6-qcard v6-end"><span class="v6-big-emoji" aria-hidden="true">${medal}</span><span class="mini-label" style="display:block;margin-top:10px">${esc(a.a.title)} · ${a.mode==='timed'?'Contrarreloj':'Práctica'}</span><h2>${record?'¡Nuevo récord!':a.correct>=a.total*.8&&a.total?'¡Excelente ronda!':'¡Ronda terminada!'}</h2><div class="result-score">${a.score}<span>puntos</span></div><div class="v6-end-stats"><span>✅ ${a.correct}/${a.total} aciertos</span><span>🎯 ${acc} % de precisión</span><span>🔥 racha máxima ${a.best}</span>${gained?`<span style="color:var(--purple)">✦ +${gained} XP</span>`:''}</div>${rec?`<p class="fine">Tu récord: ${rec.bestTimed} pts contrarreloj · ${rec.bestPractice} pts práctica · ${rec.plays} rondas.</p>`:'<p class="fine">Modo profesor: la ronda no se guarda.</p>'}<div class="v6-modal-actions"><button class="btn" onclick="arcadeStart('${a.a.id}','${a.mode}')">Jugar otra vez ↻</button><button class="btn secondary" onclick="arcadeStart('${a.a.id}','${a.mode==='timed'?'practice':'timed'}')">${a.mode==='timed'?'🧘 Practicar sin tiempo':'⏱ Probar contrarreloj'}</button><button class="btn secondary" onclick="showArcade()">Elegir otro reto</button></div></article>`;
-  Sound.play(record?'level':'end');if(record||acc>=80)Confetti.burst({count:record?160:90,y:innerHeight*.3});
-  if(record)bitSays('¡Nuevo récord! 🏆 Tu cerebro de silicio está a tope.','party');
-  checkProgress();
-};
-document.addEventListener('keydown',e=>{
-  if(state.view!=='arcade'||!arena||$('v6-modal')||/INPUT|SELECT|TEXTAREA/.test(document.activeElement?.tagName||''))return;
-  const k=e.key.toLowerCase(),map={'1':0,'2':1,'3':2,'4':3,a:0,b:1,c:2,d:3};
-  if(!arena.locked&&k in map){e.preventDefault();arcadeAnswer(map[k])}
-  else if(arena.locked&&arena.mode==='practice'&&(k==='enter'||k===' ')&&document.activeElement?.id!=='v6-next'){e.preventDefault();arcadeNext()}
-});
 
 /* ------------------------------------------------------------------ registro en vivo (Google Sheets) */
 const REG='arquitecto-de-bits-registro',SESSION=uid(),SESSION_START=Date.now();
 let regCfg={endpoint:'',clave:'',curso:''},regQueue=[],regState={status:'off',inflight:false,backoff:0,retryAt:0,lastOk:0,lastError:''};
-function normEndpoint(v){v=String(v||'').trim();if(/^AKfy[\w-]{20,}$/.test(v))return 'https://script.google.com/macros/s/'+v+'/exec';const m=v.match(/^https:\/\/script\.google\.com\/(?:a\/macros\/[\w.-]+|macros)\/s\/[\w-]+\/exec/);return m?m[0]:''}
-function metaCfg(){try{return JSON.parse(document.querySelector('meta[name="registro-sheets"]')?.content||'{}')||{}}catch(e){return {}}}
+function normEndpoint(v){v=String(v||'').trim();const m=v.match(/^https:\/\/script\.google\.com\/(?:a\/macros\/[\w.-]+|macros)\/s\/[\w-]+\/exec/);return m?m[0]:''}
 function loadReg(){
   let stored={};try{stored=JSON.parse(localStorage.getItem(REG))||{}}catch(e){}
-  const meta=metaCfg(),file=window.REGISTRO_CONFIG||{},pickCfg=[meta,file,stored].find(c=>normEndpoint(c.endpoint))||{};
-  regCfg={endpoint:normEndpoint(pickCfg.endpoint),clave:String(pickCfg.clave||''),curso:String(pickCfg.curso||'')};
-  regQueue=Array.isArray(stored.queue)?stored.queue.filter(e=>e&&e.id).slice(-500):[];
-  const q=new URLSearchParams(location.search),h=normEndpoint(q.get('hoja'));
-  if(h){regCfg={endpoint:h,clave:q.get('clave')||'',curso:q.get('curso')||''};persistReg()}
+  const cfg=window.REGISTRO_CONFIG||{};
+  regCfg={endpoint:normEndpoint(cfg.endpoint),clave:String(cfg.clave||''),curso:String(cfg.curso||'')};
+  /* Los eventos pendientes solo se reenvían a la misma dirección que los recibió. */
+  regQueue=regCfg.endpoint&&stored.endpoint===regCfg.endpoint&&Array.isArray(stored.queue)?stored.queue.filter(e=>e&&e.id).slice(-500):[];
 }
 function persistReg(){try{localStorage.setItem(REG,JSON.stringify({endpoint:regCfg.endpoint,clave:regCfg.clave,curso:regCfg.curso,queue:regQueue.slice(-500)}))}catch(e){}}
 window.registroActivo=()=>!!regCfg.endpoint;
@@ -4576,50 +4382,68 @@ setInterval(()=>flush(),6000);
 function setStatus(st){
   regState.status=regCfg.endpoint?st:'off';const c=$('v6-cloud');if(!c)return;
   c.hidden=!regCfg.endpoint;if(!regCfg.endpoint)return;
-  const n=regQueue.length,shown=regState.status==='pending'&&!regState.lastError?'sending':regState.status,label={ok:regState.lastOk?'En vivo':'Registro activo',sending:'Sincronizando…',pending:'Sincronizando…',offline:'Sin red · '+n,error:'Revisar registro',denied:'Clave incorrecta',off:''}[regState.status]||'En vivo';
+  /* Tras un envío correcto reciente, los eventos en cola no cambian el aviso: el registro sigue «En vivo». */
+  const live=['pending','sending'].includes(regState.status)&&regState.lastOk&&!regState.lastError&&Date.now()-regState.lastOk<120000,disp=live?'ok':regState.status;
+  const n=regQueue.length,shown=disp==='pending'&&!regState.lastError?'sending':disp,label={ok:regState.lastOk?'En vivo':'Registro activo',sending:'Sincronizando…',pending:'Sincronizando…',offline:'Sin red · '+n,error:'Revisar registro',denied:'Clave incorrecta',off:''}[disp]||'En vivo';
   c.dataset.status=shown;c.textContent='☁ '+label;
-  c.title='Registro en Google Sheets'+(regCfg.curso?' · '+regCfg.curso:'')+' · '+(regState.lastOk?'último envío '+new Date(regState.lastOk).toLocaleTimeString('es-CO'):'sin envíos todavía')+(regState.lastError?' · '+regState.lastError:'')+(isTeacher()?' · toca para configurar':'');
+  c.title='Registro en Google Sheets'+(regCfg.curso?' · '+regCfg.curso:'')+' · '+(regState.lastOk?'último envío '+new Date(regState.lastOk).toLocaleTimeString('es-CO'):'sin envíos todavía')+(regState.lastError?' · '+regState.lastError:'')+(isTeacher()?' · toca para abrir la hoja':'');
 }
-function registrationNote(){return regCfg.endpoint?'☁ Registro del curso activo'+(regCfg.curso?' ('+regCfg.curso+')':'')+': al entrar, tu nombre y tus interacciones —misiones, respuestas, retos y preguntas a Bit— se envían en tiempo real a la hoja de Google de tu profesor. No se verifica tu identidad.':'Registro local con tu nombre. No se verifica tu identidad ni se envían datos a servidores.'}
+function registrationNote(){return regCfg.endpoint?'☁ Registro del curso activo'+(regCfg.curso?' ('+regCfg.curso+')':'')+': al entrar, tu nombre y tus interacciones —simulaciones, misiones, respuestas y preguntas a Bit— se envían en tiempo real a la hoja de Google de tu profesor. No se verifica tu identidad.':'Registro local con tu nombre. No se verifica tu identidad ni se envían datos a servidores.'}
 window.registrationNote=registrationNote;
 function updateNotes(){
   const r=$('registration-note');if(r){r.textContent=registrationNote();r.classList.toggle('v6-live-note',!!regCfg.endpoint)}
   const c=$('chat-note');if(c)c.textContent=regCfg.endpoint?'Respuestas de una base didáctica predeterminada; Bit no usa IA. Tu profesor activó el registro del curso: tus preguntas se guardan en su hoja de Google.':'Respuestas de una base didáctica predeterminada. No usa IA ni envía tus preguntas a servidores.';
   setStatus(regState.status==='off'?(regQueue.length?'pending':'ok'):regState.status);
 }
-function studentLink(){if(!/^https?:/.test(location.protocol)||!regCfg.endpoint)return '';const u=new URL(location.href);u.search='';u.hash='';u.searchParams.set('hoja',regCfg.endpoint);if(regCfg.clave)u.searchParams.set('clave',regCfg.clave);if(regCfg.curso)u.searchParams.set('curso',regCfg.curso);return u.toString()}
-function openRegistro(){
-  if(!isTeacher()){toast('La conexión con Google Sheets se configura en el modo profesor.');return}
-  const link=studentLink();
-  modal(`<span class="mini-label">Modo profesor · Registro en vivo</span><h2 id="v6-reg-title">☁ Conectar con Google Sheets</h2><p>Cada misión, respuesta, reto, pregunta a Bit y cambio de escena de tus estudiantes se agrega a tu hoja en segundos. Sin conexión, los eventos esperan en el navegador y se envían al volver la red.</p><ol class="v6-steps"><li>Abre tu hoja «El Arquitecto de Bits · Registro en vivo» y entra a <b>Extensiones → Apps Script</b>.</li><li>Pega el archivo <b>Code.gs</b> del repositorio, guarda y ejecuta <b>configurarHoja</b>.</li><li><b>Implementar → Nueva implementación → Aplicación web</b>: ejecutar como «Yo» y acceso «Cualquier usuario». Copia la URL que termina en <code>/exec</code>.</li></ol><form class="v6-form" onsubmit="event.preventDefault();V6.saveRegistro()"><label>URL de la aplicación web<input id="v6-reg-url" value="${esc(regCfg.endpoint)}" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off" spellcheck="false"></label><label>Clave del curso <small>Opcional. Debe coincidir con la propiedad CLAVE del script.</small><input id="v6-reg-key" value="${esc(regCfg.clave)}" autocomplete="off"></label><label>Curso o grupo <small>Aparece en cada fila de la hoja.</small><input id="v6-reg-course" value="${esc(regCfg.curso)}" placeholder="Arquitectura 2026-2 · Grupo A" autocomplete="off"></label><div class="v6-modal-actions" style="justify-content:flex-start;margin-top:4px"><button type="button" class="btn secondary" onclick="V6.testRegistro()">Probar conexión</button><button type="submit" class="btn">Guardar y activar</button>${regCfg.endpoint?'<button type="button" class="btn secondary" onclick="V6.disableRegistro()">Desactivar</button>':''}</div></form><div class="v6-result" id="v6-reg-result" role="status">${regCfg.endpoint?'Estado: '+esc(($('v6-cloud')?.textContent||'').replace('☁ ',''))+(regQueue.length?' · '+regQueue.length+' eventos en cola':''):'Sin configurar.'}</div>${link?`<label class="v6-form" style="margin-top:14px">Enlace para tus estudiantes<input readonly value="${esc(link)}" onclick="this.select()"></label>`:''}<p class="fine" style="margin-top:14px">Para repartir el archivo con la conexión incluida, guarda y después usa <b>↓ Descargar aplicación</b>. Informa a tus estudiantes que sus interacciones quedarán registradas.</p><div class="v6-modal-actions"><button type="button" class="btn secondary" onclick="V6.closeModal()">Cerrar</button></div>`,{left:true});
-  $('v6-modal')?.setAttribute('aria-labelledby','v6-reg-title');
+/* ------------------------------------------------------------------ acceso del profesor con contraseña */
+/* Solo se guarda la huella SHA-256 de la contraseña. Es una barrera para el aula, no un control de seguridad del servidor. */
+const TEACHER_HASH='708628e30651835eaf72d0fcd4a368de621adcb8dd303edf3ba5ab86e1774e49';
+function sha256Fallback(bytes){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const len=bytes.length,words=new Uint32Array(((len+9+63)>>6)<<4);
+  for(let i=0;i<len;i++)words[i>>2]|=bytes[i]<<(24-(i%4)*8);
+  words[len>>2]|=0x80<<(24-(len%4)*8);words[words.length-1]=len*8;
+  const rot=(x,n)=>(x>>>n)|(x<<(32-n)),W=new Uint32Array(64);
+  for(let o=0;o<words.length;o+=16){
+    for(let t=0;t<64;t++){if(t<16)W[t]=words[o+t];else{const a=W[t-15],b=W[t-2];W[t]=(W[t-16]+(rot(a,7)^rot(a,18)^(a>>>3))+W[t-7]+(rot(b,17)^rot(b,19)^(b>>>10)))|0}}
+    let [a,b,c,d,e,f,g,h]=H;
+    for(let t=0;t<64;t++){const t1=(h+(rot(e,6)^rot(e,11)^rot(e,25))+((e&f)^(~e&g))+K[t]+W[t])|0,t2=((rot(a,2)^rot(a,13)^rot(a,22))+((a&b)^(a&c)^(b&c)))|0;h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0}
+    H[0]=(H[0]+a)|0;H[1]=(H[1]+b)|0;H[2]=(H[2]+c)|0;H[3]=(H[3]+d)|0;H[4]=(H[4]+e)|0;H[5]=(H[5]+f)|0;H[6]=(H[6]+g)|0;H[7]=(H[7]+h)|0;
+  }
+  return H.map(x=>(x>>>0).toString(16).padStart(8,'0')).join('');
 }
-function formCfg(){return {endpoint:normEndpoint($('v6-reg-url')?.value),clave:String($('v6-reg-key')?.value||'').trim(),curso:String($('v6-reg-course')?.value||'').trim().slice(0,80)}}
-function result(text,ok){const r=$('v6-reg-result');if(r){r.textContent=text;r.className='v6-result '+(ok===true?'ok':ok===false?'ko':'')}}
-async function testRegistro(){
-  const c=formCfg();if(!c.endpoint){result('La URL debe ser de script.google.com y terminar en /exec.',false);return}
-  result('Probando la conexión…');
-  try{const u=new URL(c.endpoint);u.searchParams.set('accion','ping');if(c.clave)u.searchParams.set('clave',c.clave);const res=await fetch(u,{cache:'no-store'});const j=await res.json();if(!j.ok)throw new Error(j.error||'La hoja rechazó la prueba');
-    const body=JSON.stringify({app:'arquitecto-de-bits',version:VERSION,clave:c.clave,curso:c.curso,eventos:[{id:uid(),fecha_cliente:new Date().toISOString(),sesion:SESSION,curso:c.curso,estudiante:'Prueba del profesor',clave_estudiante:'prueba-del-profesor',modo:'teacher',vista:state.view,escena:'',titulo_escena:'',fase:'',tipo:'prueba',accion:'probar conexión',valor:'',correcto:'',puntaje:'',detalle:'',xp:'',nivel:'',escenas_completadas:'',misiones:'',insignias:'',dispositivo:deviceLabel(),version:VERSION}]});
-    const post=await fetch(c.endpoint,{method:'POST',body,cache:'no-store'});const pj=await post.json();if(!pj.ok)throw new Error(pj.error||'No se pudo escribir la fila de prueba');
-    result('✓ Conexión correcta con «'+(j.hoja||'tu hoja')+'». Se escribió una fila de prueba en Eventos.',true)}
-  catch(e){result('✕ No se pudo comprobar: '+(e.message||e)+'. Revisa que la implementación tenga acceso «Cualquier usuario» y que la URL termine en /exec.',false)}
+async function sha256Hex(text){
+  const bytes=new TextEncoder().encode(text);
+  try{if(window.crypto&&crypto.subtle&&crypto.subtle.digest){const d=await crypto.subtle.digest('SHA-256',bytes);return [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,'0')).join('')}}catch(e){}
+  return sha256Fallback(bytes);
 }
-function saveRegistro(){
-  const c=formCfg();if(!c.endpoint){result('La URL debe ser de script.google.com y terminar en /exec.',false);return}
-  regCfg=c;persistReg();const meta=document.querySelector('meta[name="registro-sheets"]');if(meta)meta.content=JSON.stringify(c);
-  updateNotes();result('✓ Registro activado. Desde ahora las interacciones de tus estudiantes en este archivo se enviarán a la hoja.',true);toast('Registro en vivo activado.');
-  if(state.view==='home')goHome();
+window.V6_sha256=sha256Hex;
+let teacherFails=0;
+const baseEnterTeacher=enterTeacher;
+enterTeacher=function(){
+  modal(`<span class="v6-lock" aria-hidden="true">🔐</span><span class="mini-label" style="display:block;margin-top:10px">Acceso del profesor</span><h2 id="v6-pass-title">Escribe la contraseña</h2><p>El modo profesor abre todas las escenas, la presentación en el aula y el acceso a la hoja de registro.</p><form class="v6-form" id="v6-pass-form" onsubmit="event.preventDefault();V6.checkTeacher()" autocomplete="off"><label for="v6-pass">Contraseña de profesor</label><div class="v6-pass-row"><input id="v6-pass" type="password" autocomplete="current-password" spellcheck="false" autocapitalize="off" maxlength="64" aria-describedby="v6-pass-error" data-autofocus><button type="button" class="btn secondary small" onclick="V6.togglePass()" aria-controls="v6-pass" aria-pressed="false" id="v6-pass-eye">Mostrar</button></div><p class="v6-pass-error" id="v6-pass-error" role="alert" hidden></p><div class="v6-modal-actions"><button type="button" class="btn secondary" onclick="V6.closeModal()">Cancelar</button><button type="submit" class="btn" id="v6-pass-submit">Entrar como profesor →</button></div></form>`);
+  $('v6-modal')?.setAttribute('aria-labelledby','v6-pass-title');
+};
+async function checkTeacher(){
+  const input=$('v6-pass'),error=$('v6-pass-error'),submit=$('v6-pass-submit');if(!input||submit?.disabled)return;
+  if(submit)submit.disabled=true;
+  const ok=(await sha256Hex(input.value))===TEACHER_HASH;
+  if(ok){teacherFails=0;closeModal();baseEnterTeacher();toast('Modo profesor activado.');return}
+  teacherFails++;Sound.play('bad');
+  const wait=teacherFails>=3?Math.min(10,teacherFails*2):0;
+  if(error){error.hidden=false;error.textContent=wait?'Contraseña incorrecta. Espera '+wait+' s para volver a intentarlo.':'Contraseña incorrecta. Revisa mayúsculas, números y el punto final.'}
+  input.value='';input.setAttribute('aria-invalid','true');const card=document.querySelector('.v6-modal-card');if(card){card.classList.remove('v6-shake');void card.offsetWidth;card.classList.add('v6-shake')}
+  setTimeout(()=>{if(submit)submit.disabled=false;input.focus()},wait*1000);
 }
-function disableRegistro(){regCfg={endpoint:'',clave:'',curso:''};regQueue=[];persistReg();const meta=document.querySelector('meta[name="registro-sheets"]');if(meta)meta.content='';updateNotes();closeModal();toast('Registro en vivo desactivado en este navegador.');if(state.view==='home')goHome()}
+function togglePass(){const i=$('v6-pass'),b=$('v6-pass-eye');if(!i)return;const show=i.type==='password';i.type=show?'text':'password';if(b){b.textContent=show?'Ocultar':'Mostrar';b.setAttribute('aria-pressed',String(show))}i.focus()}
 
 /* ------------------------------------------------------------------ API pública e inicio */
-window.V6={version:VERSION,closeModal,openRegistro,testRegistro,saveRegistro,disableRegistro,flush:()=>flush(true),
+window.V6={version:VERSION,closeModal,checkTeacher,togglePass,flush:()=>flush(true),
   toggleSound(){prefs.sound=!prefs.sound;savePrefs();applyPrefs();if(prefs.sound)Sound.play('good')},
-  toggleType(){prefs.classic=!prefs.classic;savePrefs();applyPrefs();toast(prefs.classic?'Tipografía clásica activada.':'Tipografía moderna activada.')},
-  exportSummary(){if(!isStudent())return null;const g=game(),lv=levelInfo(totalXP());return {xp:totalXP(),nivel:lv.n,titulo_nivel:lv.name,insignias:BADGES.filter(b=>g.badges[b.id]).map(b=>({id:b.id,titulo:b.title,fecha:g.badges[b.id]})),mejor_racha:g.bestStreak,retos:g.arcade}},
-  levelInfo,badges:()=>BADGES.map(({test,...b})=>b),registro:()=>({...regCfg,cola:regQueue.length,estado:regState.status}),arena:()=>arena&&{juego:arena.a.id,modo:arena.mode,puntaje:arena.score,aciertos:arena.correct,intentos:arena.total,restante:Math.round(arena.left),pregunta:arena.q&&{tema:arena.q.topic,opciones:arena.q.options,respuesta:arena.q.answer}}};
-document.addEventListener('click',e=>{if(e.target.closest('#v6-cloud')&&isTeacher())openRegistro()});
+  exportSummary(){if(!isStudent())return null;const g=game(),lv=levelInfo(totalXP());return {xp:totalXP(),nivel:lv.n,titulo_nivel:lv.name,insignias:BADGES.filter(b=>g.badges[b.id]).map(b=>({id:b.id,titulo:b.title,fecha:g.badges[b.id]})),mejor_racha:g.bestStreak}},
+  levelInfo,badges:()=>BADGES.map(({test,...b})=>b),registro:()=>({...regCfg,cola:regQueue.length,estado:regState.status})};
+document.addEventListener('click',e=>{if(e.target.closest('#v6-cloud')&&isTeacher()){const h=String((window.REGISTRO_CONFIG||{}).hoja||'');if(/^https:\/\/docs\.google\.com\//.test(h))window.open(h,'_blank','noopener')}});
 loadReg();applyPrefs();updateNotes();paintLevel();
 if(state.view==='access'&&typeof showModePicker==='function')showModePicker(state.showStudent);
 track('sesion_inicio',{});
