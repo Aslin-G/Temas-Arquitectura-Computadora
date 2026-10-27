@@ -51,15 +51,13 @@ La hoja «El Arquitecto de Bits · Registro en vivo» tiene estas pestañas:
 | **Eventos** | Todo lo que ocurre, con fecha, escena, fase, acción, valor y dispositivo. |
 | **Respuestas / Misiones / Cuestionarios** | Detalle por tipo de actividad. |
 
-### Publicación del script (una sola vez)
+### Publicación del script
 
-Google exige que el dueño de la hoja autorice y publique el script; nadie más puede hacerlo por él.
+El script ya está publicado como aplicación web desde la hoja (Extensiones → Apps Script) y su URL `/exec` está escrita en `REGISTRO_CONFIG.endpoint`. No hay que repetir nada.
 
-1. En la hoja: **Extensiones → Apps Script**. Pega `google-apps-script/Code.gs` y guarda.
-2. **Implementar → Nueva implementación → Aplicación web**. Ejecutar como: **Yo**. Quién tiene acceso: **Cualquier usuario**. Autoriza el acceso cuando Google lo pida (si aparece «Google no verificó esta aplicación», elige *Configuración avanzada → Ir a…*: es tu propio script).
-3. Copia la URL que termina en `/exec` y escríbela en `REGISTRO_CONFIG.endpoint` de `index.html`. Desde ese momento todo se registra solo.
+Si algún día cambias `Code.gs`: guarda, entra a **Implementar → Gestionar implementaciones → Editar (lápiz) → Versión: Nueva versión → Implementar**. Así la URL se conserva y la aplicación sigue conectada. Si en cambio creas una implementación nueva, tendrá otra URL y habrá que actualizar `REGISTRO_CONFIG.endpoint`.
 
-Mientras el `endpoint` esté vacío, la aplicación funciona normal y guarda el progreso solo en cada navegador.
+Para comprobar que responde, abre en el navegador la URL con `?accion=ping` al final: debe mostrar `"ok":true` y `"Conexión correcta"`.
 
 Opcional: en la hoja, menú **🎓 Arquitecto de Bits → Definir clave del curso**, y escribe la misma clave en `REGISTRO_CONFIG.clave`.
 
